@@ -1,0 +1,34 @@
+
+version alpha 0.0 
+initialy designed functions
+createAccount
+
+
+
+
+version alpha 0.1 20171014Fri
+The contract should be an ether pool (etherbase)
+thus it should allow user charge their account by putting ether in to the contranct.
+the first method to put ether in is the provide value when creating a user account.
+A second way is to call topUp function to send ether to this contract and get some token.
+By design, the token distributed by the contract should be at a constant exchange rate to ether.
+currently, the rate is set to be 1 token = 1 wei which is the smallest ether unit.
+
+A withdraw function is created corresponding to topUp function.
+This function should allow user account to exchange their token back to ether in their ether address.
+But the chellange is, when sending ether from the contract, the gas fee is to be paid by the sender, if the sender here is the message sender i.e. the user,
+the user will pay for the gas, however, if the sender is considered as the contract itself, there will be a problem.
+If the contract is charged gas for each transaction (the contract will loss at least 0.001 ether for each transaction according to current gas price),
+the contract etherbase will fail due to too many withdraw transactions. The contract itself is not making any profit but will have to pay some fee due to users' transaction,
+that's not fair.
+Then an experiment should be held to examine how the ethereum network perform such a transaction from the contract with msg.sender a user to be the caller of the function.
+0.001 ether = 10^15 wei which is a large amount of loss in terms of wei.
+    experiment design:
+    create the contract with external address A;
+    create user account with external address B, charge 0.01 ether for token;
+        expecting: the contract has 0.01 ether and address B pay 0.01 ether plus gas fee;
+    address B call withdraw function to withdraw 0.01 ether;
+        expecting: the contract send 0.01 ether to B and B pay the gas, resulting B receive 0.01 minus gas fee.
+    If so, the withdraw function is usable.
+    
+The contract shouldn't be paying that fee for transfering back. 
