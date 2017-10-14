@@ -29,6 +29,17 @@ Then an experiment should be held to examine how the ethereum network perform su
         expecting: the contract has 0.01 ether and address B pay 0.01 ether plus gas fee;
     address B call withdraw function to withdraw 0.01 ether;
         expecting: the contract send 0.01 ether to B and B pay the gas, resulting B receive 0.01 minus gas fee.
-    If so, the withdraw function is usable.
+    A easy way to examine the behavior of the function (actually the contract convention) is to set a getter for the contract.
+    top-up the contract first, suppose the contract possesses _amountA wei
+        check the contract balance;
+    withdraw _amountB wei by calling function withdraw as external address (user)
+        check the contract balance;
+        if the balance == _amountA - _amountB
+            the transaction fee was paid by the msg.sender i.e. the user account.
+        else
+            the fee was paid by the contract
+
+    If by convention the user will pay for calling a function that send ether from contract etherbase, 
+    the withdraw function need not to have a mechanism to make the ether in contract intact
     
 The contract shouldn't be paying that fee for transfering back. 
