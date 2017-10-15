@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex title_page_1"] 1507993710 "title_page_1.aux" "title_page_1.bbl" "title_page_1" 1507993710
+["bibtex title_page_1"] 1508055964 "title_page_1.aux" "title_page_1.bbl" "title_page_1" 1508055964
   "/home/nero/TEXLive/texmf-dist/bibtex/bst/IEEEtran/IEEEtran.bst" 1480098433 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
   "reference.bib" 1507992167 155 5ad75aaa1b30c57e26c4b591b4a35ade ""
-  "title_page_1.aux" 1507993710 1364 4c7e473d9367fcc502ad2f336e3ab29f ""
+  "title_page_1.aux" 1508055964 714 d18364ff381621b243807be59a182b43 ""
   (generated)
   "title_page_1.blg"
   "title_page_1.bbl"
-["pdflatex"] 1507993710 "/home/nero/DataToken/devlog/title_page_1.tex" "title_page_1.pdf" "title_page_1" 1507993710
-  "/home/nero/DataToken/devlog/title_page_1.tex" 1507993709 6571 83e39495fff887bc6be33f9391816eb2 ""
+["pdflatex"] 1508055964 "/home/nero/DataToken/devlog/title_page_1.tex" "title_page_1.pdf" "title_page_1" 1508055964
+  "/home/nero/DataToken/devlog/title_page_1.tex" 1508055964 8325 23780bb5b1ff7acb6dc4d6d4f467e68a ""
   "/home/nero/TEXLive/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/home/nero/TEXLive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/home/nero/TEXLive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -150,9 +150,9 @@
   "/home/nero/TEXLive/texmf-var/web2c/pdftex/pdflatex.fmt" 1507974254 4128035 07366571080d5ef06885219aa275b47a ""
   "/home/nero/TEXLive/texmf.cnf" 1507974231 496 01ab80fa0036a81d2df86fb0ac70c709 ""
   "XJTLU_shield.eps" 1507992167 481042 f80366cf6845ec1e2c0abfbd046c84aa ""
-  "title_page_1.aux" 1507993710 1364 4c7e473d9367fcc502ad2f336e3ab29f ""
-  "title_page_1.bbl" 1507993710 877 628a2a8c68e066122d1514411e0b8455 "bibtex title_page_1"
-  "title_page_1.tex" 1507993709 6571 83e39495fff887bc6be33f9391816eb2 ""
+  "title_page_1.aux" 1508055964 714 d18364ff381621b243807be59a182b43 ""
+  "title_page_1.bbl" 1508055964 877 628a2a8c68e066122d1514411e0b8455 "bibtex title_page_1"
+  "title_page_1.tex" 1508055964 8325 23780bb5b1ff7acb6dc4d6d4f467e68a ""
   (generated)
   "title_page_1.pdf"
   "title_page_1.aux"

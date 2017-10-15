@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.14)  14 OCT 2017 11:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.14)  15 OCT 2017 04:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -575,27 +575,28 @@ e 99.
 
 {/home/nero/TEXLive/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./XJTLU_shie
 ld-eps-converted-to.pdf>] [1]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 167.
+[2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 182.
 
-
-(/home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
+ (/home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 167.
- (./title_page_1.bbl
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 182.
+
+(./title_page_1.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 24.
 
-) [2] (./title_page_1.aux) ) 
+) [3] (./title_page_1.aux) ) 
 Here is how much of TeX's memory you used:
- 13331 strings out of 492990
- 263127 string characters out of 6134945
- 316115 words of memory out of 5000000
- 16602 multiletter control sequences out of 15000+600000
- 12172 words of font info for 43 fonts, out of 8000000 for 9000
+ 13243 strings out of 492990
+ 261062 string characters out of 6134945
+ 313910 words of memory out of 5000000
+ 16514 multiletter control sequences out of 15000+600000
+ 11026 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,80p,450b,704s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,5n,56p,450b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
 </home/nero/TEXLive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmbx10.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/c
@@ -607,10 +608,10 @@ Live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nero/TEXLive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/nero/TEXLive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/nero/TEXLive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmti12.pfb>
-Output written on title_page_1.pdf (3 pages, 153580 bytes).
+Output written on title_page_1.pdf (4 pages, 153679 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
