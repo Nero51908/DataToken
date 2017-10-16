@@ -38,6 +38,8 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+\usepackage{hyperref}
 %\usepackage{harvard}
 
 \begin{document}
@@ -161,7 +163,33 @@ The contract shouldn't be paying that fee for transfering back.
 
 
 
-
+\subsection{Diary 20171016 Mon}
+Mapping a host address to a guest address will make the link unique, thereby the sevice can only be recorded one on one which is no good for practical use.
+I'm now searching for a datastructurea like array which can be marked as related to one host address so that all guests of the same host address can be stored in it.
+In the documentation of solidity \^0.4.18, mapping types expression $$mapping(KeyType => ValueType)$$
+allows KeyType to be almost any type except for mapping type; ValueType to any type including mapping type.
+This mapping feature can merge mappings from guest to payment status.
+And here is a solution for linking host to guest.\href{https://ethereum.stackexchange.com/questions/27053/how-to-create-a-mapping-of-string-and-struct-array-in-solidity}{The following code is a good demonstration from stackexchange.}
+\begin{lstlisting}
+    pragma solidity ^0.4.11;
+    
+    contract AuthorizationManager{
+        struct User{
+          string userId;
+          uint roleId;
+        }
+    
+        mapping (string => User[]) companyUserMap;
+    
+        function addUser(string _key,string _userId, uint _roleId){
+            companyUserMap[_key].push(User(_userId,_roleId));
+        }
+    
+        function removeSingleUser(string _key){
+            companyUserMap[_key].length--;
+        }
+    }
+\end{lstlisting}
 \subsection{Mathematics}
 
 \LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let

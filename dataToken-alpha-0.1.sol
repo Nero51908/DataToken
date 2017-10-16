@@ -30,8 +30,8 @@ contract DataTokenAlpha {
     mapping(address=>bool) public buyingFlag;
     mapping(address=>uint256) public dataToken;
     
-    ///host ledger chain mapping///
-    mapping(address=>address) public Guest; //Host=>Guest
+    ///host ledger chain mapping///     ///currently, the operation is one on one since I'm using mapping to link two addresses.
+    mapping(address=>address) public Guest; //Host=>Guest to mark 
     mapping(address=>uint256) public DataUsage;//address here is the address of guest
     mapping(address=>bool) public feePaid;//address is guest
     
