@@ -1,8 +1,8 @@
 This is BibTeX, Version 0.99d (TeX Live 2017)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: title_page_1.aux
+The top-level auxiliary file: datatopken_devlog.aux
 The style file: IEEEtran.bst
-I found no \citation commands---while reading file title_page_1.aux
+I found no \citation commands---while reading file datatopken_devlog.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -16,7 +16,7 @@ Database file #1: reference.bib
 Done.
 You've used 0 entries,
             4087 wiz_defined-function locations,
-            821 strings with 7302 characters,
+            821 strings with 7312 characters,
 and the built_in function-call counts, 104 in all, are:
 = -- 0
 > -- 0

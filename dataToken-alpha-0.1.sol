@@ -70,9 +70,7 @@ contract DataTokenAlpha {
             revert();
         }
     }
-
-    //quit function
-    function 
+    
     
     //availableSharing function will mark current account as "ready to share data service"
     //utilizing mapping relationship sharingFlag
