@@ -2,8 +2,8 @@ PWD /home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final
 INPUT /home/nero/TEXLive/texmf.cnf
 INPUT /home/nero/TEXLive/texmf-dist/web2c/texmf.cnf
 INPUT /home/nero/TEXLive/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatopken_devlog.tex
-OUTPUT datatopken_devlog.log
+INPUT /home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatoken_devlog.tex
+OUTPUT datatoken_devlog.log
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/article.cls
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/article.cls
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/size12.clo
@@ -203,9 +203,9 @@ INPUT /home/nero/TEXLive/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
-INPUT datatopken_devlog.aux
-INPUT datatopken_devlog.aux
-OUTPUT datatopken_devlog.aux
+INPUT datatoken_devlog.aux
+INPUT datatoken_devlog.aux
+OUTPUT datatoken_devlog.aux
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/ucs/ucsencs.def
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/ucs/ucsencs.def
 INPUT /home/nero/TEXLive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -214,14 +214,14 @@ INPUT /home/nero/TEXLive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /home/nero/TEXLive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /home/nero/TEXLive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT datatopken_devlog.out
-INPUT datatopken_devlog.out
-INPUT datatopken_devlog.out
-INPUT datatopken_devlog.out
-OUTPUT datatopken_devlog.pdf
-INPUT ./datatopken_devlog.out
-INPUT ./datatopken_devlog.out
-OUTPUT datatopken_devlog.out
+INPUT datatoken_devlog.out
+INPUT datatoken_devlog.out
+INPUT datatoken_devlog.out
+INPUT datatoken_devlog.out
+OUTPUT datatoken_devlog.pdf
+INPUT ./datatoken_devlog.out
+INPUT ./datatoken_devlog.out
+OUTPUT datatoken_devlog.out
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
@@ -261,11 +261,9 @@ INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
-INPUT datatopken_devlog.bbl
-INPUT datatopken_devlog.bbl
-INPUT datatopken_devlog.aux
-INPUT ./datatopken_devlog.out
-INPUT ./datatopken_devlog.out
+INPUT datatoken_devlog.aux
+INPUT ./datatoken_devlog.out
+INPUT ./datatoken_devlog.out
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb

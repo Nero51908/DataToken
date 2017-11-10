@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex datatopken_devlog"] 1509871349 "datatopken_devlog.aux" "datatopken_devlog.bbl" "datatopken_devlog" 1509871837
+["bibtex datatoken_devlog"] 1510323907 "datatoken_devlog.aux" "datatoken_devlog.bbl" "datatoken_devlog" 1510323907
   "/home/nero/TEXLive/texmf-dist/bibtex/bst/IEEEtran/IEEEtran.bst" 1480098433 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "datatopken_devlog.aux" 1509871836 1778 46ab1ad541cdd6e1ea4509fa295db4a0 ""
-  "reference.bib" 1507992167 155 5ad75aaa1b30c57e26c4b591b4a35ade ""
+  "datatoken_devlog.aux" 1510323907 1778 46ab1ad541cdd6e1ea4509fa295db4a0 ""
+  "reference.bib" 0 -1 0 ""
   (generated)
-  "datatopken_devlog.bbl"
-  "datatopken_devlog.blg"
-["pdflatex"] 1509871836 "/home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatopken_devlog.tex" "datatopken_devlog.pdf" "datatopken_devlog" 1509871837
-  "/home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatopken_devlog.tex" 1509871836 10023 d5b49fb67a49145fa62a43ff2c604d3c ""
+  "datatoken_devlog.bbl"
+  "datatoken_devlog.blg"
+["pdflatex"] 1510323907 "/home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatoken_devlog.tex" "datatoken_devlog.pdf" "datatoken_devlog" 1510323907
+  "/home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatoken_devlog.tex" 1510323903 10023 5f7008b8c9da7e58995349dd980d04d8 ""
   "/home/nero/TEXLive/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/home/nero/TEXLive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/home/nero/TEXLive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -166,12 +166,12 @@
   "/home/nero/TEXLive/texmf-var/web2c/pdftex/pdflatex.fmt" 1507974254 4128035 07366571080d5ef06885219aa275b47a ""
   "/home/nero/TEXLive/texmf.cnf" 1507974231 496 01ab80fa0036a81d2df86fb0ac70c709 ""
   "XJTLU_shield.eps" 1507992167 481042 f80366cf6845ec1e2c0abfbd046c84aa ""
-  "datatopken_devlog.aux" 1509871836 1778 46ab1ad541cdd6e1ea4509fa295db4a0 ""
-  "datatopken_devlog.bbl" 1509871349 877 628a2a8c68e066122d1514411e0b8455 "bibtex datatopken_devlog"
-  "datatopken_devlog.out" 1509871836 552 ec21dc074fea9ebdac236b17673e53d3 ""
-  "datatopken_devlog.tex" 1509871836 10023 d5b49fb67a49145fa62a43ff2c604d3c ""
+  "datatoken_devlog.aux" 1510323907 1778 46ab1ad541cdd6e1ea4509fa295db4a0 ""
+  "datatoken_devlog.bbl" 0 -1 0 "bibtex datatoken_devlog"
+  "datatoken_devlog.out" 1510323907 552 ec21dc074fea9ebdac236b17673e53d3 ""
+  "datatoken_devlog.tex" 1510323903 10023 5f7008b8c9da7e58995349dd980d04d8 ""
   (generated)
-  "datatopken_devlog.aux"
-  "datatopken_devlog.log"
-  "datatopken_devlog.out"
-  "datatopken_devlog.pdf"
+  "datatoken_devlog.log"
+  "datatoken_devlog.aux"
+  "datatoken_devlog.pdf"
+  "datatoken_devlog.out"
