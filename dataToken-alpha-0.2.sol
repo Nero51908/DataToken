@@ -8,10 +8,15 @@ contract DataTokenAlpha{
         
     }
    
-    uint256 public userIndx=0;
+    uint256 public userIndx=1;
     mapping (address=>bool) public isNotNew;
     mapping (address=>uint256) public index;
-    modifier isNew() {
+    userInfo[] public Info;
+    function DataTokenAlpha() public {
+            Info.push(userInfo(this,false,0));
+
+    }
+        modifier isNew() {
         if(!isNotNew[msg.sender]){
             _;
         }else{
@@ -21,10 +26,7 @@ contract DataTokenAlpha{
     function getter_this_is_not_new() constant public returns(bool) {
         return isNotNew[msg.sender];
     }
-    //function public topUp() payable {
-    //    
-    //}
-    userInfo[] public Info;
+    
     function addUser() isNew public {
         
         Info.push(userInfo(msg.sender,false,0));
@@ -32,8 +34,13 @@ contract DataTokenAlpha{
         index[msg.sender]=userIndx;
         userIndx+=1;
     }
+    
+    //function public topUp() payable {
+    //    
+    //}
+    
     //function for test
-    function giveToken(){
+    function giveToken() public {
         Info[index[msg.sender]].tokenBalance+=10;
     }
     //end of test function

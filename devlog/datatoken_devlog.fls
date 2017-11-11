@@ -255,9 +255,9 @@ INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
-INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
@@ -267,9 +267,7 @@ INPUT ./datatoken_devlog.out
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
-INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
-INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
