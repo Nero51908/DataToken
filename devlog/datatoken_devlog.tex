@@ -40,9 +40,11 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{fullpage}
 %\usepackage{harvard}
 
 \begin{document}
+
 
 \begin{titlepage}
 
@@ -105,26 +107,23 @@ Dr. Siyi \textsc{Wang} % Supervisor's Name
 \vfill % Fill the rest of the page with whitespace
 
 \end{titlepage}
-
+\tableofcontents
 
 \begin{abstract}
-This is a placeholder line for Abstract.
+This project aims to implement a blockchain oriented cellular 
+data sharing software on Ethereum platform. The first part of this
+Final Year Project focuses on software layer implementation, and the
+second half will consider some potential implementations in real life.
+
 \end{abstract}
 
 \section{Introduction}
 DataToken is the name of the smart contract to be developed as my Final Year Project (FYP) in XJTLU.
-All DataToken projects will be named with postfix``alpha'' since the propotype development is far from finished yet.
-Versions are depicted in *.* format e.g. 0.0; increment on the number before the dot means new functions or features are added, increment on the number after the dot means minor changes are added to source code.
-
-\section{Parameters Settings}
-\begin{itemize}
-    \item User 
-    \begin{itemize}
-        \item user index
-        \item userId
-    \end{itemize}
-    
-\end{itemize}
+All DataToken projects will be named with postfix``alpha'' since the propotype development is far from 
+finished yet.
+Versions are depicted in *.* format e.g. 0.0; increment on the number before the dot means 
+new functions or features are added, increment on the number after the dot means minor 
+changes are added to source code.
 
 \section{DataToken Alpha 0.0}
 version alpha 0.0 
@@ -199,13 +198,14 @@ And here is a solution for linking host to guest.\href{https://ethereum.stackexc
     }
 \end{lstlisting}
 \subsection{Diary 20171017 Tue}
-How should a ledger be like? An individual ledger or a public ledger to record everyone?
+How should a ledger be like?
+An individual ledger or a public ledger to record everyone?
 \section{DataToken Alpha 0.2 20171110}
 Contract vatiable list:
 \begin{itemize}
     \item uint256 public userIndex //index of userInfo array Info
-    \item mapping (address=>bool) public isNotNew //used or not mark
-    \item mapping (address=>uint256) public index //to query in array Info
+    \item mapping (address$=>$bool) public isNotNew //used or not mark
+    \item mapping (address$=>$uint256) public index //to query in array Info
     
     
 \end{itemize}
@@ -230,17 +230,62 @@ the function:
     \item index increment is needed since the function add userInfo
     to the same userInfo array each time and the index should be different.
     \item store the index of current userInfo by mapping the address to 
-    a uint256 value.
+    a uint256 value.\\\\
 \end{enumerate}
+Method addUser() is described by the following code:
+\begin{lstlisting}
+    function addUser() isNew public {
+        
+        Info.push(userInfo(msg.sender,false,0));
+        isNotNew[msg.sender]=true;
+        index[msg.sender]=userIndx;
+        userIndx+=1;
+    }
+\end{lstlisting}
+\noindent
+\textbf{Bug:}
 \begin{enumerate}
-    \item Bug: default target value (uint256) in a map is 0\\
+    \item \textbf{Default target value (uint256) in a map is 0}\\
     An used address will have the userIndex mapping value 0, which 
     will be interpreted as position [0] if Info[0] does hold information
     of a user.\\
-    Fix trail 1: initialize userIndex with none zero value, say 1.
+    \textbf{Trail Fix 1:} Initialize userIndex with none zero value, say 1.
     Position [0] in Info array is initialized with the contract address
-    and other default values.
+    and other default values.\\
 \end{enumerate}
+\textbf{Limitations:}
+\begin{enumerate}
+    \item Information of users is stored by an array 
+    but the array may be size limited.\\
+    \textbf{Answer:} array is capable to store a very big number of 
+    indices like $2^{256}$; it maybe not a problem for the scope of a
+    small application on Ethereum. This user information system cound 
+    be altered by some more flexible methods in solidity language.
+    \item  A method inside dataToken contract named removeUser() will 
+    remove message sender from user list and redeem Ethers according
+    to token balance.
+    Once a user (address) is removed from Info[] array,
+    the position (index) of it 
+    will be empty, however, current addUser function won't be able
+    to reuse the released indices.\\
+    \textbf{Answer:} For this version of implementation (alpha V0.2), the removed
+    positions will be left empty and not be used by the contract. 
+   
+\end{enumerate}
+\subsection{Diary 20171114 Tue}
+\textbf{Design of removeUser() method.}
+The very first question is what have been created
+by a call of addUser(). As the definition of addUser() in Diary 20171111 Sat,
+once addUser() is called:
+\begin{itemize}
+    \item Info[] will have a new userInfo cascated at the end of it. 
+    \item A corresponding position in map \textbf{index} is created to hold 
+    the index of that userInfo.
+    \item A nother map \textbf{isNotNew} will hold the state of whether an
+    addresss is used or not. Being True means this address is not a new user.
+    \\
+\end{itemize}
+Once call of removeUser() will remove the created information above.
 
 
 
