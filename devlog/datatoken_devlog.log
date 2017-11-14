@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  14 NOV 2017 15:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  14 NOV 2017 16:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -782,20 +782,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 284--287
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--298
+
+ []
+
 No file datatoken_devlog.bbl.
 [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 296.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 296.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 310.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 310.
  (./datatoken_devlog.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 296.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 296.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 310.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 310.
 Package rerunfilecheck Info: File `datatoken_devlog.out' has not changed.
 (rerunfilecheck)             Checksum: 6BACAB02D8BA95FEC5953B00F90E5A13;499.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 296.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 310.
  ) 
 Here is how much of TeX's memory you used:
- 18437 strings out of 492985
- 337639 string characters out of 6134895
+ 18438 strings out of 492985
+ 337645 string characters out of 6134895
  418333 words of memory out of 5000000
  21602 multiletter control sequences out of 15000+600000
  11333 words of font info for 40 fonts, out of 8000000 for 9000
@@ -810,10 +815,10 @@ st/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nero/TEXLive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr8.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy10.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti12.pfb>
-Output written on datatoken_devlog.pdf (6 pages, 156151 bytes).
+Output written on datatoken_devlog.pdf (6 pages, 156728 bytes).
 PDF statistics:
- 166 PDF objects out of 1000 (max. 8388607)
- 145 compressed objects within 2 object streams
- 49 named destinations out of 1000 (max. 500000)
+ 167 PDF objects out of 1000 (max. 8388607)
+ 146 compressed objects within 2 object streams
+ 50 named destinations out of 1000 (max. 500000)
  82 words of extra memory for PDF output out of 10000 (max. 10000000)
 

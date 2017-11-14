@@ -286,8 +286,22 @@ once addUser() is called:
     \\
 \end{itemize}
 Once call of removeUser() will remove the created information above.
-
-
+\begin{itemize}
+    \item Mark the isNotNew mapping of the address as false.
+    The information of this address won't be removed from \textbf{Info}.
+    The corresponding index will be reserved.
+    \item Once this address is marking itself as a user again,
+    addUser() could check whether it's \textbf{index} mapping
+    is non-zero, then the old position of this address can be marked as
+    user by just changing the value of \textbf{isNotNew} mapping.
+    \\
+\end{itemize}
+\textbf{Limitations}
+\begin{enumerate}
+    \item This will also cause another problem that a user must be aware
+    that the token won't be redeemed if withdraw function is not called.
+\end{enumerate}
+Behavior of this function is as expected so far.
 
 
 %\bibliographystyle{agsm}
