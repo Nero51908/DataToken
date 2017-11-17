@@ -1,14 +1,23 @@
 pragma solidity ^0.4.16;
 
 contract DataTokenAlpha{
+    uint public v2weiRate = 1;
+    function chv2weiRate(uint _newRate){
+        v2weiRate = _newRate;
+    }
     struct userInfo{
         address etherAdd; //ethereum address to top up the account or withdraw
         bool userRole; //1:is a provider; 0:is a receiver
         uint256 tokenBalance;//token balance 
-        
+        //ledger
+        address provider;
+        address receiver;
+        uint256 volume;
+        bool paid;
     }
     //event to report whether an operation is done correctly.
-    event userOperationResult (string _report);
+    event userOperationResult (string _report);//result of adding or removing users.
+    event userBalanceUpdate (string _report, uint256 _income);
     uint256 public userIndx=1;
     mapping (address=>bool) public isNotNew;
     mapping (address=>uint256) public index;
@@ -17,12 +26,14 @@ contract DataTokenAlpha{
     //Initializer
     //
     function DataTokenAlpha() public {
-            Info.push(userInfo(this,false,0));
+            Info.push(userInfo(this,false,0,0,0,0,true));
     }
     //
     //end of Initializer
     //
-        //check if the user is currently not a user
+        //
+        //isNew modifier: to check if the user is currently not a user
+        //
         modifier isNew() {
         if(!isNotNew[msg.sender]){
             _;
@@ -31,17 +42,43 @@ contract DataTokenAlpha{
             getter_this_is_not_new;
         }
         }
-        //check if the user is currently a user
-        
+        //
+        //isUser modifier: to check if the user is currently a user
+        //
         modifier isUser() {
             if(isNotNew[msg.sender]){
                 _;
                 userOperationResult("This is a user.");
             }else{
+                revert();
                 userOperationResult("This address is not a user.");
             }
-            
         }
+        //
+        //isNotReceiver check
+        //
+        modifier isNotReceiver() {
+            if (Info[index[msg.sender]].userRole){
+                _;
+            } else {
+                
+            }
+        }
+        //
+        //isReceiver check
+        //
+        modifier isReceiver() {
+            if (Info[index[msg.sender]].userRole){
+                
+            } else {
+                _;
+            }
+        }
+        //
+        //
+        //
+            
+        
     //getter function to tell the value of isNotNew mapping
     function getter_this_is_not_new() constant public returns(bool) {
         return isNotNew[msg.sender];
@@ -51,7 +88,7 @@ contract DataTokenAlpha{
         
         if(index[msg.sender]==0){
         //do this with a complete new address
-        Info.push(userInfo(msg.sender,false,0));
+        Info.push(userInfo(msg.sender,false,0,0,0,0,true));
         isNotNew[msg.sender]=true;
         index[msg.sender]=userIndx;
         userIndx+=1;
@@ -69,16 +106,67 @@ contract DataTokenAlpha{
         userOperationResult("The user is marked as not using this contract.");
     }
     
-    //function public topUp() payable {
-    //    
-    //}
-    
-    //function for test
-    function giveToken() public {
-        Info[index[msg.sender]].tokenBalance+=10;
+    //
+    //topUp function: sender must input a non-zero value (Ether)
+    //current setting: 1 Ether = 1000 token
+    function topUp() isUser payable public {
+        Info[index[msg.sender]].tokenBalance+=msg.value;
+        //event log 
+        userBalanceUpdate("Exchanged this many of token from Ether: ",Info[index[msg.sender]].tokenBalance);
     }
-    //end of test function
     
+    //
+    //withdraw Ether from this contract
+    //redeem Ether using all token of current user.
+    //msg.sender will pay for this send() operation, which is undertaken by Ethereum network.
+    function withdraw() isUser public {
+        if(msg.sender.send(Info[index[msg.sender]].tokenBalance)){
+            userBalanceUpdate("Withdraw operation has succeeded, redeemed amount of wei:", Info[index[msg.sender]].tokenBalance);
+            Info[index[msg.sender]].tokenBalance=0;
+        } else {
+            revert();
+            userBalanceUpdate("Withdraw operation has faild and all changes are reverted",0);
+        }
+    }
+    
+    //
+    //function transfer token in side this contract
+    //
+    function transfer(address _provider, address _receiver, uint256 _amount) isUser public {
+        if(Info[index[_receiver]].tokenBalance - _amount >= 0){
+        Info[index[_receiver]].tokenBalance -= _amount;
+        Info[index[_provider]].tokenBalance += _amount;
+        //delete the value of provider after a complete payment
+        Info[index[_receiver]].provider=0;
+        //paid is true by default, so there is no need to change 
+        //event log
+        userBalanceUpdate("Token transfer from receiver to provider, amount:",_amount);
+        } else {
+            userBalanceUpdate("Token transfer failed, not enough token in receiver account, transfer value:",_amount);
+            Info[index[_provider]].paid = false;
+        }
+    }
+    //
+    //Charge the data receiver after using.
+    //
+    //input of pay should be from userInfo (Info[]) of msg.sender
+    //there should be a interface of this contract to assign volume of msg.sender
+    function pay(address _provider, uint256 _volume) isReceiver public {
+        transfer(_provider, msg.sender, _volume*v2weiRate);
+    }
+   
+//////////////////////////////////////////////////
+    //function for test
+    function contractBalance() constant public returns (uint256 ) {
+        return this.balance;
+    }
+    function giveToken(uint256 _amount) public {
+        Info[index[msg.sender]].tokenBalance+=_amount;
+        userBalanceUpdate("This many token is given to current message sender: ",_amount);
+    }
+    
+    //end of test function
+/////////////////////////////////////////////////
 
     
 }

@@ -163,8 +163,6 @@ $0.001$ ether = $10^15$  wei which is a large amount of loss in terms of wei.
         else
             the fee was paid by the contract
 
-    If by convention the user will pay for calling a function that send ether from contract etherbase, 
-    the withdraw function need not to have a mechanism to make the ether in contract intact
     
 The contract shouldn't be paying that fee for transfering back. 
 
@@ -198,7 +196,7 @@ And here is a solution for linking host to guest.\href{https://ethereum.stackexc
     }
 \end{lstlisting}
 \subsection{Diary 20171017 Tue}
-How should a ledger be like?
+What should a ledger be like?
 An individual ledger or a public ledger to record everyone?
 \section{DataToken Alpha 0.2 20171110}
 Contract vatiable list:
@@ -206,7 +204,12 @@ Contract vatiable list:
     \item uint256 public userIndex //index of userInfo array Info
     \item mapping (address$=>$bool) public isNotNew //used or not mark
     \item mapping (address$=>$uint256) public index //to query in array Info
-    
+    \item (struct) userInfo 
+    \begin{itemize}
+        \item address etherAdd //Ether private address of this user;
+        \item bool userRole; //is this user a provider(true) or a receiver(false)
+        \item uint256 tokenBalance; //
+    \end{itemize}
     
 \end{itemize}
 With the structure described in version 0.1, the dataToken v0.2
@@ -302,6 +305,56 @@ Once call of removeUser() will remove the created information above.
     that the token won't be redeemed if withdraw function is not called.
 \end{enumerate}
 Behavior of this function is as expected so far.
+
+\subsection{Diary 20171115}
+Topup and withdraw function are implented.\\
+\begin{itemize}
+    \item topUp()\\
+    is a payable function which is able to send ether to the contract from the message sender.
+    Global variable msg.value is the value designated to send to dataToken contract by the user.
+    If the message sender is a user, certain amount of Ether will be sent to the contract and then 
+    the function will offer the user account an equivalent amount of token
+    obeying an 1 wei = 1 token exchange rate.\\
+    \item withdraw()\\
+    If a user call this function, 
+    it will redeem all token of current user back to Ether in the user's address.
+\end{itemize}
+
+\subsection{Diary 20171116}
+Design of payment logic:\\
+\begin{enumerate}
+    \item New components of userInfo is added to desicribe a ledger:
+    \begin{itemize}
+        \item address provider; //address of the provider, is 0 by default.
+        \item address receiver; //address of the reveiver, is 0 by default.
+        \item uint256 volume;   //data usage if as a reveiver, is 0 by default.
+        \item bool paid;
+        //whether the user has paid for the last use of sharing, is true by default.
+    \end{itemize}
+    \item New functions to deal with accounting and payment are needed.
+    \begin{itemize}
+        \item pay(address \_provider, uint256 \_volume)
+        \item transfer(address \_provider, address \_receiver, uint256 \_amount)\\
+        transfer() will deal with token transfer. It will be called inside function pay().
+        As to obtain a good level of flexibility,
+        the behavior of transfer token can still be used in somewhere else.
+    
+    \end{itemize}    
+    \item In one sharing process, the receiver will have it's provider infromation
+\end{enumerate}
+\subsection{Diary 20171117}
+An exachange rate mechanism: uint variable v2weiRate and a function chv2weiRate().
+If it is necessary to change the rate of exchange, call the function. This is not 
+a feature for frequent use but it may be necessary to use during my tests.\\\\
+A new function link() will match a receiver to a provider when a receiver user call it.\\\\
+\textbf{Limitations}:
+\begin{itemize}
+    \item Each provider may serve serveral receivers at the same time, however,
+    there should be a number limit. What if multiple providers are in the same space with
+    several receivers? (How to match the providers to the receivers?)
+    A typical solution is to maintain receiver number of each provider in the same space
+    at an average level. How to implement this volume balance feature?
+\end{itemize}
 
 
 %\bibliographystyle{agsm}

@@ -5,5 +5,8 @@
 \contentsline {subsection}{\numberline {3.1}Diary 20171016 Mon}{2}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Diary 20171017 Tue}{3}{subsection.3.2}
 \contentsline {section}{\numberline {4}DataToken Alpha 0.2 20171110}{3}{section.4}
-\contentsline {subsection}{\numberline {4.1}Diary 20171111 Sat}{3}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Diary 20171114 Tue}{4}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.1}Diary 20171111 Sat}{4}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Diary 20171114 Tue}{5}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Diary 20171115}{5}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Diary 20171116}{6}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Diary 20171117}{6}{subsection.4.5}

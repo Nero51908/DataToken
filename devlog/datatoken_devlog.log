@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  14 NOV 2017 16:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  17 NOV 2017 19:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -719,7 +719,7 @@ Package epstopdf Info: Source file: <XJTLU_shield.eps>
 -to.pdf XJTLU_shield.eps>
 (epstopdf)             \includegraphics on input line 103.
 Package epstopdf Info: Output file is already uptodate.
-<XJTLU_shield-eps-converted-to.pdf, id=39, pagebox=cropbox, 26.0975pt x 33.1237
+<XJTLU_shield-eps-converted-to.pdf, id=51, pagebox=cropbox, 26.0975pt x 33.1237
 5pt>
 File: XJTLU_shield-eps-converted-to.pdf Graphic file (type pdf)
 <use XJTLU_shield-eps-converted-to.pdf>
@@ -741,68 +741,93 @@ been already used, duplicate ignored
                    \relax 
 l.165 
        [1]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 183.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 181.
 
  (/home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 183.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 181.
  [2]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 189.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 187.
 
 
 (/home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 189.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 187.
 
-Overfull \hbox (2.59416pt too wide) in paragraph at lines 191--192
+Overfull \hbox (2.59416pt too wide) in paragraph at lines 189--190
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 232--234
+Underfull \hbox (badness 10000) in paragraph at lines 235--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--234
+Underfull \hbox (badness 10000) in paragraph at lines 235--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--255
+Underfull \hbox (badness 10000) in paragraph at lines 251--258
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 284--287
+Underfull \hbox (badness 10000) in paragraph at lines 287--290
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 293--298
+Underfull \hbox (badness 10000) in paragraph at lines 296--301
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--318
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 324--325
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 346--351
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 346--351
 
  []
 
 No file datatoken_devlog.bbl.
-[5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 310.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 310.
+[6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 363.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 363.
  (./datatoken_devlog.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 310.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 310.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 363.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 363.
 Package rerunfilecheck Info: File `datatoken_devlog.out' has not changed.
-(rerunfilecheck)             Checksum: 6BACAB02D8BA95FEC5953B00F90E5A13;499.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 310.
+(rerunfilecheck)             Checksum: C4EC13C09A18F939C67629B4112B1983;690.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 363.
  ) 
 Here is how much of TeX's memory you used:
- 18438 strings out of 492985
- 337645 string characters out of 6134895
- 418333 words of memory out of 5000000
- 21602 multiletter control sequences out of 15000+600000
+ 18448 strings out of 492985
+ 337761 string characters out of 6134895
+ 419333 words of memory out of 5000000
+ 21605 multiletter control sequences out of 15000+600000
  11333 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,6n,56p,556b,1760s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -815,10 +840,10 @@ st/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nero/TEXLive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr8.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy10.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti12.pfb>
-Output written on datatoken_devlog.pdf (6 pages, 156728 bytes).
+Output written on datatoken_devlog.pdf (7 pages, 160030 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 146 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 500000)
- 82 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 192 PDF objects out of 1000 (max. 8388607)
+ 170 compressed objects within 2 object streams
+ 57 named destinations out of 1000 (max. 500000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
