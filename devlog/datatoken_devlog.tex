@@ -344,6 +344,10 @@ Design of payment logic:\\
 \end{enumerate}
 \subsection{Diary 20171117}
 An exachange rate mechanism: uint variable v2weiRate and a function chv2weiRate().
+To test the function of this contract, an new initializer is defined.
+The contract will initialize a provider whose address is\\
+0xdd870fa1b7c4700f2bd7f44238821c26f7392148\\
+
 If it is necessary to change the rate of exchange, call the function. This is not 
 a feature for frequent use but it may be necessary to use during my tests.\\\\
 A new function link() will match a receiver to a provider when a receiver user call it.\\\\
@@ -355,7 +359,8 @@ A new function link() will match a receiver to a provider when a receiver user c
     A typical solution is to maintain receiver number of each provider in the same space
     at an average level. How to implement this volume balance feature?
 \end{itemize}
-
+\subsection{Diary 20171118}
+Link function will only provide 1 to 1 link now because the struct userInfo allows just one receiver address.
 
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}

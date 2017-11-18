@@ -1,8 +1,16 @@
 pragma solidity ^0.4.16;
 
 contract DataTokenAlpha{
+    //
+    //////////////////////////////////////
+    //Test variable //////////////////////
+    //provider list
+    address[] providers;//nearby providers.
+    //////////////////////////////////////
+    //////////////////////////////////////
+   
     uint public v2weiRate = 1;
-    function chv2weiRate(uint _newRate){
+    function chv2weiRate(uint _newRate) public {
         v2weiRate = _newRate;
     }
     struct userInfo{
@@ -22,11 +30,17 @@ contract DataTokenAlpha{
     mapping (address=>bool) public isNotNew;
     mapping (address=>uint256) public index;
     userInfo[] public Info;
-    //
+    ////////////////////////////////////////
     //Initializer
-    //
+    ////////////////////////////////////////
     function DataTokenAlpha() public {
+        //initialize index 0 in Info array
             Info.push(userInfo(this,false,0,0,0,0,true));
+            ///////////////////////////////////////////////////////////
+            //manually creating a default provider for testing purpose
+            ///////////////////////////////////////////////////////////
+            Info.push(userInfo(0xdd870fa1b7c4700f2bd7f44238821c26f7392148,true,0,0,0,0,true));
+            providers.push(0xdd870fa1b7c4700f2bd7f44238821c26f7392148);
     }
     //
     //end of Initializer
@@ -154,15 +168,25 @@ contract DataTokenAlpha{
     function pay(address _provider, uint256 _volume) isReceiver public {
         transfer(_provider, msg.sender, _volume*v2weiRate);
     }
-   
+   //
+   //link the msg.sender to a provider in provider list
+   //
+   function link() isReceiver public {
+       
+   }
 //////////////////////////////////////////////////
     //function for test
     function contractBalance() constant public returns (uint256 ) {
         return this.balance;
     }
     function giveToken(uint256 _amount) public {
-        Info[index[msg.sender]].tokenBalance+=_amount;
+        Info[index[msg.sender]].tokenBalance += _amount;
         userBalanceUpdate("This many token is given to current message sender: ",_amount);
+    }
+    function suProvider() isUser isReceiver public {
+        Info[index[msg.sender]].userRole = true;
+        providers.push(msg.sender);
+        userOperationResult("You have succeessfully turned to be provider.");
     }
     
     //end of test function
