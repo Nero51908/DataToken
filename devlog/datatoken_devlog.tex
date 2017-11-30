@@ -362,6 +362,38 @@ A new function link() will match a receiver to a provider when a receiver user c
 \subsection{Diary 20171118}
 Link function will only provide 1 to 1 link now because the struct userInfo allows just one receiver address.
 The limitation is obvious, the next step is to make this matching more flexible.
+\subsection{Diary 20171128}
+The concept of contract in Solidity resembles the concept of class in objective oriented languages
+but ``contract'' is deployable on Ethereum network.\\
+If a contract (class) called user is defined, can I make an array of instances of user contract in my dataToken contract?\\
+There is problem of gas cost be
+fore understanding what exactly a contract is in Solidity.
+\subsection{Diary 20171130}
+Coding style is changed. Function declaration is like:
+\begin{lstlisting}
+    function getter_this_is_not_new() 
+    constant 
+    public
+    returns(bool) 
+    {
+        return isNotNew[msg.sender];
+    }
+\end{lstlisting}
+Each function modifier is listed in saperate lines.\\
+A feature of Solidity, enum type is probably used for declaration of flags.\\
+For a private Ethereum address, it's states could be:
+\begin{itemize}
+    \item not a user of DataToken contract
+    \item a user of DataToken contract
+    \begin{itemize}
+        \item a provider 
+        \item a reveiver
+        \begin{itemize}
+            \item have paid the last bill
+            \item have not paid
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
 \bibliography{reference}

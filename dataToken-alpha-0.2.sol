@@ -1,18 +1,20 @@
 pragma solidity ^0.4.16;
 
 contract DataTokenAlpha{
-    //
     //////////////////////////////////////
-    //Test variable //////////////////////
+    //Test variables
+    //////////////////////////////////////
     //provider list
     address[] public providers;//nearby providers.
     //////////////////////////////////////
+    //End of test variables
     //////////////////////////////////////
-   
+    
+    ////////////////////////////////////////
+    //Contract variables
+    ////////////////////////////////////////
     uint public v2weiRate = 1;
-    function chv2weiRate(uint _newRate) public {
-        v2weiRate = _newRate;
-    }
+    
     struct userInfo{
         address etherAdd; //ethereum address to top up the account or withdraw
         bool userRole; //1:is a provider; 0:is a receiver
@@ -28,27 +30,41 @@ contract DataTokenAlpha{
     event userBalanceUpdate (string _report, uint256 _income);
     uint256 public userIndx = 1;
     uint256 public providerIndx = 1;
-    mapping (address=>bool) public isNotNew;
-    mapping (address=>uint256) public index;
-    mapping (address=>uint256) public pIndex;
-    userInfo[] public Info;
+    mapping (address=>bool) public isNotNew;//whether is contract user flag
+    mapping (address=>uint256) public index;//contract user index
+    mapping (address=>uint256) public pIndex;//provider index
+    userInfo[] public Info;//user inforamtion array
+    ////////////////////////////////////////
+    //End of Contract variables
+    ////////////////////////////////////////
+    
     ////////////////////////////////////////
     //Initializer
     ////////////////////////////////////////
-    function DataTokenAlpha() public {
+    //1. Contract user array will hold information of the contract itself
+    //2. Private address 0xdd870fa1b7c4700f2bd7f44238821c26f7392148 is defined as user 
+    //3. This first private address user is marked as provider for testing purposes
+    //4. Contract user index [0] and [1] are used after this initialization
+    function DataTokenAlpha() 
+    public 
+    {
         //initialize index 0 in Info array
-            Info.push(userInfo(this,false,0,0,0,0,true));
-            ///////////////////////////////////////////////////////////
-            //manually creating a default provider for testing purpose
-            ///////////////////////////////////////////////////////////
-            Info.push(userInfo(0xdd870fa1b7c4700f2bd7f44238821c26f7392148,true,0,0,0,0,true));
-            index[0xdd870fa1b7c4700f2bd7f44238821c26f7392148]= userIndx;
-            userIndx += 1;
-            providers.push(0xdd870fa1b7c4700f2bd7f44238821c26f7392148);
+        Info.push(userInfo(this,false,0,0,0,0,true));
+        ///////////////////////////////////////////////////////////
+        //manually creating a default provider for testing purpose
+        ///////////////////////////////////////////////////////////
+        Info.push(userInfo(0xdd870fa1b7c4700f2bd7f44238821c26f7392148,true,0,0,0,0,true));
+        index[0xdd870fa1b7c4700f2bd7f44238821c26f7392148]= userIndx;
+        userIndx += 1;
+        providers.push(0xdd870fa1b7c4700f2bd7f44238821c26f7392148);
     }
-    //
-    //end of Initializer
-    //
+    ////////////////////////////////////////
+    //End of Initializer
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    //Modifiers Definitions
+    ////////////////////////////////////////
         //
         //isNew modifier: to check if the user is currently not a user
         //
@@ -124,10 +140,12 @@ contract DataTokenAlpha{
             isNotNew[msg.sender]=true;
             userOperationResult("User information is recoverd.");
         }
-
     }
     //remove current message sender from the user list if it were in it.
-    function removeUser() isUser public{
+    function removeUser()
+    isUser 
+    public
+    {
         isNotNew[msg.sender]=false;
         userOperationResult("The user is marked as not using this contract.");
     }
@@ -135,7 +153,11 @@ contract DataTokenAlpha{
     //
     //topUp function: sender must input a non-zero value (Ether)
     //current setting: 1 Ether = 1000 token
-    function topUp() isUser payable public {
+    function topUp() 
+    isUser 
+    payable 
+    public 
+    {
         Info[index[msg.sender]].tokenBalance+=msg.value;
         //event log 
         userBalanceUpdate("Exchanged this many of token from Ether: ",Info[index[msg.sender]].tokenBalance);
@@ -145,7 +167,10 @@ contract DataTokenAlpha{
     //withdraw Ether from this contract
     //redeem Ether using all token of current user.
     //msg.sender will pay for this send() operation, which is undertaken by Ethereum network.
-    function withdraw() isUser public {
+    function withdraw() 
+    isUser 
+    public 
+    {
         if(msg.sender.send(Info[index[msg.sender]].tokenBalance)){
             userBalanceUpdate("Withdraw operation has succeeded, redeemed amount of wei:", Info[index[msg.sender]].tokenBalance);
             Info[index[msg.sender]].tokenBalance=0;
@@ -158,7 +183,10 @@ contract DataTokenAlpha{
     //
     //function transfer token in side this contract
     //
-    function transfer(address _provider, address _receiver, uint256 _amount) isUser public {
+    function transfer(address _provider, address _receiver, uint256 _amount) 
+    isUser 
+    public 
+    {
         if(Info[index[_receiver]].tokenBalance - _amount >= 0){
         Info[index[_receiver]].tokenBalance -= _amount;
         Info[index[_provider]].tokenBalance += _amount;
@@ -177,7 +205,10 @@ contract DataTokenAlpha{
     //
     //input of pay should be from userInfo (Info[]) of msg.sender
     //there should be a interface of this contract to assign volume of msg.sender
-    function pay(address _provider, uint256 _volume) isReceiver public {
+    function pay(address _provider, uint256 _volume) 
+    isReceiver 
+    public 
+    {
         transfer(_provider, msg.sender, _volume*v2weiRate);
     }
    //
@@ -200,17 +231,32 @@ contract DataTokenAlpha{
          }
        }
    }
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
     //function for test
-    function contractBalance() constant public returns (uint256 ) {
+    //change wei=>token rate
+    function chv2weiRate(uint _newRate)
+    public 
+    {
+        v2weiRate = _newRate;
+    }
+    //getter of contract balance
+    function contractBalance() 
+    constant 
+    public 
+    returns (uint256 ) 
+    {
         return this.balance;
     }
+    //give _amount token to messagee sender
     function giveToken(uint256 _amount) 
     public
     {
         Info[index[msg.sender]].tokenBalance+=_amount;
         userBalanceUpdate("This many token is given to current message sender: ",_amount);
     }
+    //switch user role flag when user is currently a receiver 
     function suProvider() 
     isReceiver 
     public
@@ -221,6 +267,7 @@ contract DataTokenAlpha{
         providerIndx += 1;
         userOperationResult("You have succeessfully turned to be provider.");
     }
+    //switch user role flag when user is curretnly a provider
     function suReceiver()
     isNotReceiver
     public
@@ -229,10 +276,9 @@ contract DataTokenAlpha{
         delete providers[pIndex[msg.sender]];
         userOperationResult("You have succeessfully turned to be receiver.");  
     }
-    
-    
-    //end of test function
-/////////////////////////////////////////////////
-
+    //end of test functions
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
     
 }
