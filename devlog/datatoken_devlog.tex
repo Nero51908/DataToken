@@ -362,6 +362,7 @@ A new function link() will match a receiver to a provider when a receiver user c
 \subsection{Diary 20171118}
 Link function will only provide 1 to 1 link now because the struct userInfo allows just one receiver address.
 The limitation is obvious, the next step is to make this matching more flexible.
+\section{DataToken Alpha 0.2.2}
 \subsection{Diary 20171128}
 The concept of contract in Solidity resembles the concept of class in objective oriented languages
 but ``contract'' is deployable on Ethereum network.\\
@@ -393,6 +394,50 @@ For a private Ethereum address, it's states could be:
             \item have not paid
         \end{itemize}
     \end{itemize}
+\end{itemize}
+\subsection{Diary 20171201}
+Utilizing enum type in Solidity, user identification, user role and payment state 
+can be
+\begin{itemize}
+    \item NOTCONTRACTUSER = 0
+    \item ISPROVIDER = 1
+    \item ISRECEIVER = 2
+    \item HAVENOTPAID = 3 i.e. implicitely a provider, but the contract don't allow it do anything but to pay the bill.
+\end{itemize}
+userRole(bool) in structure userInfo is changed to be Identification(uint). 
+Values of Identification is from enum state {...} as demonstrated above.\\
+Another problem is to match multiple user to the same provider.\\
+OR, the function could return several available providers for user to choose which one 
+to connect to.\\\\
+\textbf{Contract variables now are:}
+\begin{itemize}
+    \item v2weiRate(uint) : token to wei rate. set to 1 in current version.    
+    \item providers(addres[ ]) : array of providers i.e. Identification = 1.
+    \item users(userInfo[ ]) : array of user information
+    \begin{itemize}
+        \item userInfo(struct) definition
+        \begin{itemize}
+            \item Identification(unint) : one value from state(enum)
+            \item etherAddress(address) : Ethereum address if this is a user
+            \item provider(address) : the provider's address before the next time sharing
+            \item dataUsage(uint256) : data usage in MB. Must be integer in current version
+            \item receivers(addres[ ]) : each sharing process should allow multiple receiver
+        \end{itemize}
+    \end{itemize}
+    \item tokenBalance(address$=>$uint256 mapping) : token balance of a user (address as key)
+    \item providerIndex(address$=>$uint256 mapping) : if Identification = PROVIDER, note the index in providers(address[ ]) array
+    \item usersIndex(address$=>$unint256 mapping): if Identification $\neq$ NOTCONTRACTUSER, note the index in users(userInfo[]) array
+\end{itemize}
+\textbf{Fundamental functions in this contract:}
+\begin{itemize}
+    \item addUser() : mark message sender as a user of this contract\\
+    Identification = ISRECEIVER
+    \item removeUser() : mark message sender as ``not a user''\\
+    Identification = NOTCONTRACTUSER
+    \item suProvider() : if Identification = ISRECEIVER, change the message sender's Identification to ISRECEIVER\\
+    Identification = ISPROVIDER
+    \item suReceiver() : if Identification = ISPROVIDER, mark message sender as receiver\\
+    Identification = ISRECEIVER
 \end{itemize}
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
