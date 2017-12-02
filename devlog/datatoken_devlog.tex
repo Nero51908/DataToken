@@ -439,6 +439,17 @@ to connect to.\\\\
     \item suReceiver() : if Identification = ISPROVIDER, mark message sender as receiver\\
     Identification = ISRECEIVER
 \end{itemize}
+\subsection{Diary 20171202}
+Bug report:\\
+Cannot add new users. Call of addUser() is always rejected by modifier isNotContractUser() by 
+replying that``This address is a registered contract user.''
+
+User Identification(State) is changed to be a mapping called Identification(address$=>$State),
+because default mapping value of a unassigned key is 0 which can be used to distinguish new user.
+Before this change, Identification(State) is a value inside users(userInfo[]) in which
+unregistered address will have index 0 as default mapping value of userIndex(address$=>$uint256),
+that is, all new users will be recognized as users[0] which is the user position for the contract itself.
+
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
 \bibliography{reference}

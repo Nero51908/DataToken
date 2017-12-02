@@ -17,8 +17,8 @@ contract DataTokenAlpha{
         address[] receivers;
     }
     mapping (address=>uint256) public tokenBalance;
-    mapping (address=>uint256) public providerIndex;
-    mapping (address=>uint256) public userIndex;
+    mapping (address=>uint256) public providerIndex;//if Identification == PROVIDER, this should be a unique value (i.e. a non-zero value)
+    mapping (address=>uint256) public userIndex;//if Identification != NOTCONTRACTUSER, this should be a unique value (i.e. a non-zero value)
     //////////////////////////////////////
     //End of Contract variables
     //////////////////////////////////////
@@ -58,7 +58,13 @@ contract DataTokenAlpha{
         //
         modifier isNotContractUser() {
         if(users[userIndex[msg.sender]].Identification == 0){
-            _;
+            if(userIndex[msg.sender] != 0){
+                modifierResult("This address was a user of DataToken", userIndex[msg.sender]);
+                users[userIndex[msg.sender]].Identification = ISRECEIVER;
+                functionCallResult("Contract user identity is recovered, welcome back.");
+            } else {
+                _;
+            }
         }else{
             modifierResult("This address has been registered",users[userIndex[msg.sender]].Identification);
         }
@@ -101,23 +107,13 @@ contract DataTokenAlpha{
 
 
     //add current message sender to user list if it is not in the list.
-    function addUser() 
-    isNotContractUser 
-    public 
+    function addUser()
+    isNotContractUser
+    public
     {
-        if(index[msg.sender]==0){
-        //do this with a complete new address
-        Info.push(userInfo(msg.sender,false,0,0,new address[] (0),0,true));
-        isNotNew[msg.sender]=true;
-        index[msg.sender]=userIndx;
-        userIndx+=1;
-        userOperationResult("A new user is added.");
-        } else {
-            //do this with an address which was a user of this contract.
-            isNotNew[msg.sender]=true;
-            userOperationResult("User information is recoverd.");
-        }
-
+        userIndex[msg.sender] = users.length;
+        users.push(userInfo(State.ISRECEIVER,msg.sender,0,0,new address[](0x0))));
+        
     }
     //remove current message sender from the user list if it were in it.
     function removeUser() isUser public{
