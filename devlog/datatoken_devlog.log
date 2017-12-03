@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  3 DEC 2017 02:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  3 DEC 2017 23:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -719,7 +719,7 @@ Package epstopdf Info: Source file: <XJTLU_shield.eps>
 -to.pdf XJTLU_shield.eps>
 (epstopdf)             \includegraphics on input line 103.
 Package epstopdf Info: Output file is already uptodate.
-<XJTLU_shield-eps-converted-to.pdf, id=75, pagebox=cropbox, 26.0975pt x 33.1237
+<XJTLU_shield-eps-converted-to.pdf, id=79, pagebox=cropbox, 26.0975pt x 33.1237
 5pt>
 File: XJTLU_shield-eps-converted-to.pdf Graphic file (type pdf)
 <use XJTLU_shield-eps-converted-to.pdf>
@@ -841,21 +841,27 @@ alue of userIndex(address$=\OML/cmm/m/it/12 >$\OT1/cmr/m/n/12 uint256),
  []
 
 No file datatoken_devlog.bbl.
+
+Overfull \hbox (23.27876pt too wide) in paragraph at lines 453--459
+\OT1/cmr/m/n/12 Rewrite of with-draw() func-tion in re-spond to the newly de-fi
+ned tokenBalance(address$=\OML/cmm/m/it/12 >$\OT1/cmr/m/n/12 uint256). 
+ []
+
 [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 456.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 456.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 459.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 459.
  (./datatoken_devlog.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 456.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 456.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 459.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 459.
 Package rerunfilecheck Info: File `datatoken_devlog.out' has not changed.
-(rerunfilecheck)             Checksum: 8FFFD4FDE92EB55CEE24448D4A2A1B66;1067.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 456.
+(rerunfilecheck)             Checksum: E8B9C3C7FB0E578F6ECBDBD035101E0A;1131.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 459.
  ) 
 Here is how much of TeX's memory you used:
- 18472 strings out of 492985
- 338084 string characters out of 6134895
- 420332 words of memory out of 5000000
- 21612 multiletter control sequences out of 15000+600000
+ 18474 strings out of 492985
+ 338114 string characters out of 6134895
+ 420333 words of memory out of 5000000
+ 21613 multiletter control sequences out of 15000+600000
  11333 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,6n,56p,556b,1760s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -868,10 +874,10 @@ st/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nero/TEXLive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr8.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy10.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti12.pfb>
-Output written on datatoken_devlog.pdf (10 pages, 166434 bytes).
+Output written on datatoken_devlog.pdf (10 pages, 166738 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
- 74 named destinations out of 1000 (max. 500000)
- 154 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 252 PDF objects out of 1000 (max. 8388607)
+ 226 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 162 words of extra memory for PDF output out of 10000 (max. 10000000)
 

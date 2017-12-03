@@ -449,7 +449,10 @@ because default mapping value of a unassigned key is 0 which can be used to dist
 Before this change, Identification(State) is a value inside users(userInfo[]) in which
 unregistered address will have index 0 as default mapping value of userIndex(address$=>$uint256),
 that is, all new users will be recognized as users[0] which is the user position for the contract itself.
-
+\subsection{Diary 20171203}
+Rewrite of withdraw() function in respond to the newly defined tokenBalance(address$=>$uint256).\\
+There could be a revert() function for token transfers like Solidity has for Ether transfer.
+Need some design on this feature.
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
 \bibliography{reference}
