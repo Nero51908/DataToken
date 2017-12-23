@@ -59,12 +59,16 @@ contract DataTokenAlpha {
         if(Identification[msg.sender] != State.NOTCONTRACTUSER)
         {
             _;
+        } else {
+            modifierResult("Your address is not a user of this contract.", uint8(Identification[msg.sender]));
         }
     }
     modifier isGoodUser() {//user identification value is not HAVENOTPAID
         if(Identification[msg.sender] == State.ISPROVIDER || Identification[msg.sender] == State.ISRECEIVER)
         {
             _;
+        } else {
+            modifierResult("Your last use of data is not paid, pay first and then do others.", uint(Identification[msg.sender]));
         }
     }
         //
@@ -182,7 +186,8 @@ contract DataTokenAlpha {
     //withdraw Ether from this contract
     //redeem Ether using all token of current user.
     //msg.sender will pay for this send() operation, which is undertaken by Ethereum network.
-    function withdraw() 
+    function withdraw()
+    isContractUser
     isGoodUser 
     public 
     {
@@ -241,7 +246,8 @@ contract DataTokenAlpha {
     //Receiver need to call pay function to make themselves ISRECEIVER again, otherwise 
     //they will remain HAVENOTPAID Identification(Address=>State)
     //
-    function pay() 
+    function pay()
+    isContractUser
     haveNotPaid
     public 
     {

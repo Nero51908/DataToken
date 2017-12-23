@@ -266,6 +266,8 @@ INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT datatoken_devlog.bbl
+INPUT datatoken_devlog.bbl
 INPUT datatoken_devlog.aux
 INPUT ./datatoken_devlog.out
 INPUT ./datatoken_devlog.out

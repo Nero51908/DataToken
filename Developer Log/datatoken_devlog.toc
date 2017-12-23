@@ -1,0 +1,23 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}DataToken Alpha 0.0}{2}{section.2}
+\contentsline {section}{\numberline {3}DataToken Alpha 0.1 20171014 Fri}{2}{section.3}
+\contentsline {subsection}{\numberline {3.1}Diary 20171016 Mon}{2}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Diary 20171017 Tue}{3}{subsection.3.2}
+\contentsline {section}{\numberline {4}DataToken Alpha 0.2 20171110}{3}{section.4}
+\contentsline {subsection}{\numberline {4.1}Diary 20171111 Sat}{4}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Diary 20171114 Tue}{5}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Diary 20171115}{6}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Diary 20171116}{6}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Diary 20171117}{7}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Diary 20171118}{7}{subsection.4.6}
+\contentsline {section}{\numberline {5}DataToken Alpha 0.2.2}{7}{section.5}
+\contentsline {subsection}{\numberline {5.1}Diary 20171128}{7}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Diary 20171130}{7}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Diary 20171201}{8}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Diary 20171202}{9}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Diary 20171203}{9}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Diary 20171204 Redesign of link() Function }{10}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Diary 20171206 New feature proposal (Not Implemented)}{10}{subsection.5.7}
+\contentsline {subsection}{\numberline {5.8}Diary 20171211 External input to DataToken Contract}{10}{subsection.5.8}
+\contentsline {subsection}{\numberline {5.9}Diary 20171213}{10}{subsection.5.9}

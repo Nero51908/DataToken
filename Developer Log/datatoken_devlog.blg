@@ -1,0 +1,15 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: datatoken_devlog.aux
+The style file: IEEEtran.bst
+I couldn't open database file reference.bib
+---line 42 of file datatoken_devlog.aux
+ : \bibdata{reference
+ :                   }
+I'm skipping whatever remains of this command
+I found no \citation commands---while reading file datatoken_devlog.aux
+I found no database files---while reading file datatoken_devlog.aux
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+(There were 3 error messages)

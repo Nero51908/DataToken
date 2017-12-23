@@ -50,7 +50,7 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 
-\center % Center everything on the page
+\centering % Center everything on the page
  
 %----------------------------------------------------------------------------------------
 %	HEADING SECTIONS
@@ -453,6 +453,45 @@ that is, all new users will be recognized as users[0] which is the user position
 Rewrite of withdraw() function in respond to the newly defined tokenBalance(address$=>$uint256).\\
 There could be a revert() function for token transfers like Solidity has for Ether transfer.
 Need some design on this feature.
+\subsection{Diary 20171204 Redesign of link() Function }
+providers(address[]) is the array to hold provider address. 
+link() function is designed to pair receivers with providers 
+by assigning userInfo.provider as a provider and 
+push the receiver address to the provider's userInfo.receiver(address[]) array.
+Providers have the right to see how many receivers are using it's shared data.
+Whether receivers could have the right to choose which provider they would like to link
+is still a reserved question.\\
+A typical use of DataToken from a receiver Alex's perspective should be:
+\begin{enumerate}
+    \item Click link(function)
+    then the receiver Alex is linked to one provider Bill nearby,
+    which means the contract now knows Bill has a receiver Alex while Alex has a provider Bill.
+    Before Alex quit using Bill's Hotspot and pay Bill for the sharing,
+    Alex will have Identification State.HAVENOTPAID with which 
+    Alex cannot call any functions other than topUp() and pay().
+    \item Use the Wi-Fi service of the provider
+    \item Alex call the pay() function
+    Alex will be removed from receiver list of Bill
+
+\end{enumerate}
+\subsection{Diary 20171206 New feature proposal (Not Implemented)}
+A feature of limiting how much data can be shared without payment can be added to suProvider.
+Suppose a provider would only share 3 GB of data service. Like the payment system of Alipay,
+there should be some ``buffer area'' that the receiver pay some earnest money or 
+there should be some mechanisms to monitor whether the receiver have enough money to pay for it's 
+data consumption. 
+\subsection{Diary 20171211 External input to DataToken Contract}
+Suppose there a provider A and a receiver B in the same room where provider A have deployed Wi-Fi hotspot.
+Link function is called by B when B want to use A's hotspot.
+When B is successfully linked to A, in the contract B can only pay A before the sharing and paying procedure is finished.
+\begin{itemize}
+	\item Link function should know that A's Wi-Fi is accessible to B.
+	\item Link function should know that B has successfully connected to hotspot of A.
+\end{itemize}
+There should be a machenism like using public serviced Wi-Fi that
+B can connect to hotspot A and will be notified to ``register'' so that B can have access to the Internet under such hotspot.
+\subsection{Diary 20171213}
+Suggested price Token/MB and a provider have the right to designiate it's own price.
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
 \bibliography{reference}
