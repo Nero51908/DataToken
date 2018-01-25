@@ -1,8 +1,8 @@
-PWD /home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog
+PWD /home/nero/Dropbox/University Life as a Student/UndergraduateYear4@XJTLU/EEE311 Final Year Project/DataTokenAlpha/Developer Log
 INPUT /home/nero/TEXLive/texmf.cnf
 INPUT /home/nero/TEXLive/texmf-dist/web2c/texmf.cnf
 INPUT /home/nero/TEXLive/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /home/nero/Dropbox/UniversityDocument/XJTLU_Undergraduate_Year4/EEE311 Final Year Project/DataToken/devlog/datatoken_devlog.tex
+INPUT /home/nero/Dropbox/University Life as a Student/UndergraduateYear4@XJTLU/EEE311 Final Year Project/DataTokenAlpha/Developer Log/datatoken_devlog.tex
 OUTPUT datatoken_devlog.log
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/article.cls
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/article.cls
@@ -266,6 +266,10 @@ INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /home/nero/TEXLive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT datatoken_devlog.bbl
 INPUT datatoken_devlog.bbl
 INPUT datatoken_devlog.aux

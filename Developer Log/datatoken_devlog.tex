@@ -140,7 +140,7 @@ currently, the rate is set to be 1 token = 1 wei which is the smallest ether uni
 
 A withdraw function is created corresponding to topUp function.
 This function should allow user account to exchange their token back to ether in their ether address.
-But the chellange is, when sending ether from the contract, the gas fee is to be paid by the sender, if the sender here is the message sender i.e. the user,
+But the challenge is, when sending ether from the contract, the gas fee is to be paid by the sender, if the sender here is the message sender i.e. the user,
 the user will pay for the gas, however, if the sender is considered as the contract itself, there will be a problem.
 If the contract is charged gas for each transaction (the contract will loss at least 0.001 ether for each transaction according to current gas price),
 the contract etherbase will fail due to too many withdraw transactions. The contract itself is not making any profit but will have to pay some fee due to users' transaction,
@@ -164,7 +164,7 @@ $0.001$ ether = $10^15$  wei which is a large amount of loss in terms of wei.
             the fee was paid by the contract
 
     
-The contract shouldn't be paying that fee for transfering back. 
+The contract shouldn't be paying that fee for transferring back. 
 
 
 
@@ -492,6 +492,29 @@ There should be a machenism like using public serviced Wi-Fi that
 B can connect to hotspot A and will be notified to ``register'' so that B can have access to the Internet under such hotspot.
 \subsection{Diary 20171213}
 Suggested price Token/MB and a provider have the right to designiate it's own price.
+\subsection{Diary 20180125}
+The contract itself is ICO; thus Datatoken is not necessarily linked to Ether.
+Set the total coin number and the smallest deviation to start coin offering will be acceptable.
+Users can buy Datatoken from ICO smart contract or from other token owners.
+A well implemented token transfer function has been provided by Ethereum core team.
+\\
+Mobile application layer can provide evidence that the user is within certain Wi-Fi coverage.
+The back end layer (smart contract) should provide a stable function
+to link a user with a provider and care about nothing else.
+\section{Latest Variable Structure}
+\subsection{Address State Flag address $=>$ State Identification}
+\begin{itemize}
+    \item (enum)State State.NOTCONTRACTUSER 0\\
+    Any address has value 0 in Identification Flag by default (mapping). When a contract user suspend user identity
+    the contract assigns State.NOTCONTRACTUSER to Identification Flag.
+    \item (enum)State State.ISPROVIDER 1\\
+    When Identification Flag is evaluated 2 and the user is currently not receiving data from any provider
+    (provider in userInfo is the default value 0x0...0), the user is allowed to call
+    switchProvider function to change the value of Identification Flag to State.ISPROVIDER.
+
+    \item (enum)State State.ISRECEIVER 2
+    \item (enum)State State.HAVENOTPAID 3
+\end{itemize}
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
 \bibliography{reference}
