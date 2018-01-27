@@ -1,0 +1,4 @@
+#install ethereum nodejs client for test 
+npm install -g ethereumjs-testrpc
+#start test environment provider
+testrpc

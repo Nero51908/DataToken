@@ -1,5 +1,5 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {section}{\numberline {2}DataToken Alpha 0.0}{2}{section.2}
 \contentsline {section}{\numberline {3}DataToken Alpha 0.1 20171014 Fri}{2}{section.3}
 \contentsline {subsection}{\numberline {3.1}Diary 20171016 Mon}{3}{subsection.3.1}
@@ -22,5 +22,6 @@
 \contentsline {subsection}{\numberline {5.8}Diary 20171211 External input to DataToken Contract}{10}{subsection.5.8}
 \contentsline {subsection}{\numberline {5.9}Diary 20171213}{10}{subsection.5.9}
 \contentsline {subsection}{\numberline {5.10}Diary 20180125}{11}{subsection.5.10}
+\contentsline {subsection}{\numberline {5.11}Diary 20180127}{11}{subsection.5.11}
 \contentsline {section}{\numberline {6}Latest Variable Structure}{11}{section.6}
 \contentsline {subsection}{\numberline {6.1}Address State Flag address $=>$ State Identification}{11}{subsection.6.1}
