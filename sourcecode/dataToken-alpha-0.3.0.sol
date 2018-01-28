@@ -19,6 +19,8 @@ mapping (address => role) public identification;
 mapping (string => address) providerBehind;
 //pricing: value per MB
 mapping (string => uint256) priceOf;
+//data usage recorded by provider and receiver
+mapping (address => mapping (address => uint256)) public usageOf;
 //transfer event infomation. value is 
 event Transfer(address _from, address _to, uint256 value);
 //switch user role event
@@ -68,7 +70,20 @@ public
 }
 
 /**
+*token seller function
+*/
+function buyToken()
+payable
+public
+returns(bool success)
+{
+    _transfer(owner, msg.sender, msg.value / 10 ** 9);
+    return true;
+}
+
+/**
 *internally defined switch user role function
+*has built-in check whether current role is allowed to switch
 *@param _oldrole expected current role of message sender
 *@param _newrole targeted new role after a success call of this function
 */
@@ -89,19 +104,48 @@ internal
 
 /**
 *switch to provider
+*set price of wifi service
+*set provider address behind wifi service
+*only a receiver can call this i.e. provider or underservice cannot
+*Deploy Wi-Fi hot spot and input SSID
+*a failed call could be due to duplicated SSID
+*or
+*wrong initial role of message sender
+*or
+*mapping of provider and SSID has failed
 */
-function surProvider ()
+function surProvider (uint256 _price,string _SSID)
 public
+returns(bool success)
 {
+    require(providerBehind[_SSID] == 0x0);
     _sur(msg.sender,role.ISRECEIVER,role.ISPROVIDER);
+    providerBehind[_SSID] = msg.sender;
+    priceOf[_SSID] = _price;
+    assert(providerBehind[_SSID] == msg.sender && priceOf[_SSID] == _price);
+    return true;
 }
 /**
 *switch to receiver
+*delete price of SSID
+*delete provider address behind SSID
+*only provider with no user connected can call this 
+*a failed call could be due to non-zero number of connected users
+*or
+*fail to delete infromation
+*or
+*wrong initial role of message sender
 */
-function surReceiver ()
+function surReceiver (string _SSID, uint _numberOfUsers)
 public
+returns(bool success)
 {
+    require(_numberOfUsers == 0);
     _sur(msg.sender, role.ISPROVIDER,role.ISRECEIVER);
+    delete providerBehind[_SSID];
+    delete priceOf[_SSID];
+    assert(providerBehind[_SSID] == 0x0 && priceOf[_SSID] == 0);
+    return true;
 }
 
 /**
@@ -121,42 +165,92 @@ returns (uint256 _volume)
     return balance[_wallet] / _price;
 }
 
+/**
+*function that links message sender to the chosen provider
+*@param _atSSID SSID the receiver is connecting to
+*/
+function link (string _atSSID)
+public
+returns(address receiver, uint256 usageLimit)
+{
+    require(identification[msg.sender] == role.ISRECEIVER);
+    require(_affordableData(msg.sender, priceOf[_atSSID]) >= 1);
+    identification[msg.sender] = role.UNDERSERVICE;
+    return (msg.sender, _affordableData(msg.sender, priceOf[_atSSID]));
+}
+
+/**
+*function to record data usage
+*
+*@param _usage data usage 
+*data usage is in terms of MB
+*/
+function usageRecord (address _theOtherSide, uint256 _usage) 
+public
+returns (bool success)
+{
+    usageOf[msg.sender][_theOtherSide] = _usage;
+}
+
+/**
+*internal function
+*compare data usage record by both provider and receiver's devices
+*difference is smaller than tolerance will return true
+*
+*A problem is left for front implementation:
+*How to let two devices send information to the contract.
+*/
+function _tolerance (string _atSSID, uint256 _usageLimit)
+internal
+returns (bool success)
+{
+    require(_usageLimit >= usageOf[providerBehind[_atSSID]][msg.sender]);
+    if (usageOf[msg.sender][providerBehind[_atSSID]] < usageOf[providerBehind[_atSSID]][msg.sender]) {
+        return usageOf[providerBehind[_atSSID]][msg.sender] - usageOf[msg.sender][providerBehind[_atSSID]] <= 1;
+    } else {
+        return usageOf[msg.sender][providerBehind[_atSSID]] - usageOf[providerBehind[_atSSID]][msg.sender] <= 1;
+    }
+}
+
 //suspebd receiver (message sender)
 //_sur(role.ISRECEIVER, role.UNDERSERVICE);
 
 /**
 *internally defined fee collector
 */
-function _cashier (address _receiver, string _atSSID, uint256 _volume)
+function _cashier (address _payer, string _atSSID, uint256 _volume)
 internal
 returns (bool success)
 {
     //_sur underservice back to receiver
-    _transfer(_receiver, providerBehind[_atSSID], _volume * priceOf[_atSSID]);
+    _transfer(_payer, providerBehind[_atSSID], _volume * priceOf[_atSSID]);
     _sur(msg.sender, role.UNDERSERVICE, role.ISRECEIVER);
-    assert(identification[_receiver] == role.ISRECEIVER);
+    assert(identification[_payer] == role.ISRECEIVER);
     return true;
 }
 
 /**
 *normal case used data < datalimit
-*pay function
+*pay function. 
+*
+*@param _atSSID SSID of provider
 */
-function pay (string _atSSID, uint256 _volume)
+function payAndLeave (string _atSSID, uint256 _usageLimit)
 public
+returns (bool success)
 {
-    _cashier (msg.sender, _atSSID, _volume);
-}
-
-/**
-*token seller function
-*/
-function buyToken()
-payable
-public
-returns(bool success)
-{
-    _transfer(owner, msg.sender, msg.value / 10 ** 9);
+    //compare both sides' data usage record
+    require(_tolerance(_atSSID,_usageLimit);
+    //pay the provider according to data usage recorded by the provider if tolerance is succeeded.
+    _cashier (msg.sender, _atSSID, usageOf[providerBehind[_atSSID]][msg.sender]);
+    //clear data usage record on both sides
+    delete usageOf[providerBehind[_atSSID]][msg.sender];
+    delete usageOf[msg.sender][providerBehind[_atSSID]];
+    //check if the clear operation if successful
+    assert(usageOf[providerBehind[_atSSID]][msg.sender] == usageOf[msg.sender][providerBehind[_atSSID]]);
+    //return on function success 
     return true;
 }
+
+
 }
