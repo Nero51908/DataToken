@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-contract dataTokenAlpha {
+contract DataTokenAlpha {
 address owner;
 //contract (token) properties
 string public tokenName = "dataToken";
@@ -16,9 +16,12 @@ mapping (address => uint256) public balance;
 //role of an account, by default is role.ISRECEIVER
 mapping (address => role) public identification;
 //find a provider by ssid it uses to share data service
-mapping (string => address) providerBehind;
+//mapping (string => address) providerBehind;
+
+//SSID is generated based on provider's address on the front
+mapping (address => address) public providerOf;
 //pricing: value per MB
-mapping (string => uint256) priceOf;
+mapping (address => uint256) public priceOf;
 //data usage recorded by provider and receiver
 mapping (address => mapping (address => uint256)) public usageOf;
 //transfer event infomation. value is 
@@ -30,13 +33,12 @@ event Sur(address _user, role _newrole, bool success);
 *
 *contract has defaultly a provider for convenience of test
 */
-function dataTokenAlpha() public {
+function DataTokenAlpha() public {
     owner = msg.sender;
     balance[owner] = totalSupply;
     identification[0xdd870fa1b7c4700f2bd7f44238821c26f7392148] = role.ISPROVIDER;
-    providerBehind["DataTarbitrary"] = 0xdd870fa1b7c4700f2bd7f44238821c26f7392148;
     //1 totalSupply per MB
-    priceOf["DataTarbitrary"] = 1;
+    priceOf[0xdd870fa1b7c4700f2bd7f44238821c26f7392148] = 1;
 }
 
 /**
@@ -45,12 +47,12 @@ function dataTokenAlpha() public {
 function _transfer(address _from, address _to, uint256 _value)
 internal
 {
-    //transfer to 0x0 means destroy such amount of token.
+//transfer to 0x0 means destroy such amount of token.
 require(_to != 0x0);
 //check if the sender has enough token
 require(balance[_from] >= _value);
 //check if balance of the recipient overflows (don't want overflow)
-require(balance[_to] + _value > balance[_to]);
+require(balance[_to] + _value >= balance[_to]);
 //take a snapshot on total balance of both sides for assert check
 uint256 totalBalance = balance[_from] + balance[_to];
 //transfer operation
@@ -114,16 +116,14 @@ internal
 *or
 *mapping of provider and SSID has failed
 */
-function surProvider (uint256 _price,string _SSID)
+function surProvider (uint256 _price)
 public
-returns(bool success)
+returns(bool success, address provider)
 {
-    require(providerBehind[_SSID] == 0x0);
     _sur(msg.sender,role.ISRECEIVER,role.ISPROVIDER);
-    providerBehind[_SSID] = msg.sender;
-    priceOf[_SSID] = _price;
-    assert(providerBehind[_SSID] == msg.sender && priceOf[_SSID] == _price);
-    return true;
+    priceOf[msg.sender] = _price;
+    assert(priceOf[msg.sender] == _price);
+    return (true, msg.sender);
 }
 /**
 *switch to receiver
@@ -136,15 +136,12 @@ returns(bool success)
 *or
 *wrong initial role of message sender
 */
-function surReceiver (string _SSID, uint _numberOfUsers)
+function surReceiver (uint _numberOfUsers)
 public
 returns(bool success)
 {
     require(_numberOfUsers == 0);
-    _sur(msg.sender, role.ISPROVIDER,role.ISRECEIVER);
-    delete providerBehind[_SSID];
-    delete priceOf[_SSID];
-    assert(providerBehind[_SSID] == 0x0 && priceOf[_SSID] == 0);
+    _sur(msg.sender, role.ISPROVIDER, role.ISRECEIVER);
     return true;
 }
 
@@ -160,6 +157,7 @@ returns(bool success)
 */
 function _affordableData (address _wallet, uint256 _price)
 internal
+view
 returns (uint256 _volume)
 {
     return balance[_wallet] / _price;
@@ -167,16 +165,18 @@ returns (uint256 _volume)
 
 /**
 *function that links message sender to the chosen provider
-*@param _atSSID SSID the receiver is connecting to
+*
 */
-function link (string _atSSID)
+function link (address _provider)
 public
 returns(address receiver, uint256 usageLimit)
 {
+    require(identification[_provider] == role.ISPROVIDER);
     require(identification[msg.sender] == role.ISRECEIVER);
-    require(_affordableData(msg.sender, priceOf[_atSSID]) >= 1);
+    require(_affordableData(msg.sender, priceOf[_provider]) >= 1);
     identification[msg.sender] = role.UNDERSERVICE;
-    return (msg.sender, _affordableData(msg.sender, priceOf[_atSSID]));
+    providerOf[msg.sender] = _provider;
+    return (msg.sender, _affordableData(msg.sender, priceOf[_provider]));
 }
 
 /**
@@ -190,6 +190,7 @@ public
 returns (bool success)
 {
     usageOf[msg.sender][_theOtherSide] = _usage;
+    return true;
 }
 
 /**
@@ -200,15 +201,18 @@ returns (bool success)
 *A problem is left for front implementation:
 *How to let two devices send information to the contract.
 */
-function _tolerance (string _atSSID, uint256 _usageLimit)
+function _tolerance (uint256 _range, uint256 _usageLimit)
 internal
+view
 returns (bool success)
 {
-    require(_usageLimit >= usageOf[providerBehind[_atSSID]][msg.sender]);
-    if (usageOf[msg.sender][providerBehind[_atSSID]] < usageOf[providerBehind[_atSSID]][msg.sender]) {
-        return usageOf[providerBehind[_atSSID]][msg.sender] - usageOf[msg.sender][providerBehind[_atSSID]] <= 1;
+    uint256 _urPro = usageOf[providerOf[msg.sender]][msg.sender];
+    uint256 _urRec = usageOf[msg.sender][providerOf[msg.sender]];
+    require(_usageLimit > usageOf[providerOf[msg.sender]][msg.sender]);
+    if (_urRec < _urPro) {
+        return (_urPro - _urRec < _range);
     } else {
-        return usageOf[msg.sender][providerBehind[_atSSID]] - usageOf[providerBehind[_atSSID]][msg.sender] <= 1;
+        return (_urRec - _urPro <= _range);
     }
 }
 
@@ -218,13 +222,14 @@ returns (bool success)
 /**
 *internally defined fee collector
 */
-function _cashier (address _payer, string _atSSID, uint256 _volume)
+function _cashier (address _payer, uint256 _volume)
 internal
 returns (bool success)
 {
     //_sur underservice back to receiver
-    _transfer(_payer, providerBehind[_atSSID], _volume * priceOf[_atSSID]);
+    _transfer(_payer, providerOf[_payer], _volume * priceOf[providerOf[_payer]]);
     _sur(msg.sender, role.UNDERSERVICE, role.ISRECEIVER);
+    //if the payer has payed successfully, it's role should be receiver again after execution of this function
     assert(identification[_payer] == role.ISRECEIVER);
     return true;
 }
@@ -233,21 +238,21 @@ returns (bool success)
 *normal case used data < datalimit
 *pay function. 
 *
-*@param _atSSID SSID of provider
+*
 */
-function payAndLeave (string _atSSID, uint256 _usageLimit)
+function payAndLeave (uint256 _range, uint256 _usageLimit)
 public
 returns (bool success)
 {
     //compare both sides' data usage record
-    require(_tolerance(_atSSID,_usageLimit);
+    require(_tolerance(_range, _usageLimit));
     //pay the provider according to data usage recorded by the provider if tolerance is succeeded.
-    _cashier (msg.sender, _atSSID, usageOf[providerBehind[_atSSID]][msg.sender]);
+    _cashier (msg.sender, usageOf[providerOf[msg.sender]][msg.sender]);
     //clear data usage record on both sides
-    delete usageOf[providerBehind[_atSSID]][msg.sender];
-    delete usageOf[msg.sender][providerBehind[_atSSID]];
+    usageOf[providerOf[msg.sender]][msg.sender] = 0;
+    usageOf[msg.sender][providerOf[msg.sender]] = 0;
     //check if the clear operation if successful
-    assert(usageOf[providerBehind[_atSSID]][msg.sender] == usageOf[msg.sender][providerBehind[_atSSID]]);
+    assert(usageOf[providerOf[msg.sender]][msg.sender] == usageOf[msg.sender][providerOf[msg.sender]]);
     //return on function success 
     return true;
 }
