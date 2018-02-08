@@ -1,0 +1,13 @@
+\BOOKMARK [1][-]{section.1}{Conventions}{}% 1
+\BOOKMARK [1][-]{section.2}{Internal functions}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{\137transfer\(address \137from, address \137to, uint256 \137value\)}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{\137sur\(address \137user, role \137oldrole, role \137newrole\)}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{\137affordableData\(address \137wallet, uint256 \137price\)}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Public functions}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{DataTokenAlpha.transfer\(\137address,\137value\)}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{DataTokenAlpha.buyToken\(void\)}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{DataTokenAlpha.surProvider\(\137price\)}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{DataTokenAlpha.surReceiver\(\137numberOfUsers\)}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.5}{DataTokenAlpha.link\(\137provider\)}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.6}{DataTokenAlpha.usageRecord\(\137theOtherSide,\137usage\)}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.7}{DataTokenAlpha.payAndLeave\(\137range,\137usageLimit\)}{section.3}% 13

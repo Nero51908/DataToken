@@ -505,8 +505,8 @@ to link a user with a provider and care about nothing else.
 New payment checking scheme: estimate total affordable amount of data service based on datatoken balance.\\
 New identification classification logic: Only two identities: provider and user. All ethereum addresses are recognized as receiver initially by mapping. 
 New convention that all values of token used during transfer is counted by the smallest unit of this token as to operate directly with total supply.
-\section{Latest Variable Structure}
-\subsection{Address State Flag address $=>$ State Identification}
+\\
+Address State Flag address $=>$ State Identification
 \begin{itemize}
     \item (enum)State State.NOTCONTRACTUSER 0\\
     Any address has value 0 in Identification Flag by default (mapping). When a contract user suspend user identity
@@ -519,6 +519,18 @@ New convention that all values of token used during transfer is counted by the s
     \item (enum)State State.ISRECEIVER 2
     \item (enum)State State.HAVENOTPAID 3
 \end{itemize}
+\subsection{Diary 20180131}
+public functions 
+\begin{itemize}
+    \item DataTokenAlpha.transfer(\_address,\_value)\\
+    \item DataTokenAlpha.buyToken(void)\\
+    \item DataTokenAlpha.surProvider(\_price)\\
+    \item DataTokenAlpha.surReceiver(\_numberOfUsers)\\
+    \item DataTokenAlpha.link(\_provider)\\
+    \item DataTokenAlpha.usageRecord(\_theOtherSide,\_usage)\\
+    \item DataTokenAlpha.payAndLeave(\_range,\_usageLimit)\\
+\end{itemize}
+
 %\bibliographystyle{agsm}
 \bibliographystyle{IEEEtran}
 \bibliography{reference}

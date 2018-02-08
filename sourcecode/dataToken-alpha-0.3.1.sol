@@ -36,13 +36,20 @@ event Sur(address _user, role _newrole, bool success);
 function DataTokenAlpha() public {
     owner = msg.sender;
     balance[owner] = totalSupply;
-    identification[0xdd870fa1b7c4700f2bd7f44238821c26f7392148] = role.ISPROVIDER;
-    //1 totalSupply per MB
-    priceOf[0xdd870fa1b7c4700f2bd7f44238821c26f7392148] = 1;
 }
+
 
 /**
 *internally defined transfer operation
+*transfer certain amount of token from one address to another address
+*this function is so powerful that it should not be accessable externally.
+*@param {address} _from value sender
+*@param {address} _to value receiver
+*@param {uint256} _value value to be sent
+*@exception _to is not 0x0 address
+*@exception _from doesn't have enough token to transfer
+*@exception token of _to will overflow after receiving the transfer
+*@throws total balance of _to and _from has changed after this transfer operation 
 */
 function _transfer(address _from, address _to, uint256 _value)
 internal
@@ -64,6 +71,8 @@ assert(balance[_from] + balance[_to] == totalBalance);
 
 /**
 *tranfer that is called publicly
+*@param {address} _to receiver of _value
+*@param {uint256} _value value of token to transfer
 */
 function transfer(address _to, uint256 _value)
 public
@@ -73,6 +82,9 @@ public
 
 /**
 *token seller function
+*
+*msg.sender buy token from owner address using Ether by naming value of the transaction when calling this function
+*this function is payable
 */
 function buyToken()
 payable
@@ -85,9 +97,14 @@ returns(bool success)
 
 /**
 *internally defined switch user role function
+*
 *has built-in check whether current role is allowed to switch
-*@param _oldrole expected current role of message sender
-*@param _newrole targeted new role after a success call of this function
+*
+*@param {address} _user address to make change on
+*@param {role} _oldrole expected current role of message sender
+*@param {role} _newrole targeted new role after a success call of this function
+*
+*@exception current user role is not the required _oldrole
 */
 function _sur(address _user, role _oldrole, role _newrole)
 internal
@@ -105,16 +122,16 @@ internal
 }
 
 /**
-*switch to provider
-*set price of wifi service
-*set provider address behind wifi service
-*only a receiver can call this i.e. provider or underservice cannot
-*Deploy Wi-Fi hot spot and input SSID
-*a failed call could be due to duplicated SSID
-*or
-*wrong initial role of message sender
-*or
-*mapping of provider and SSID has failed
+*public function
+*
+*a receiver is switched to be a provider after a success call of this function
+*
+*@param {uint256} _price price of wifi service in terms of token per 100 MB data
+*
+*@return {bool} success whether the function has finished successfully
+*@return {address} provider address of the function caller
+*
+*@throw priceOf mapping is not changed by this function
 */
 function surProvider (uint256 _price)
 public
@@ -125,16 +142,19 @@ returns(bool success, address provider)
     assert(priceOf[msg.sender] == _price);
     return (true, msg.sender);
 }
+
 /**
-*switch to receiver
-*delete price of SSID
-*delete provider address behind SSID
-*only provider with no user connected can call this 
-*a failed call could be due to non-zero number of connected users
-*or
-*fail to delete infromation
-*or
-*wrong initial role of message sender
+*public function
+*
+*a provider in idle is switched to be a receiver after a success call
+*
+*priceOf mapping is intackt from this function
+*
+*@param {uint} _numberOfUsers current number of users under this provider's hot spot 
+*
+*@return {bool} success whether this fucntion has succeeded
+*
+*@exception _numberOfUsers is not 0 i.e. this provider is not in idle
 */
 function surReceiver (uint _numberOfUsers)
 public

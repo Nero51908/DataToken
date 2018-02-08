@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{fullpage}
+\begin{document}
+\tableofcontents
+\section{Conventions}
+Function names and variable names start with ``\_'' are indicating internal functions and input parameters.\\
+For instance, \_address means input parameter has name \_address; \_transfer() means this is a internal function.
+
+\section{Internal functions}
+\subsection{\_transfer(address \_from, address \_to, uint256 \_value)}
+\subsection{\_sur(address \_user, role \_oldrole, role \_newrole)}
+\subsection{\_affordableData(address \_wallet, uint256 \_price)}
+
+\section{Public functions}    
+\subsection{DataTokenAlpha.transfer(\_address,\_value)}
+\subsection{DataTokenAlpha.buyToken(void)}
+\subsection{DataTokenAlpha.surProvider(\_price)}
+\subsection{DataTokenAlpha.surReceiver(\_numberOfUsers)}
+\subsection{DataTokenAlpha.link(\_provider)}
+\subsection{DataTokenAlpha.usageRecord(\_theOtherSide,\_usage)}
+\subsection{DataTokenAlpha.payAndLeave(\_range,\_usageLimit)}
+
+\end{document}

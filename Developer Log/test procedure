@@ -1,0 +1,14 @@
+#Test procedure
+
+Create contract
+
+Check balance, identification, provider, price of contract owner (creator)
+"0xc7c52866feffa3475961cfb99d7b1a720a6b731c"
+expected results: balance = 666*10^9; identification = 0 (receiver); provider = 0x0 (no provider); price = 0 (haven't called surProvider())
+
+
+
+
+
+
+

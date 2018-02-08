@@ -1,13 +1,13 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  31 JAN 2018 10:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.13)  31 JAN 2018 14:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **"/home/nero/Dropbox/University Life as a Student/UndergraduateYear4@XJTLU/EEE
-311 Final Year Project/DataTokenAlpha/Developer Log/datatoken_devlog.tex"
+311 Final Year Project/DataTokenAlpha/Documentation/DataTokenDoc.tex"
 
 (/home/nero/Dropbox/University Life as a Student/UndergraduateYear4@XJTLU/EEE31
-1 Final Year Project/DataTokenAlpha/Developer Log/datatoken_devlog.tex
+1 Final Year Project/DataTokenAlpha/Documentation/DataTokenDoc.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 84 language(s) loaded.
 (/home/nero/TEXLive/texmf-dist/tex/latex/base/article.cls
@@ -654,25 +654,24 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip50
 )
-(./datatoken_devlog.aux)
-\openout1 = `datatoken_devlog.aux'.
+(./DataTokenDoc.aux)
+\openout1 = `DataTokenDoc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-
-(/home/nero/TEXLive/texmf-dist/tex/latex/ucs/ucsencs.def
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+ (/home/nero/TEXLive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 (/home/nero/TEXLive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -691,7 +690,7 @@ File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 ) ABD: EveryShipout initializing macros
 \c@lstlisting=\count149
 \AtBeginShipoutBox=\box42
-Package hyperref Info: Link coloring OFF on input line 46.
+Package hyperref Info: Link coloring OFF on input line 11.
 
 (/home/nero/TEXLive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -701,222 +700,44 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count150
 )
-LaTeX Info: Redefining \ref on input line 46.
-LaTeX Info: Redefining \pageref on input line 46.
-LaTeX Info: Redefining \nameref on input line 46.
+LaTeX Info: Redefining \ref on input line 11.
+LaTeX Info: Redefining \pageref on input line 11.
+LaTeX Info: Redefining \nameref on input line 11.
 
-(./datatoken_devlog.out) (./datatoken_devlog.out)
+(./DataTokenDoc.out) (./DataTokenDoc.out)
 \@outlinefile=\write4
-\openout4 = `datatoken_devlog.out'.
+\openout4 = `DataTokenDoc.out'.
 
-Package epstopdf Info: Source file: <XJTLU_shield.eps>
-(epstopdf)                    date: 2017-10-14 22:42:47
-(epstopdf)                    size: 481042 bytes
-(epstopdf)             Output file: <XJTLU_shield-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-10-14 22:45:14
-(epstopdf)                    size: 33021 bytes
-(epstopdf)             Command: <repstopdf --outfile=XJTLU_shield-eps-converted
--to.pdf XJTLU_shield.eps>
-(epstopdf)             \includegraphics on input line 103.
-Package epstopdf Info: Output file is already uptodate.
-<XJTLU_shield-eps-converted-to.pdf, id=107, pagebox=cropbox, 26.0975pt x 33.123
-75pt>
-File: XJTLU_shield-eps-converted-to.pdf Graphic file (type pdf)
-<use XJTLU_shield-eps-converted-to.pdf>
-Package pdftex.def Info: XJTLU_shield-eps-converted-to.pdf  used on input line 
-103. on input line 103.
-Package pdftex.def Info: Requested size: 155.02pt x 196.7834pt on input line 10
-3.
+ (./DataTokenDoc.toc)
+\tf@toc=\write5
+\openout5 = `DataTokenDoc.toc'.
+
  [1
 
-{/home/nero/TEXLive/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./XJTLU_shie
-ld-eps-converted-to.pdf>]
-(./datatoken_devlog.toc)
-\tf@toc=\write5
-\openout5 = `datatoken_devlog.toc'.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.128 \section
-              {DataToken Alpha 0.0} [1] [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 181.
-
-
-(/home/nero/TEXLive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 181.
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 187.
-
-
-(/home/nero/TEXLive/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 187.
-
-Overfull \hbox (2.59416pt too wide) in paragraph at lines 189--190
-[][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 235--237
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 235--237
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 251--258
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 287--290
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--301
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 312--318
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 324--325
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 346--350
-
- []
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 351--355
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 351--355
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 407--413
-
- []
-
-[8]
-Overfull \hbox (1.28595pt too wide) in paragraph at lines 429--430
-[]\OT1/cmr/m/n/12 usersIndex(address$=\OML/cmm/m/it/12 >$\OT1/cmr/m/n/12 unint2
-56 map-ping): if Iden-ti-fi-ca-tion $\OMS/cmsy/m/n/12 6\OT1/cmr/m/n/12 =$ NOT-C
-ON-TRAC-TUSER,
- []
-
-
-Overfull \hbox (13.21774pt too wide) in paragraph at lines 447--452
-[]\OT1/cmr/m/n/12 User Iden-ti-fi-ca-tion(State) is changed to be a map-ping ca
-lled Identification(address$=\OML/cmm/m/it/12 >$\OT1/cmr/m/n/12 State),
- []
-
-
-Overfull \hbox (4.6095pt too wide) in paragraph at lines 447--452
-\OT1/cmr/m/n/12 reg-is-tered ad-dress will have in-dex 0 as de-fault map-ping v
-alue of userIndex(address$=\OML/cmm/m/it/12 >$\OT1/cmr/m/n/12 uint256),
- []
-
-
-Overfull \hbox (23.27876pt too wide) in paragraph at lines 453--456
-\OT1/cmr/m/n/12 Rewrite of with-draw() func-tion in re-spond to the newly de-fi
-ned tokenBalance(address$=\OML/cmm/m/it/12 >$\OT1/cmr/m/n/12 uint256). 
- []
-
-[9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 525--526
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 526--527
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 527--528
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 528--529
-
- []
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 529--530
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 530--531
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 531--532
-
- []
-
-(./datatoken_devlog.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 24.
-
-) [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 537.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 537.
- (./datatoken_devlog.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 537.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 537.
-Package rerunfilecheck Info: File `datatoken_devlog.out' has not changed.
-(rerunfilecheck)             Checksum: D3F69D5FA965EB69BBACD8A828A4D34A;1691.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 537.
+{/home/nero/TEXLive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 31.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 31.
+ (./DataTokenDoc.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 31.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 31.
+Package rerunfilecheck Info: File `DataTokenDoc.out' has not changed.
+(rerunfilecheck)             Checksum: ECC9BFD8C3203178B90EFB71326290D6;1143.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 31.
  ) 
 Here is how much of TeX's memory you used:
- 18503 strings out of 492985
- 338606 string characters out of 6134895
- 420333 words of memory out of 5000000
- 21626 multiletter control sequences out of 15000+600000
- 11333 words of font info for 40 fonts, out of 8000000 for 9000
+ 18090 strings out of 492985
+ 334355 string characters out of 6134895
+ 415333 words of memory out of 5000000
+ 21299 multiletter control sequences out of 15000+600000
+ 8568 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,6n,56p,577b,1760s stack positions out of 5000i,500n,10000p,200000b,80000s
-</home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></ho
-me/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/ner
-o/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></home/nero/TEX
-Live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></home/nero/TEXLive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/nero/TEXLive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nero/TEXLive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr8.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy10.pfb></home/nero/TEXLive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmti12.pfb>
-Output written on datatoken_devlog.pdf (13 pages, 172800 bytes).
+ 62i,5n,56p,573b,340s stack positions out of 5000i,500n,10000p,200000b,80000s
+</home/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></ho
+me/nero/TEXLive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on DataTokenDoc.pdf (2 pages, 36331 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 277 compressed objects within 3 object streams
- 89 named destinations out of 1000 (max. 500000)
- 218 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 98 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
+ 17 named destinations out of 1000 (max. 500000)
+ 117 words of extra memory for PDF output out of 10000 (max. 10000000)
 

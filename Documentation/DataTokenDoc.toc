@@ -1,0 +1,14 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Conventions}{1}{section.1}
+\contentsline {section}{\numberline {2}Internal functions}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}\_transfer(address \_from, address \_to, uint256 \_value)}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}\_sur(address \_user, role \_oldrole, role \_newrole)}{2}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}\_affordableData(address \_wallet, uint256 \_price)}{2}{subsection.2.3}
+\contentsline {section}{\numberline {3}Public functions}{2}{section.3}
+\contentsline {subsection}{\numberline {3.1}DataTokenAlpha.transfer(\_address,\_value)}{2}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}DataTokenAlpha.buyToken(void)}{2}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}DataTokenAlpha.surProvider(\_price)}{2}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}DataTokenAlpha.surReceiver(\_numberOfUsers)}{2}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}DataTokenAlpha.link(\_provider)}{2}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}DataTokenAlpha.usageRecord(\_theOtherSide,\_usage)}{2}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}DataTokenAlpha.payAndLeave(\_range,\_usageLimit)}{2}{subsection.3.7}
