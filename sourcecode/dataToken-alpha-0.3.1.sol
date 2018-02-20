@@ -24,6 +24,8 @@ mapping (address => address) public providerOf;
 mapping (address => uint256) public priceOf;
 //data usage recorded by provider and receiver
 mapping (address => mapping (address => uint256)) public usageOf;
+//wifi passwd of provider
+mapping (address => string) internal passwd;
 //transfer event infomation. value is 
 event Transfer(address _from, address _to, uint256 value);
 //switch user role event
@@ -46,10 +48,10 @@ function DataTokenAlpha() public {
 *@param {address} _from value sender
 *@param {address} _to value receiver
 *@param {uint256} _value value to be sent
-*@exception _to is not 0x0 address
-*@exception _from doesn't have enough token to transfer
-*@exception token of _to will overflow after receiving the transfer
-*@throws total balance of _to and _from has changed after this transfer operation 
+* _to is not 0x0 address
+* _from doesn't have enough token to transfer
+* token of _to will overflow after receiving the transfer
+* total balance of _to and _from has changed after this transfer operation will throw
 */
 function _transfer(address _from, address _to, uint256 _value)
 internal
@@ -104,7 +106,7 @@ returns(bool success)
 *@param {role} _oldrole expected current role of message sender
 *@param {role} _newrole targeted new role after a success call of this function
 *
-*@exception current user role is not the required _oldrole
+* current user role is not the required _oldrole
 */
 function _sur(address _user, role _oldrole, role _newrole)
 internal
@@ -131,14 +133,15 @@ internal
 *@return {bool} success whether the function has finished successfully
 *@return {address} provider address of the function caller
 *
-*@throw priceOf mapping is not changed by this function
+* priceOf mapping is not changed by this function throw
 */
-function surProvider (uint256 _price)
+function surProvider (uint256 _price, string _passwd)
 public
 returns(bool success, address provider)
 {
     _sur(msg.sender,role.ISRECEIVER,role.ISPROVIDER);
     priceOf[msg.sender] = _price;
+    passwd[msg.sender] = _passwd;
     assert(priceOf[msg.sender] == _price);
     return (true, msg.sender);
 }
@@ -154,7 +157,7 @@ returns(bool success, address provider)
 *
 *@return {bool} success whether this fucntion has succeeded
 *
-*@exception _numberOfUsers is not 0 i.e. this provider is not in idle
+* _numberOfUsers is not 0 i.e. this provider is not in idle
 */
 function surReceiver (uint _numberOfUsers)
 public
@@ -165,12 +168,6 @@ returns(bool success)
     return true;
 }
 
-/**
-*link receiver to a provider
-*/
-//verify a ssid sent from front and tell the front whether there is a provider behind such ssid
-//estimate balance of receiver => affordable data and tell front end ot set a counter
-//when front end tell data limit is acheived, stop the service
 
 /**
 *internally defined estimation function
@@ -184,19 +181,39 @@ returns (uint256 _volume)
 }
 
 /**
-*function that links message sender to the chosen provider
 *
+*public function that links message sender to the chosen provider
+*
+*This function will log address 
+*
+*message sender must be receiver
+*@param _provider is the address of provider
+*(Suppose user interface can translate SSID to be address of provider and use that address as argument)
+*
+*affordable data is estimated in this function and the estimation is required to be larger than 1 (MB)
+*
+*role of message sender is changed to be UNDERSERVICE which means can call no function but payandleave()
+*
+*provider address is assigned to msg.sender for use of payment issuing and fetching passwd for wifi connection from mapping
+*
+*return messagesender address and estimation of it's max possible data usage
+*
+*when provider address is not assigned to message sender successfully, throw.
+*
+*when message sender role is not changed to be role.UNDERSERVICE, throw.
 */
 function link (address _provider)
 public
-returns(address receiver, uint256 usageLimit)
+returns(address receiver, uint256 usageLimit, string pwd)
 {
     require(identification[_provider] == role.ISPROVIDER);
     require(identification[msg.sender] == role.ISRECEIVER);
     require(_affordableData(msg.sender, priceOf[_provider]) >= 1);
     identification[msg.sender] = role.UNDERSERVICE;
     providerOf[msg.sender] = _provider;
-    return (msg.sender, _affordableData(msg.sender, priceOf[_provider]));
+    return (msg.sender, _affordableData(msg.sender, priceOf[_provider]), passwd[_provider]);
+    assert(providerOf[msg.sender] == _provider);
+    assert(identification[msg.sender] == role.UNDERSERVICE);
 }
 
 /**
@@ -219,7 +236,7 @@ returns (bool success)
 *difference is smaller than tolerance will return true
 *
 *A problem is left for front implementation:
-*How to let two devices send information to the contract.
+*To let two devices send information to the contract about data usage.
 */
 function _tolerance (uint256 _range, uint256 _usageLimit)
 internal
@@ -236,7 +253,7 @@ returns (bool success)
     }
 }
 
-//suspebd receiver (message sender)
+//suspend receiver (message sender)
 //_sur(role.ISRECEIVER, role.UNDERSERVICE);
 
 /**
@@ -258,6 +275,7 @@ returns (bool success)
 *normal case used data < datalimit
 *pay function. 
 *
+*assume that tolerance of data usage error obtained by comparing both records is always satisfied (otherwise this function will never succeed)
 *
 */
 function payAndLeave (uint256 _range, uint256 _usageLimit)
