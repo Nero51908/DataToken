@@ -45,9 +45,9 @@ function DataTokenAlpha() public {
 *internally defined transfer operation
 *transfer certain amount of token from one address to another address
 *this function is so powerful that it should not be accessable externally.
-*@param {address} _from value sender
-*@param {address} _to value receiver
-*@param {uint256} _value value to be sent
+*param {address} _from value sender
+*param {address} _to value receiver
+*param {uint256} _value value to be sent
 * _to is not 0x0 address
 * _from doesn't have enough token to transfer
 * token of _to will overflow after receiving the transfer
@@ -73,8 +73,8 @@ assert(balance[_from] + balance[_to] == totalBalance);
 
 /**
 *tranfer that is called publicly
-*@param {address} _to receiver of _value
-*@param {uint256} _value value of token to transfer
+*param {address} _to receiver of _value
+*param {uint256} _value value of token to transfer
 */
 function transfer(address _to, uint256 _value)
 public
@@ -102,9 +102,9 @@ returns(bool success)
 *
 *has built-in check whether current role is allowed to switch
 *
-*@param {address} _user address to make change on
-*@param {role} _oldrole expected current role of message sender
-*@param {role} _newrole targeted new role after a success call of this function
+*param {address} _user address to make change on
+*param {role} _oldrole expected current role of message sender
+*param {role} _newrole targeted new role after a success call of this function
 *
 * current user role is not the required _oldrole
 */
@@ -128,7 +128,7 @@ internal
 *
 *a receiver is switched to be a provider after a success call of this function
 *
-*@param {uint256} _price price of wifi service in terms of token per 100 MB data
+*param {uint256} _price price of wifi service in terms of token per 100 MB data
 *
 *@return {bool} success whether the function has finished successfully
 *@return {address} provider address of the function caller
@@ -153,7 +153,7 @@ returns(bool success, address provider)
 *
 *priceOf mapping is intackt from this function
 *
-*@param {uint} _numberOfUsers current number of users under this provider's hot spot 
+*param {uint} _numberOfUsers current number of users under this provider's hot spot 
 *
 *@return {bool} success whether this fucntion has succeeded
 *
@@ -187,7 +187,7 @@ returns (uint256 _volume)
 *This function will log address 
 *
 *message sender must be receiver
-*@param _provider is the address of provider
+*param _provider is the address of provider
 *(Suppose user interface can translate SSID to be address of provider and use that address as argument)
 *
 *affordable data is estimated in this function and the estimation is required to be larger than 1 (MB)
@@ -219,7 +219,7 @@ returns(address receiver, uint256 usageLimit, string pwd)
 /**
 *function to record data usage
 *
-*@param _usage data usage 
+*param _usage data usage 
 *data usage is in terms of MB
 */
 function usageRecord (address _theOtherSide, uint256 _usage) 
