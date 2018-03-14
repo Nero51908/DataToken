@@ -7,22 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Welcome to DataTokenAlpha! &#8212; DataTokenAlpha  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="#">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -31,16 +33,15 @@
             
   <div class="section" id="welcome-to-datatokenalpha">
 <h1>Welcome to DataTokenAlpha!<a class="headerlink" href="#welcome-to-datatokenalpha" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
 <p>This is the documentation of DataTokenAlpha.
 DatatokenAlpha is my final year project.</p>
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="alternate text" class="align-center" src="_images/logo.png" style="width: 192.0px; height: 162.0px;" /></a>
 </div>
 <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>This project aims to develop a scheme to allow peer-to-peer (P2P) cellular data sharing and to
+<p>This project aims to develop a scheme for peer-to-peer (P2P) cellular data sharing and to
 construct a prototype Ethereum smart contract with respect to the scheme using Solidity which is
-a blockchain oriented programming language. Smart contract DataToken-Alpha (latest version 0.2.2)
+a blockchain oriented programming language. Smart contract DataToken-Alpha (latest version 0.3.2)
 as the scheme implementation has been under development. Hence, DataToken, a token of Ether
 (Intrinsic Cryptocurrency of Ethereum) is created for data service transfer recording.The uniqueness
 of such implementation is that all the information held by the contract is protected by Ethereum
@@ -54,93 +55,211 @@ Finally, a prototype of DataToken-Alpha for autonomous data trading is ready for
 in the next semester when this project will focus on upgrading DataToken-Alpha to be a practically
 deployable smart contract as close as possible.</p>
 </div>
+<div class="section" id="coding-style">
+<h1>Coding Style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h1>
+<p>Camel case names for variable and function names.
+Internal functions all start with an underscore _.
+Input parameter of functions starts with an underscore _.</p>
+</div>
 <div class="section" id="contract-variables">
 <h1>Contract Variables<a class="headerlink" href="#contract-variables" title="Permalink to this headline">¶</a></h1>
-<p>Contracts variables are declared at the beginning of solidity contract body.
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contracts variables are declared at the beginning of solidity contract body.
 In this section, variable types and availability are indicated by source code definition
 below each mentioned variables.</p>
+</div>
 <div class="section" id="owner">
 <h2>owner<a class="headerlink" href="#owner" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">address</span> <span class="n">owner</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">address</span> <span class="nx">owner</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>The message sender address of the transaction that has initiated this
+DataTokenAlpha contract is stored in this variable.</p>
+<p>All initial supply tokens are assigned to this address.
+That is, all usable tokens are sold buy owner address.</p>
 </div>
 <div class="section" id="tokenname">
 <h2>tokenName<a class="headerlink" href="#tokenname" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="n">public</span> <span class="n">tokenName</span> <span class="o">=</span> <span class="s2">&quot;dataToken&quot;</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">string</span> <span class="kr">public</span> <span class="nx">tokenName</span> <span class="o">=</span> <span class="s2">&quot;dataToken&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>The name of token defined by this contract is dataToken.</p>
 </div>
 <div class="section" id="decimals">
 <h2>decimals<a class="headerlink" href="#decimals" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uint</span> <span class="n">public</span> <span class="n">decimals</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">uint</span> <span class="kr">public</span> <span class="nx">decimals</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>This token will support 9 digits after decimal point.
+The number of 9 actually defines the smallest operable unit of each token.</p>
 </div>
 <div class="section" id="initialsupply">
 <h2>initialSupply<a class="headerlink" href="#initialsupply" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uint256</span> <span class="n">initialSupply</span> <span class="o">=</span> <span class="mi">666</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">initialSupply</span> <span class="o">=</span> <span class="mi">666</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>There will be 666 usable tokens in this contract.</p>
 </div>
 <div class="section" id="totalsupply">
 <h2>totalSupply<a class="headerlink" href="#totalsupply" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uint256</span> <span class="n">totalSupply</span> <span class="o">=</span> <span class="n">initialSupply</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">decimals</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">totalSupply</span> <span class="o">=</span> <span class="nx">initialSupply</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="nx">decimals</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>Number of tokens in terms of the smallest unit
+is 666,000,000,000.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The smallest unit is DataToken. There are 666,000,000,000 DataTokens supplied by this contract.</p>
+</div>
+</div>
+<div class="section" id="apid-counter">
+<h2>APID_counter<a class="headerlink" href="#apid-counter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This number will be assigned to a newly registered provider.</p>
+<p>If a successful call of <a class="reference internal" href="#surprovider">surProvider</a> is initiated by
+a user without <a class="reference internal" href="#apid">APID</a> value,
+APID_counter will be assigned to the new provider’s <a class="reference internal" href="#apid">APID</a> mapping,
+and the value of APID_counter will be updated by +1 as <a class="reference internal" href="#surprovider">surProvider</a> implemented.</p>
 </div>
 <div class="section" id="role">
 <h2>role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="n">role</span> <span class="p">{</span><span class="n">ISRECEIVER</span><span class="p">,</span> <span class="n">ISPROVIDER</span><span class="p">,</span> <span class="n">UNDERSERVICE</span><span class="p">}</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">enum</span> <span class="nx">role</span> <span class="p">{</span><span class="nx">ISRECEIVER</span><span class="p">,</span> <span class="nx">ISPROVIDER</span><span class="p">,</span> <span class="nx">UNDERSERVICE</span><span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="balance">
-<h2>balance<a class="headerlink" href="#balance" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">uint256</span><span class="p">)</span> <span class="n">public</span> <span class="n">balance</span><span class="p">;</span>
-</pre></div>
+<p>This variable defines three possible roles of contract users.</p>
+<p>Numerically, identification has values:</p>
+<ul class="simple">
+<li>role.ISRECEIVER = 0</li>
+<li>role.ISPROVIDER = 1</li>
+<li>role.UNDERSERVICE = 2</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The following variables are of mapping type.</p>
+<p class="last"><a class="reference external" href="http://solidity.readthedocs.io/en/develop/types.html?#mappings">Click to find mapping in solidity documentation</a></p>
 </div>
 </div>
 <div class="section" id="identification">
 <h2>identification<a class="headerlink" href="#identification" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">role</span><span class="p">)</span> <span class="n">public</span> <span class="n">identification</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">role</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">identification</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>This mapping takes Ethereum address as key and role (enum type) as the mapped value.</p>
+<p>By default, any unassigned value is recognized as 0, therefore,
+Ethereum addresses automatically have <em>role.ISRECEIVER</em> (numerical value is 0) as mapping values of <a class="reference internal" href="#identification">identification</a>.</p>
+<p>When a receiver address calls function <a class="reference internal" href="#surprovider">surProvider</a>,
+<em>identification</em> mapping value of this address will be changed to <em>role.ISPROVIDER</em> (numerical value is 1).</p>
+<p>When a receiver address has called function <a class="reference internal" href="#link">link</a> successfully,
+mapping value of the address will be designated as <em>role.UNDERSERVICE</em> (numerical value is 2).</p>
+</div>
+</div>
+<div class="section" id="apid">
+<h1>APID<a class="headerlink" href="#apid" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">APID</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This mapping shows numerical ID of a provider address.</p>
+<p>When a provider is deploying Wi-Fi AP, frontend client could
+query value of this mapping with the Ethereum address
+of the provider. Then the unique numerical ID can be shown in SSID.</p>
+<p>There are two reasons for this mapping:</p>
+<ul class="simple">
+<li>SSID has String length limit. A full length Ethereum address exceeds such limitation, however, a truncated address is not easy to resolve.</li>
+<li>Ethereum address behind a wireless AP could be protected by this APID. Currently, <a class="reference internal" href="#providerbehind">providerBehind</a> is publicly declared, but it’s high availability is not necessary.</li>
+</ul>
+<div class="section" id="balance">
+<h2>balance<a class="headerlink" href="#balance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">balance</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Mapping balance uses Ethereum address as key and number of tokens as value.</p>
+<p>Token balance of each contract user can be viewed by calling this mapping.</p>
+<p>Only one internal function <a class="reference internal" href="#id1">_transfer</a> can manipulate values of this mapping without restriction.</p>
+</div>
+<div class="section" id="providerbehind">
+<h2>providerBehind<a class="headerlink" href="#providerbehind" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">uint256</span> <span class="p">=&gt;</span> <span class="nx">address</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">providerBehind</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This mapping is a conversed version of <a class="reference internal" href="#apid">APID</a> mapping.</p>
+<p>APID of an account is a key of this mapping.
+The value corresponds to the key (APID grabbed from SSID)
+is the Ethereum address of the AP host.</p>
+</div>
+<div class="section" id="numberofusers">
+<h2>numberOfUsers<a class="headerlink" href="#numberofusers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">numberOfUsers</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For each contract user of provider role, this mapping is important.</p>
+<ul class="simple">
+<li>When a receiver is linked to a provider by <a class="reference internal" href="#link">link</a> function, mapping value of the provider should be added by 1.</li>
+<li>When the receiver has successfully called function <a class="reference internal" href="#payandleave">payAndLeave</a>, the value of numberOfUsers should be decreased by 1.</li>
+<li>Only when this mapping value is 0 which is the default value, can a provider call function <a class="reference internal" href="#surreceiver">surReceiver</a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
+</ul>
 </div>
 <div class="section" id="providerof">
 <h2>providerOf<a class="headerlink" href="#providerof" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">address</span><span class="p">)</span> <span class="n">public</span> <span class="n">providerOf</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">address</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">providerOf</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>For each user of <em>role.UNDERSERVICE</em> who was of <em>role.ISRECEIVER</em> before a successful call of <a class="reference internal" href="#link">link</a> function,
+this mapping will be assigned by the Ethereum address of the linked provider.</p>
+<p>Only users under services has nonzero providerOf mapping.
+Value of this mapping will be reset to 0 after a successful call of <a class="reference internal" href="#payandleave">payAndLeave</a>.</p>
 </div>
 <div class="section" id="priceof">
 <h2>priceOf<a class="headerlink" href="#priceof" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">uint256</span><span class="p">)</span> <span class="n">public</span> <span class="n">priceOf</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">priceOf</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>When a receiver intends to switch user role to be a provider,
+function <a class="reference internal" href="#surprovider">surProvider</a> will request a input that specifies pricing of this AP service to deploy in DataToken/MB.</p>
 </div>
 <div class="section" id="usageof">
 <h2>usageOf<a class="headerlink" href="#usageof" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">uint256</span><span class="p">))</span> <span class="n">public</span> <span class="n">usageOf</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">))</span> <span class="kr">public</span> <span class="nx">usageOf</span><span class="p">;</span>
 </pre></div>
+</div>
+<p>This is a mapping designed to verify data usage information to prevent cheating on both sides when issuing payment.</p>
+<p>A function <a class="reference internal" href="#tolerance">_tolerance</a> is defined to check whether data usage record can reach a consensus.</p>
+<p>If records from both provider and receiver agree with each other, the receiver will pay for the amount of data usage specified by the provider.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">What will happen if a consensus is not reached has not been defined yet!</p>
 </div>
 </div>
 <div class="section" id="passwd">
 <h2>passwd<a class="headerlink" href="#passwd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="p">(</span><span class="n">address</span> <span class="o">=&gt;</span> <span class="n">string</span><span class="p">)</span> <span class="n">internal</span> <span class="n">passwd</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">string</span><span class="p">)</span> <span class="nx">internal</span> <span class="nx">passwd</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="event">
 <h1>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="transfer">
+<h2>Transfer<a class="headerlink" href="#transfer" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">value</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sur">
+<h2>sur<a class="headerlink" href="#sur" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Sur</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_user</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_newrole</span><span class="p">,</span> <span class="nx">bool</span> <span class="nx">success</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="internal-functions">
 <h1>Internal Functions<a class="headerlink" href="#internal-functions" title="Permalink to this headline">¶</a></h1>
 <p>Internal functions are invisible to API and external calls from other contracts.</p>
-<div class="section" id="transfer">
-<h2>_transfer<a class="headerlink" href="#transfer" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">_transfer</span><span class="p">(</span><span class="n">address</span> <span class="n">_from</span><span class="p">,</span> <span class="n">address</span> <span class="n">_to</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_value</span><span class="p">)</span>
+<div class="section" id="id1">
+<h2>_transfer<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_value</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A call of this function is able to transfer _value amount of token
@@ -151,9 +270,9 @@ for safety concern that API (web3 implemented by ethereum core team)
 cannot call this function directly.</p>
 <p>This function is the core of function transfer()</p>
 </div>
-<div class="section" id="sur">
-<h2>_sur<a class="headerlink" href="#sur" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">_sur</span><span class="p">(</span><span class="n">address</span> <span class="n">_user</span><span class="p">,</span> <span class="n">role</span> <span class="n">_oldrole</span><span class="p">,</span> <span class="n">role</span> <span class="n">_newrole</span><span class="p">)</span>
+<div class="section" id="id2">
+<h2>_sur<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_sur</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_user</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_oldrole</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_newrole</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>sur represents switch user role. Public functions that can switch
@@ -161,74 +280,78 @@ user roles all depend on this internal function.</p>
 </div>
 <div class="section" id="affordabledata">
 <h2>_affordableData<a class="headerlink" href="#affordabledata" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">_affordableData</span> <span class="p">(</span><span class="n">address</span> <span class="n">_wallet</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_price</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_affordableData</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_wallet</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_price</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="tolerance">
 <h2>_tolerance<a class="headerlink" href="#tolerance" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">_tolerance</span> <span class="p">(</span><span class="n">uint256</span> <span class="n">_range</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_usageLimit</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_tolerance</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_range</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usageLimit</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cashier">
 <h2>_cashier<a class="headerlink" href="#cashier" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">_cashier</span> <span class="p">(</span><span class="n">address</span> <span class="n">_payer</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_volume</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_cashier</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_payer</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_volume</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="public-functions">
 <h1>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h1>
-<p>Public functions can be invoked in other contracts and is callable by API.
-DataTokenAlpha
-————–</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">DataTokenAlpha</span><span class="p">()</span> <span class="n">public</span> <span class="p">{</span>
-    <span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">;</span>
-    <span class="n">balance</span><span class="p">[</span><span class="n">owner</span><span class="p">]</span> <span class="o">=</span> <span class="n">totalSupply</span><span class="p">;</span>
+<p>Public functions can be invoked in other contracts and is callable by API.</p>
+<div class="section" id="datatokenalpha">
+<h2>DataTokenAlpha<a class="headerlink" href="#datatokenalpha" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">DataTokenAlpha</span><span class="p">()</span> <span class="kr">public</span> <span class="p">{</span>
+    <span class="nx">owner</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+    <span class="nx">balance</span><span class="p">[</span><span class="nx">owner</span><span class="p">]</span> <span class="o">=</span> <span class="nx">totalSupply</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>This is the constructor function of solidity contract DataTokenAlpha.</p>
-<div class="section" id="id1">
-<h2>transfer<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">transfer</span><span class="p">(</span><span class="n">address</span> <span class="n">_to</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_value</span><span class="p">)</span>
+</div>
+<div class="section" id="id3">
+<h2>transfer<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_value</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="buytoken">
 <h2>buyToken<a class="headerlink" href="#buytoken" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">buyToken</span><span class="p">()</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">buyToken</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="suprovider">
-<h2>suProvider<a class="headerlink" href="#suprovider" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">surProvider</span> <span class="p">(</span><span class="n">uint256</span> <span class="n">_price</span><span class="p">,</span> <span class="n">string</span> <span class="n">_passwd</span><span class="p">)</span>
+<div class="section" id="surprovider">
+<h2>surProvider<a class="headerlink" href="#surprovider" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">surProvider</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_price</span><span class="p">,</span> <span class="nx">string</span> <span class="nx">_passwd</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="sureceiver">
-<h2>suReceiver<a class="headerlink" href="#sureceiver" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">surReceiver</span> <span class="p">(</span><span class="n">uint</span> <span class="n">_numberOfUsers</span><span class="p">)</span>
+<div class="section" id="surreceiver">
+<h2>surReceiver<a class="headerlink" href="#surreceiver" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">surReceiver</span> <span class="p">(</span><span class="nx">uint</span> <span class="nx">_numberOfUsers</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="link">
 <h2>link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">link</span> <span class="p">(</span><span class="n">address</span> <span class="n">_provider</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">link</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_provider</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="usagerecord">
 <h2>usageRecord<a class="headerlink" href="#usagerecord" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">usageRecord</span> <span class="p">(</span><span class="n">address</span> <span class="n">_theOtherSide</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_usage</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">usageRecord</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_theOtherSide</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usage</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="payandleave">
 <h2>payAndLeave<a class="headerlink" href="#payandleave" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">payAndLeave</span> <span class="p">(</span><span class="n">uint256</span> <span class="n">_range</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_usageLimit</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">payAndLeave</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_range</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usageLimit</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -244,48 +367,54 @@ DataTokenAlpha
   <ul>
 <li><a class="reference internal" href="#">Welcome to DataTokenAlpha!</a></li>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#coding-style">Coding Style</a></li>
 <li><a class="reference internal" href="#contract-variables">Contract Variables</a><ul>
 <li><a class="reference internal" href="#owner">owner</a></li>
 <li><a class="reference internal" href="#tokenname">tokenName</a></li>
 <li><a class="reference internal" href="#decimals">decimals</a></li>
 <li><a class="reference internal" href="#initialsupply">initialSupply</a></li>
 <li><a class="reference internal" href="#totalsupply">totalSupply</a></li>
+<li><a class="reference internal" href="#apid-counter">APID_counter</a></li>
 <li><a class="reference internal" href="#role">role</a></li>
-<li><a class="reference internal" href="#balance">balance</a></li>
 <li><a class="reference internal" href="#identification">identification</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apid">APID</a><ul>
+<li><a class="reference internal" href="#balance">balance</a></li>
+<li><a class="reference internal" href="#providerbehind">providerBehind</a></li>
+<li><a class="reference internal" href="#numberofusers">numberOfUsers</a></li>
 <li><a class="reference internal" href="#providerof">providerOf</a></li>
 <li><a class="reference internal" href="#priceof">priceOf</a></li>
 <li><a class="reference internal" href="#usageof">usageOf</a></li>
 <li><a class="reference internal" href="#passwd">passwd</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#event">Event</a></li>
+<li><a class="reference internal" href="#event">Event</a><ul>
+<li><a class="reference internal" href="#transfer">Transfer</a></li>
+<li><a class="reference internal" href="#sur">sur</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#internal-functions">Internal Functions</a><ul>
-<li><a class="reference internal" href="#transfer">_transfer</a></li>
-<li><a class="reference internal" href="#sur">_sur</a></li>
+<li><a class="reference internal" href="#id1">_transfer</a></li>
+<li><a class="reference internal" href="#id2">_sur</a></li>
 <li><a class="reference internal" href="#affordabledata">_affordableData</a></li>
 <li><a class="reference internal" href="#tolerance">_tolerance</a></li>
 <li><a class="reference internal" href="#cashier">_cashier</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#public-functions">Public Functions</a><ul>
-<li><a class="reference internal" href="#id1">transfer</a></li>
+<li><a class="reference internal" href="#datatokenalpha">DataTokenAlpha</a></li>
+<li><a class="reference internal" href="#id3">transfer</a></li>
 <li><a class="reference internal" href="#buytoken">buyToken</a></li>
-<li><a class="reference internal" href="#suprovider">suProvider</a></li>
-<li><a class="reference internal" href="#sureceiver">suReceiver</a></li>
+<li><a class="reference internal" href="#surprovider">surProvider</a></li>
+<li><a class="reference internal" href="#surreceiver">surReceiver</a></li>
 <li><a class="reference internal" href="#link">link</a></li>
 <li><a class="reference internal" href="#usagerecord">usageRecord</a></li>
 <li><a class="reference internal" href="#payandleave">payAndLeave</a></li>
 </ul>
 </li>
 </ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
+
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -309,20 +438,18 @@ DataTokenAlpha
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Zhuoqun Liu.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="#">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Zhuoqun Liu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
   </body>
 </html>
