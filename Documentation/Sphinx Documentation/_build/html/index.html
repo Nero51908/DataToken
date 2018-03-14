@@ -237,34 +237,49 @@ function <a class="reference internal" href="#surprovider">surProvider</a> will 
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">string</span><span class="p">)</span> <span class="nx">internal</span> <span class="nx">passwd</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.</p>
+<p>User will be require to input a password when function <a class="reference internal" href="#surprovider">surProvider</a> is called.</p>
 </div>
 </div>
 <div class="section" id="event">
 <h1>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Event is used as log when important information of the contract is changed, for example, user balance changed as a result of transfer.</p>
+</div>
 <div class="section" id="transfer">
 <h2>Transfer<a class="headerlink" href="#transfer" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">value</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>Adding this event to the end of a function that issues token transfers will trigger a return message about the transfer.</p>
 </div>
 <div class="section" id="sur">
 <h2>sur<a class="headerlink" href="#sur" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Sur</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_user</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_newrole</span><span class="p">,</span> <span class="nx">bool</span> <span class="nx">success</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>When a user switch user role, this event will return a message indicating the original user role, the intended user role and whether the operation has succeeded.</p>
 </div>
 </div>
 <div class="section" id="internal-functions">
 <h1>Internal Functions<a class="headerlink" href="#internal-functions" title="Permalink to this headline">¶</a></h1>
-<p>Internal functions are invisible to API and external calls from other contracts.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Internal functions are invisible to Web3 Javascript API and external calls from other contracts.</p>
+</div>
 <div class="section" id="id1">
 <h2>_transfer<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_value</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A call of this function is able to transfer _value amount of token
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This function has very high power that it can manipulate balance between addresses without any restriction.</p>
+<p class="last">A call of this function is able to transfer _value amount of token
 from Ethereum address _from to address _to. The function has the
 highest authority in a transfer operation.</p>
+</div>
 <p>It is defined as internal
 for safety concern that API (web3 implemented by ethereum core team)
 cannot call this function directly.</p>

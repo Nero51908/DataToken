@@ -257,13 +257,23 @@ passwd
 
     mapping (address => string) internal passwd;
 
+This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.
+
+User will be require to input a password when function `surProvider`_ is called.
+
 Event
 =====
+
+.. note::
+    Event is used as log when important information of the contract is changed, for example, user balance changed as a result of transfer.
+    
 Transfer
 --------
 .. code-block:: javascript
 
     event Transfer(address _from, address _to, uint256 value);
+
+Adding this event to the end of a function that issues token transfers will trigger a return message about the transfer. 
 
 sur
 ---
@@ -271,21 +281,26 @@ sur
 
     event Sur(address _user, role _newrole, bool success);
 
+When a user switch user role, this event will return a message indicating the original user role, the intended user role and whether the operation has succeeded.
 
 Internal Functions
 ==================
 
-Internal functions are invisible to API and external calls from other contracts.
+.. note::
+
+    Internal functions are invisible to Web3 Javascript API and external calls from other contracts.
 
 _transfer
 ---------
 .. code-block:: javascript
 
     function _transfer(address _from, address _to, uint256 _value)
-
-A call of this function is able to transfer _value amount of token
-from Ethereum address _from to address _to. The function has the 
-highest authority in a transfer operation. 
+.. warning::
+    This function has very high power that it can manipulate balance between addresses without any restriction.
+    
+    A call of this function is able to transfer _value amount of token
+    from Ethereum address _from to address _to. The function has the 
+    highest authority in a transfer operation. 
 
 It is defined as internal 
 for safety concern that API (web3 implemented by ethereum core team) 
