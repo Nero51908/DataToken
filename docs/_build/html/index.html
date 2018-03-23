@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to DataTokenAlpha! &#8212; DataTokenAlpha  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contract Variables" href="ContractVariables.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ContractVariables.html" title="Contract Variables"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-datatokenalpha">
+<h1>Welcome to DataTokenAlpha!<a class="headerlink" href="#welcome-to-datatokenalpha" title="Permalink to this headline">¶</a></h1>
+<p>This is the documentation of DataTokenAlpha.</p>
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="alternate text" class="align-center" src="_images/logo.png" style="width: 192.0px; height: 162.0px;" /></a>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This project aims to develop a scheme for peer-to-peer (P2P) cellular data sharing and to
+construct a prototype Ethereum smart contract with respect to the scheme using Solidity which is
+a blockchain oriented programming language. Smart contract DataToken-Alpha (latest version 0.3.2)
+as the scheme implementation has been under development. Hence, DataToken, a token of Ether
+(Intrinsic Cryptocurrency of Ethereum) is created for data service transfer recording.The uniqueness
+of such implementation is that all the information held by the contract is protected by Ethereum
+network based on blockchain technology from computational hacking.</p>
+<p>The implementation is started from analyzing behaviors that a ledger system is expected to have.
+By design, the contract is firstly able to offer and manage token like a bank in real world
+and secondly, it is capable to work as a cellular data service trade centre where users of such
+contract are able to transfer Internet access in terms of cellular data usage and token.
+Solidity code thud is used to implement necessary features with respect to the behaviors mentioned above.
+Finally, a prototype of DataToken-Alpha for autonomous data trading is ready for further polish
+in the next semester when this project will focus on upgrading DataToken-Alpha to be a practically
+deployable smart contract as close as possible.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContractVariables.html">Contract Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#owner">owner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#tokenname">tokenName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#decimals">decimals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#initialsupply">initialSupply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#totalsupply">totalSupply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#apid-counter">APID_counter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#role">role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#identification">identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#apid">APID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#balance">balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#providerbehind">providerBehind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#numberofusers">numberOfUsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#providerof">providerOf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#priceof">priceOf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#usageof">usageOf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContractVariables.html#passwd">passwd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="InternalFunctions.html">Internal Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="InternalFunctions.html#transfer">_transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InternalFunctions.html#sur">_sur</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InternalFunctions.html#affordabledata">_affordableData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InternalFunctions.html#tolerance">_tolerance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InternalFunctions.html#cashier">_cashier</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PublicFunctions.html">Public Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#datatokenalpha">DataTokenAlpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#transfer">transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#buytoken">buyToken</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#surprovider">surProvider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#surreceiver">surReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#link">link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#usagerecord">usageRecord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#payandleave">payAndLeave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#id1">Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PublicFunctions.html#sur">sur</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to DataTokenAlpha!</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ContractVariables.html"
+                        title="next chapter">Contract Variables</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ContractVariables.html" title="Contract Variables"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Zhuoqun Liu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>
