@@ -12,7 +12,7 @@ uint256 totalSupply = initialSupply * 10 ** decimals;
 //APID counter, each new provider will be given this number. It's value updates by +1 after each give out (implemented in surProvider function).
 uint256 APID_counter = 1;
 //ethereum users can be receiver or provider. By defualt they are all receivers. by a successful call of surProvider, a user can be recognized as a provider.
-enum role {ISRECEIVER, ISPROVIDER, UNDERSERVICE}
+enum role {ISRECEIVER, ISPROVIDER, PAIRED}
 //token balance of each ethereum account. counted in totalSupply
 mapping (address => uint256) public balance;
 //role of an account, by default is role.ISRECEIVER
@@ -204,7 +204,7 @@ returns (uint256 _volume)
 *
 *affordable data is estimated in this function and the estimation is required to be larger than 1 (MB)
 *
-*role of message sender is changed to be UNDERSERVICE which means can call no function but payandleave()
+*role of message sender is changed to be PAIRED which means can call no function but payandleave()
 *
 *provider address is assigned to msg.sender for use of payment issuing and fetching passwd for wifi connection from mapping
 *
@@ -212,7 +212,7 @@ returns (uint256 _volume)
 *
 *when provider address is not assigned to message sender successfully, throw.
 *
-*when message sender role is not changed to be role.UNDERSERVICE, throw.
+*when message sender role is not changed to be role.PAIRED, throw.
 */
 function link (address _provider)
 public
@@ -221,12 +221,12 @@ returns(address receiver, uint256 usageLimit, string pwd)
     require(identification[_provider] == role.ISPROVIDER);
     require(identification[msg.sender] == role.ISRECEIVER);
     require(_affordableData(msg.sender, priceOf[_provider]) >= 1);
-    identification[msg.sender] = role.UNDERSERVICE;
+    identification[msg.sender] = role.PAIRED;
     providerOf[msg.sender] = _provider;
     numberOfUsers[_provider] += 1;  
     return (msg.sender, _affordableData(msg.sender, priceOf[_provider]), passwd[_provider]);
     assert(providerOf[msg.sender] == _provider);
-    assert(identification[msg.sender] == role.UNDERSERVICE);
+    assert(identification[msg.sender] == role.PAIRED);
 }
 
 /**
@@ -267,20 +267,20 @@ returns (bool success)
 }
 
 //suspend receiver (message sender)
-//_sur(role.ISRECEIVER, role.UNDERSERVICE);
+//_sur(role.ISRECEIVER, role.PAIRED);
 
 /**
 *internally defined fee collector
 *has high authority
-*role.UNDERSERVICE will be recovered to be role.ISRECEIVER on succeed.
+*role.PAIRED will be recovered to be role.ISRECEIVER on succeed.
 */
 function _cashier (address _payer, uint256 _volume)
 internal
 returns (bool success)
 {
-    //_sur underservice back to receiver
+    //_sur PAIRED back to receiver
     _transfer(_payer, providerOf[_payer], _volume * priceOf[providerOf[_payer]]);
-    _sur(msg.sender, role.UNDERSERVICE, role.ISRECEIVER);
+    _sur(msg.sender, role.PAIRED, role.ISRECEIVER);
     //if the payer has payed successfully, it's role should be receiver again after execution of this function
     assert(identification[_payer] == role.ISRECEIVER);
     return true;
