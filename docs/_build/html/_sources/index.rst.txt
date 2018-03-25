@@ -33,10 +33,26 @@ Finally, a prototype of DataToken-Alpha for autonomous data trading is ready for
 in the next semester when this project will focus on upgrading DataToken-Alpha to be a practically 
 deployable smart contract as close as possible.
 
+Terms and Conventions
+=====================
+In the context of DataTokenAlpha contract, each Ethereum address 
+has three possible roles:
+
+* Receiver (Default role)
+* Provider (A receiver can switch user role as provider)
+* Paired (A receiver who is using AP service of a provider)
+
+.. note::
+    Both "receiver" and "paired" are referred to as "receiver" in the following documentation. User `identification`_ value will distinguish paired receiver from unpaired receiver.
+
+Camel case names for variable and function names.
+Internal functions all start with an underscore _.
+Input parameter of functions starts with an underscore _.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   ContractVariables.rst
-   InternalFunctions.rst
-   PublicFunctions.rst
+   ContractVariables
+   InternalFunctions
+   PublicFunctions
