@@ -1,6 +1,5 @@
-################
 Public Functions
-################
+================
 
 Public functions can be invoked in other contracts and is callable by Web3 Javascript API.
 
