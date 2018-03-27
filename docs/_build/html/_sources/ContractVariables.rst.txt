@@ -58,21 +58,6 @@ is 666,000,000,000.
 .. note::
     The smallest unit is DataToken. There are 666,000,000,000 DataTokens supplied by this contract.
 
-APID_counter
-------------
-.. code-block:: javascript
-
-    uint256 APID_counter = 1;
-
-This number will be assigned to a newly registered provider.
-
-If a successful call of `surProvider`_ is initiated by 
-a user without `APID`_ value,
-APID_counter will be assigned to the new provider's `APID`_ mapping,
-and the value of APID_counter will be updated by +1 as `surProvider`_ implemented.
-
-
-
 role
 ----
 .. code-block:: javascript
@@ -103,10 +88,10 @@ This mapping takes Ethereum address as key and role (enum type) as the mapped va
 By default, any unassigned value is recognized as 0, therefore, 
 Ethereum addresses automatically have *role.ISRECEIVER* (numerical value is 0) as mapping values of `identification`_.
 
-When a receiver address calls function `surProvider`_,
+When a receiver address calls function :ref:`surProvider`,
 *identification* mapping value of this address will be changed to *role.ISPROVIDER* (numerical value is 1).
 
-When a receiver address has called function `link`_ successfully, 
+When a receiver address has called function :ref:`link` successfully, 
 mapping value of the address will be designated as *role.PAIRED* (numerical value is 2).
 
 APID
@@ -127,6 +112,19 @@ There are two reasons for this mapping:
 
 * Ethereum address behind a wireless AP could be protected by this APID. Currently, `providerBehind`_ is publicly declared, but it's high availability is not necessary. 
 
+APID_counter
+------------
+.. code-block:: javascript
+
+    uint256 APID_counter = 1;
+
+This number will be assigned to a newly registered provider.
+
+If a successful call of :ref:`surProvider` is initiated by 
+a user without :ref:`APID' value,
+APID_counter will be assigned to the new provider's `APID` mapping,
+and the value of APID_counter will be updated by +1 as :ref:`surProvider` implemented.
+
 balance
 -------
 .. code-block:: javascript
@@ -137,7 +135,7 @@ Mapping balance uses Ethereum address as key and number of tokens as value.
 
 Token balance of each contract user can be viewed by calling this mapping.
 
-Only one internal function `_transfer`_ can manipulate values of this mapping without restriction.
+Only one internal function :ref:`_transfer` can manipulate values of this mapping without restriction.
 
 providerBehind
 --------------
@@ -159,7 +157,7 @@ numberOfUsers
 
 For each contract user of provider role, this mapping is important.
 
-* When a receiver is linked to a provider by `link`_ function, mapping value of the provider should be added by 1.
+* When a receiver is linked to a provider by :ref:`link` function, mapping value of the provider should be added by 1.
 
 * When the receiver has successfully called function `payAndLeave`_, the value of numberOfUsers should be decreased by 1.
 
@@ -171,7 +169,7 @@ providerOf
 
     mapping (address => address) public providerOf;
 
-For each user of *role.PAIRED* who was of *role.ISRECEIVER* before a successful call of `link`_ function,
+For each user of *role.PAIRED* who was of *role.ISRECEIVER* before a successful call of :ref:`link` function,
 this mapping will be assigned by the Ethereum address of the linked provider.
 
 Only users being served has nonzero providerOf mapping.
@@ -184,7 +182,7 @@ priceOf
     mapping (address => uint256) public priceOf;
 
 When a receiver intends to switch user role to be a provider, 
-function `surProvider`_ will request a input that specifies pricing of this AP service to deploy in DataToken/MB.
+function :ref:`surProvider` will request a input that specifies pricing of this AP service to deploy in DataToken/MB.
 
 usageOf
 -------
@@ -209,4 +207,4 @@ passwd
 
 This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.
 
-User will be require to input a password when function `surProvider`_ is called.
+User will be require to input a password when function :ref:`surProvider` is called.

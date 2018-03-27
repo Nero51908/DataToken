@@ -1,0 +1,527 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Contract Variables &#8212; DataTokenAlpha  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to DataTokenAlpha!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to DataTokenAlpha!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="contract-variables">
+<h1>Contract Variables<a class="headerlink" href="#contract-variables" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contracts variables are declared at the beginning of solidity contract body.
+In this section, variable types and availability are indicated by source code definition
+below each mentioned variables.</p>
+</div>
+<div class="section" id="owner">
+<h2>owner<a class="headerlink" href="#owner" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">address</span> <span class="nx">owner</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The message sender address of the transaction that has initiated this
+DataTokenAlpha contract is stored in this variable.</p>
+<p>All initial supply tokens are assigned to this address.
+That is, all usable tokens are sold buy owner address.</p>
+</div>
+<div class="section" id="tokenname">
+<h2>tokenName<a class="headerlink" href="#tokenname" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">string</span> <span class="kr">public</span> <span class="nx">tokenName</span> <span class="o">=</span> <span class="s2">&quot;dataToken&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The name of token defined by this contract is dataToken.</p>
+</div>
+<div class="section" id="decimals">
+<h2>decimals<a class="headerlink" href="#decimals" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint</span> <span class="kr">public</span> <span class="nx">decimals</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This token will support 9 digits after decimal point.
+The number of 9 actually defines the smallest operable unit of each token.</p>
+</div>
+<div class="section" id="initialsupply">
+<h2>initialSupply<a class="headerlink" href="#initialsupply" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">initialSupply</span> <span class="o">=</span> <span class="mi">666</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>There will be 666 usable tokens in this contract.</p>
+</div>
+<div class="section" id="totalsupply">
+<h2>totalSupply<a class="headerlink" href="#totalsupply" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">totalSupply</span> <span class="o">=</span> <span class="nx">initialSupply</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="nx">decimals</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Number of tokens in terms of the smallest unit
+is 666,000,000,000.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The smallest unit is DataToken. There are 666,000,000,000 DataTokens supplied by this contract.</p>
+</div>
+</div>
+<div class="section" id="role">
+<h2>role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">enum</span> <span class="nx">role</span> <span class="p">{</span><span class="nx">ISRECEIVER</span><span class="p">,</span> <span class="nx">ISPROVIDER</span><span class="p">,</span> <span class="nx">PAIRED</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This variable defines three possible roles of contract users.</p>
+<p>Numerically, identification has values:</p>
+<ul class="simple">
+<li>role.ISRECEIVER = 0</li>
+<li>role.ISPROVIDER = 1</li>
+<li>role.PAIRED = 2</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The following variables are of mapping type.</p>
+<p class="last"><a class="reference external" href="http://solidity.readthedocs.io/en/develop/types.html?#mappings">Click to find mapping in solidity documentation</a></p>
+</div>
+</div>
+<div class="section" id="identification">
+<h2>identification<a class="headerlink" href="#identification" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">role</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">identification</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This mapping takes Ethereum address as key and role (enum type) as the mapped value.</p>
+<p>By default, any unassigned value is recognized as 0, therefore,
+Ethereum addresses automatically have <em>role.ISRECEIVER</em> (numerical value is 0) as mapping values of <a class="reference internal" href="#identification">identification</a>.</p>
+<p>When a receiver address calls function <a class="reference internal" href="#surprovider">surProvider</a>,
+<em>identification</em> mapping value of this address will be changed to <em>role.ISPROVIDER</em> (numerical value is 1).</p>
+<p>When a receiver address has called function <span class="xref std std-ref">link</span> successfully,
+mapping value of the address will be designated as <em>role.PAIRED</em> (numerical value is 2).</p>
+</div>
+<div class="section" id="apid">
+<h2>APID<a class="headerlink" href="#apid" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">APID</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This mapping shows numerical ID of a provider address.</p>
+<p>When a provider is deploying Wi-Fi AP, frontend client could
+query value of this mapping with the Ethereum address
+of the provider. Then the unique numerical ID can be shown in SSID.</p>
+<p>There are two reasons for this mapping:</p>
+<ul class="simple">
+<li>SSID has String length limit. A full length Ethereum address exceeds such limitation, however, a truncated address is not easy to resolve.</li>
+<li>Ethereum address behind a wireless AP could be protected by this APID. Currently, <a class="reference internal" href="#providerbehind">providerBehind</a> is publicly declared, but it’s high availability is not necessary.</li>
+</ul>
+</div>
+<div class="section" id="apid-counter">
+<h2>APID_counter<a class="headerlink" href="#apid-counter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This number will be assigned to a newly registered provider.</p>
+<p>If a successful call of <a class="reference internal" href="#surprovider">surProvider</a> is initiated by
+a user without <span class="xref std std-ref">APID’ value,
+APID_counter will be assigned to the new provider’s `APID</span> mapping,
+and the value of APID_counter will be updated by +1 as <a class="reference internal" href="#surprovider">surProvider</a> implemented.</p>
+</div>
+<div class="section" id="balance">
+<h2>balance<a class="headerlink" href="#balance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">balance</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Mapping balance uses Ethereum address as key and number of tokens as value.</p>
+<p>Token balance of each contract user can be viewed by calling this mapping.</p>
+<p>Only one internal function <span class="xref std std-ref">_transfer</span> can manipulate values of this mapping without restriction.</p>
+</div>
+<div class="section" id="providerbehind">
+<h2>providerBehind<a class="headerlink" href="#providerbehind" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">uint256</span> <span class="p">=&gt;</span> <span class="nx">address</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">providerBehind</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This mapping is a conversed version of <a class="reference internal" href="#apid">APID</a> mapping.</p>
+<p>APID of an account is a key of this mapping.
+The value corresponds to the key (APID grabbed from SSID)
+is the Ethereum address of the AP host.</p>
+</div>
+<div class="section" id="numberofusers">
+<h2>numberOfUsers<a class="headerlink" href="#numberofusers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">numberOfUsers</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For each contract user of provider role, this mapping is important.</p>
+<ul class="simple">
+<li>When a receiver is linked to a provider by <span class="xref std std-ref">link</span> function, mapping value of the provider should be added by 1.</li>
+<li>When the receiver has successfully called function <a class="reference internal" href="#payandleave">payAndLeave</a>, the value of numberOfUsers should be decreased by 1.</li>
+<li>Only when this mapping value is 0 which is the default value, can a provider call function <a class="reference internal" href="#surreceiver">surReceiver</a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
+</ul>
+</div>
+<div class="section" id="providerof">
+<h2>providerOf<a class="headerlink" href="#providerof" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">address</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">providerOf</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For each user of <em>role.PAIRED</em> who was of <em>role.ISRECEIVER</em> before a successful call of <span class="xref std std-ref">link</span> function,
+this mapping will be assigned by the Ethereum address of the linked provider.</p>
+<p>Only users being served has nonzero providerOf mapping.
+Value of this mapping will be reset to 0 after a successful call of <a class="reference internal" href="#payandleave">payAndLeave</a>.</p>
+</div>
+<div class="section" id="priceof">
+<h2>priceOf<a class="headerlink" href="#priceof" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">priceOf</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>When a receiver intends to switch user role to be a provider,
+function <a class="reference internal" href="#surprovider">surProvider</a> will request a input that specifies pricing of this AP service to deploy in DataToken/MB.</p>
+</div>
+<div class="section" id="usageof">
+<h2>usageOf<a class="headerlink" href="#usageof" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">))</span> <span class="kr">public</span> <span class="nx">usageOf</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This is a mapping designed to verify data usage information to prevent cheating on both sides when issuing payment.</p>
+<p>A function <a class="reference internal" href="#tolerance">_tolerance</a> is defined to check whether data usage record can reach a consensus.</p>
+<p>If records from both provider and receiver agree with each other, the receiver will pay for the amount of data usage specified by the provider.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">What will happen if a consensus is not reached has not been defined yet!</p>
+</div>
+</div>
+<div class="section" id="passwd">
+<h2>passwd<a class="headerlink" href="#passwd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">string</span><span class="p">)</span> <span class="nx">internal</span> <span class="nx">passwd</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.</p>
+<p>User will be require to input a password when function <a class="reference internal" href="#surprovider">surProvider</a> is called.</p>
+</div>
+</div>
+<div class="section" id="internal-functions">
+<h1>Internal Functions<a class="headerlink" href="#internal-functions" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Internal functions are invisible to Web3 Javascript API and external calls from other contracts.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Internal functions are defined with great power that can easily change data on Ethereum like DataToken balance of contract users.</p>
+</div>
+<div class="section" id="transfer">
+<h2>_transfer<a class="headerlink" href="#transfer" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function has great power that it can manipulate balance between addresses without any restriction.</p>
+</div>
+<p>A call of this function is able to transfer _value amount of token
+from Ethereum address _from to address _to. The function has the
+highest authority in a transfer operation.</p>
+<p>It is defined as internal
+for safety concern that API (web3 implemented by ethereum core team)
+cannot call this function directly.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">This function is the core of functions that are able to cause change of DataToken balance.</p>
+</div>
+</div>
+<div class="section" id="sur">
+<h2>_sur<a class="headerlink" href="#sur" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_sur</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_user</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_oldrole</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_newrole</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>“sur” represents switch user role. This function will not check current user role but will
+simply alter <a class="reference internal" href="#identification">identification</a> mapping of input <em>_user</em> address with input <em>_newrole</em>.
+Public functions that can switch user roles all depend on this internal function.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">This function is the core of function <a class="reference internal" href="#surreceiver">surReceiver</a> and function <a class="reference internal" href="#surprovider">surProvider</a>.</p>
+</div>
+</div>
+<div class="section" id="affordabledata">
+<h2>_affordableData<a class="headerlink" href="#affordabledata" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_affordableData</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_wallet</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_price</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function is used to find data usage limitation for a receiver.</p>
+<p>DataToken balance of this receiver and data service pricing of the linked provider are considered.</p>
+<p>The output value can be used for data usage countdown.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Current version of contract is not ready for the countdown feature.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">function <a class="reference internal" href="#link">link</a> depends on this function because it requires receiver must have balance to pay for no less than 1 MB to call function <a class="reference internal" href="#link">link</a>.</p>
+</div>
+</div>
+<div class="section" id="tolerance">
+<h2>_tolerance<a class="headerlink" href="#tolerance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_tolerance</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_range</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usageLimit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function is used from receiver’s perspective. When a receiver is about to quit AP service from the provider,
+this function checks mapping <a class="reference internal" href="#usageof">usageOf</a> values of both the receiver and the provider to make sure they agree with each other within a tolerance defined as consensus of this contract.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">function <a class="reference internal" href="#payandleave">payAndLeave</a> requires _tolerance to be true.</p>
+</div>
+</div>
+<div class="section" id="cashier">
+<h2>_cashier<a class="headerlink" href="#cashier" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_cashier</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_payer</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_volume</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function is responsible to collecting payment from a receiver when the receiver calls function <a class="reference internal" href="#payandleave">payAndLeave</a>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">This function is an important component in function <a class="reference internal" href="#payandleave">payAndLeave</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="public-functions">
+<h1>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h1>
+<p>Public functions can be invoked in other contracts and is callable by Web3 Javascript API.</p>
+<div class="section" id="datatokenalpha">
+<h2>DataTokenAlpha<a class="headerlink" href="#datatokenalpha" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">DataTokenAlpha</span><span class="p">()</span> <span class="kr">public</span> <span class="p">{</span>
+    <span class="nx">owner</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+    <span class="nx">balance</span><span class="p">[</span><span class="nx">owner</span><span class="p">]</span> <span class="o">=</span> <span class="nx">totalSupply</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">This is the constructor function of solidity contract DataTokenAlpha.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>transfer<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="buytoken">
+<h2>buyToken<a class="headerlink" href="#buytoken" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">buyToken</span><span class="p">()</span>
+<span class="nx">payable</span>
+<span class="kr">public</span>
+<span class="nx">returns</span><span class="p">(</span><span class="nx">bool</span> <span class="nx">success</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nx">_transfer</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">value</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This function is payable. That means, any contract user can call this function with a specified Ethereum value in terms of <a class="reference external" href="http://ethdocs.org/en/latest/ether.html">wei</a>.
+The function will then transfer equivalent amount of DataToken from <em>owner</em> address to the buyer’s address according to
+the exchange rule that 1 DataToken = 1,000,000,000 wei = 1 Gwei.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Thi function will only transfer Ether from buyer to contract rather than from buyer to <em>owner</em> to buy DataToken. There should be a way for the <em>owner</em> to deposit Ether from the contract.</p>
+</div>
+</div>
+<div class="section" id="surprovider">
+<h2>surProvider<a class="headerlink" href="#surprovider" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">surProvider</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_price</span><span class="p">,</span> <span class="nx">string</span> <span class="nx">_passwd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function can only be called by contract users with <a class="reference internal" href="#identification">identification</a> role.ISRECEIVER.
+On success, <em>role.ISPROVIDER</em> will be assigned to identification mapping of the message sender.</p>
+</div>
+<div class="section" id="surreceiver">
+<h2>surReceiver<a class="headerlink" href="#surreceiver" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">surReceiver</span> <span class="p">(</span><span class="nx">uint</span> <span class="nx">_numberOfUsers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When a provider want to switch back to be a receiver, this function will be there for help.
+The provider will be required to have no linked receiver who is using wireless AP under the name of this provider.
+On success, <em>role.ISRECEIVER</em> will be assigned to <a class="reference internal" href="#identification">identification</a> mapping of the message sender.</p>
+</div>
+<div class="section" id="link">
+<h2>link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">link</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_provider</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Only receivers with <em>role.ISRECEIVER</em> can call this function.
+This function will pair the message sender with the designated provider.</p>
+<p>..warning:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">function</span> <span class="n">actually</span> <span class="n">relies</span> <span class="n">on</span> <span class="n">a</span> <span class="n">address</span> <span class="n">resolver</span> <span class="n">since</span> <span class="n">the</span> <span class="n">frontend</span> <span class="n">client</span> <span class="n">should</span> <span class="n">only</span> <span class="n">feed</span> <span class="n">the</span> <span class="n">function</span> <span class="n">APID</span><span class="o">.</span> <span class="n">And</span> <span class="n">such</span> <span class="n">resolver</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">implemented</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usagerecord">
+<h2>usageRecord<a class="headerlink" href="#usagerecord" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">usageRecord</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_theOtherSide</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usage</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function assigns value of <a class="reference internal" href="#usageof">usageOf</a> in terms of MB.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">There should be some timing and data refreshing features to make the mapped data up to date, however, this feature is not implemented within this version of contract.</p>
+</div>
+</div>
+<div class="section" id="payandleave">
+<h2>payAndLeave<a class="headerlink" href="#payandleave" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">payAndLeave</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_range</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usageLimit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When a receiver wish to leave it’s wireless AP, it can call this function to issue a payment and disconnect from the provider.</p>
+</div>
+</div>
+<div class="section" id="event">
+<h1>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Event is used as log when important information of the contract is changed, for example, user balance changed as a result of transfer.</p>
+</div>
+<div class="section" id="id2">
+<h2>Transfer<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Adding this event to the end of a function that issues token transfers will trigger a return message about the transfer.</p>
+</div>
+<div class="section" id="id3">
+<h2>sur<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Sur</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_user</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_newrole</span><span class="p">,</span> <span class="nx">bool</span> <span class="nx">success</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a user switch user role, this event will return a message indicating the original user role, the intended user role and whether the operation has succeeded.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Contract Variables</a><ul>
+<li><a class="reference internal" href="#owner">owner</a></li>
+<li><a class="reference internal" href="#tokenname">tokenName</a></li>
+<li><a class="reference internal" href="#decimals">decimals</a></li>
+<li><a class="reference internal" href="#initialsupply">initialSupply</a></li>
+<li><a class="reference internal" href="#totalsupply">totalSupply</a></li>
+<li><a class="reference internal" href="#role">role</a></li>
+<li><a class="reference internal" href="#identification">identification</a></li>
+<li><a class="reference internal" href="#apid">APID</a></li>
+<li><a class="reference internal" href="#apid-counter">APID_counter</a></li>
+<li><a class="reference internal" href="#balance">balance</a></li>
+<li><a class="reference internal" href="#providerbehind">providerBehind</a></li>
+<li><a class="reference internal" href="#numberofusers">numberOfUsers</a></li>
+<li><a class="reference internal" href="#providerof">providerOf</a></li>
+<li><a class="reference internal" href="#priceof">priceOf</a></li>
+<li><a class="reference internal" href="#usageof">usageOf</a></li>
+<li><a class="reference internal" href="#passwd">passwd</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#internal-functions">Internal Functions</a><ul>
+<li><a class="reference internal" href="#transfer">_transfer</a></li>
+<li><a class="reference internal" href="#sur">_sur</a></li>
+<li><a class="reference internal" href="#affordabledata">_affordableData</a></li>
+<li><a class="reference internal" href="#tolerance">_tolerance</a></li>
+<li><a class="reference internal" href="#cashier">_cashier</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a><ul>
+<li><a class="reference internal" href="#datatokenalpha">DataTokenAlpha</a></li>
+<li><a class="reference internal" href="#id1">transfer</a></li>
+<li><a class="reference internal" href="#buytoken">buyToken</a></li>
+<li><a class="reference internal" href="#surprovider">surProvider</a></li>
+<li><a class="reference internal" href="#surreceiver">surReceiver</a></li>
+<li><a class="reference internal" href="#link">link</a></li>
+<li><a class="reference internal" href="#usagerecord">usageRecord</a></li>
+<li><a class="reference internal" href="#payandleave">payAndLeave</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#event">Event</a><ul>
+<li><a class="reference internal" href="#id2">Transfer</a></li>
+<li><a class="reference internal" href="#id3">sur</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to DataTokenAlpha!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/AboutCode.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to DataTokenAlpha!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Zhuoqun Liu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

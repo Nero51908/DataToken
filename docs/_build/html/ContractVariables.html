@@ -100,17 +100,6 @@ is 666,000,000,000.</p>
 <p class="last">The smallest unit is DataToken. There are 666,000,000,000 DataTokens supplied by this contract.</p>
 </div>
 </div>
-<div class="section" id="apid-counter">
-<h2>APID_counter<a class="headerlink" href="#apid-counter" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This number will be assigned to a newly registered provider.</p>
-<p>If a successful call of <a href="#id1"><span class="problematic" id="id2">`surProvider`_</span></a> is initiated by
-a user without <a class="reference internal" href="#apid">APID</a> value,
-APID_counter will be assigned to the new provider’s <a class="reference internal" href="#apid">APID</a> mapping,
-and the value of APID_counter will be updated by +1 as <a href="#id3"><span class="problematic" id="id4">`surProvider`_</span></a> implemented.</p>
-</div>
 <div class="section" id="role">
 <h2>role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">enum</span> <span class="nx">role</span> <span class="p">{</span><span class="nx">ISRECEIVER</span><span class="p">,</span> <span class="nx">ISPROVIDER</span><span class="p">,</span> <span class="nx">PAIRED</span><span class="p">}</span>
@@ -137,9 +126,9 @@ and the value of APID_counter will be updated by +1 as <a href="#id3"><span clas
 <p>This mapping takes Ethereum address as key and role (enum type) as the mapped value.</p>
 <p>By default, any unassigned value is recognized as 0, therefore,
 Ethereum addresses automatically have <em>role.ISRECEIVER</em> (numerical value is 0) as mapping values of <a class="reference internal" href="#identification">identification</a>.</p>
-<p>When a receiver address calls function <a href="#id5"><span class="problematic" id="id6">`surProvider`_</span></a>,
+<p>When a receiver address calls function <span class="xref std std-ref">surProvider</span>,
 <em>identification</em> mapping value of this address will be changed to <em>role.ISPROVIDER</em> (numerical value is 1).</p>
-<p>When a receiver address has called function <a href="#id7"><span class="problematic" id="id8">`link`_</span></a> successfully,
+<p>When a receiver address has called function <span class="xref std std-ref">link</span> successfully,
 mapping value of the address will be designated as <em>role.PAIRED</em> (numerical value is 2).</p>
 </div>
 <div class="section" id="apid">
@@ -157,6 +146,17 @@ of the provider. Then the unique numerical ID can be shown in SSID.</p>
 <li>Ethereum address behind a wireless AP could be protected by this APID. Currently, <a class="reference internal" href="#providerbehind">providerBehind</a> is publicly declared, but it’s high availability is not necessary.</li>
 </ul>
 </div>
+<div class="section" id="apid-counter">
+<h2>APID_counter<a class="headerlink" href="#apid-counter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This number will be assigned to a newly registered provider.</p>
+<p>If a successful call of <span class="xref std std-ref">surProvider</span> is initiated by
+a user without <span class="xref std std-ref">APID’ value,
+APID_counter will be assigned to the new provider’s `APID</span> mapping,
+and the value of APID_counter will be updated by +1 as <span class="xref std std-ref">surProvider</span> implemented.</p>
+</div>
 <div class="section" id="balance">
 <h2>balance<a class="headerlink" href="#balance" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">balance</span><span class="p">;</span>
@@ -164,7 +164,7 @@ of the provider. Then the unique numerical ID can be shown in SSID.</p>
 </div>
 <p>Mapping balance uses Ethereum address as key and number of tokens as value.</p>
 <p>Token balance of each contract user can be viewed by calling this mapping.</p>
-<p>Only one internal function <a href="#id9"><span class="problematic" id="id10">`_transfer`_</span></a> can manipulate values of this mapping without restriction.</p>
+<p>Only one internal function <span class="xref std std-ref">_transfer</span> can manipulate values of this mapping without restriction.</p>
 </div>
 <div class="section" id="providerbehind">
 <h2>providerBehind<a class="headerlink" href="#providerbehind" title="Permalink to this headline">¶</a></h2>
@@ -183,9 +183,9 @@ is the Ethereum address of the AP host.</p>
 </div>
 <p>For each contract user of provider role, this mapping is important.</p>
 <ul class="simple">
-<li>When a receiver is linked to a provider by <a href="#id11"><span class="problematic" id="id12">`link`_</span></a> function, mapping value of the provider should be added by 1.</li>
-<li>When the receiver has successfully called function <a href="#id13"><span class="problematic" id="id14">`payAndLeave`_</span></a>, the value of numberOfUsers should be decreased by 1.</li>
-<li>Only when this mapping value is 0 which is the default value, can a provider call function <a href="#id15"><span class="problematic" id="id16">`surReceiver`_</span></a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
+<li>When a receiver is linked to a provider by <span class="xref std std-ref">link</span> function, mapping value of the provider should be added by 1.</li>
+<li>When the receiver has successfully called function <a href="#id1"><span class="problematic" id="id2">`payAndLeave`_</span></a>, the value of numberOfUsers should be decreased by 1.</li>
+<li>Only when this mapping value is 0 which is the default value, can a provider call function <a href="#id3"><span class="problematic" id="id4">`surReceiver`_</span></a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
 </ul>
 </div>
 <div class="section" id="providerof">
@@ -193,10 +193,10 @@ is the Ethereum address of the AP host.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">address</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">providerOf</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>For each user of <em>role.PAIRED</em> who was of <em>role.ISRECEIVER</em> before a successful call of <a href="#id17"><span class="problematic" id="id18">`link`_</span></a> function,
+<p>For each user of <em>role.PAIRED</em> who was of <em>role.ISRECEIVER</em> before a successful call of <span class="xref std std-ref">link</span> function,
 this mapping will be assigned by the Ethereum address of the linked provider.</p>
 <p>Only users being served has nonzero providerOf mapping.
-Value of this mapping will be reset to 0 after a successful call of <a href="#id19"><span class="problematic" id="id20">`payAndLeave`_</span></a>.</p>
+Value of this mapping will be reset to 0 after a successful call of <a href="#id5"><span class="problematic" id="id6">`payAndLeave`_</span></a>.</p>
 </div>
 <div class="section" id="priceof">
 <h2>priceOf<a class="headerlink" href="#priceof" title="Permalink to this headline">¶</a></h2>
@@ -204,7 +204,7 @@ Value of this mapping will be reset to 0 after a successful call of <a href="#id
 </pre></div>
 </div>
 <p>When a receiver intends to switch user role to be a provider,
-function <a href="#id21"><span class="problematic" id="id22">`surProvider`_</span></a> will request a input that specifies pricing of this AP service to deploy in DataToken/MB.</p>
+function <span class="xref std std-ref">surProvider</span> will request a input that specifies pricing of this AP service to deploy in DataToken/MB.</p>
 </div>
 <div class="section" id="usageof">
 <h2>usageOf<a class="headerlink" href="#usageof" title="Permalink to this headline">¶</a></h2>
@@ -212,7 +212,7 @@ function <a href="#id21"><span class="problematic" id="id22">`surProvider`_</spa
 </pre></div>
 </div>
 <p>This is a mapping designed to verify data usage information to prevent cheating on both sides when issuing payment.</p>
-<p>A function <a href="#id23"><span class="problematic" id="id24">`_tolerance`_</span></a> is defined to check whether data usage record can reach a consensus.</p>
+<p>A function <a href="#id7"><span class="problematic" id="id8">`_tolerance`_</span></a> is defined to check whether data usage record can reach a consensus.</p>
 <p>If records from both provider and receiver agree with each other, the receiver will pay for the amount of data usage specified by the provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -225,7 +225,7 @@ function <a href="#id21"><span class="problematic" id="id22">`surProvider`_</spa
 </pre></div>
 </div>
 <p>This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.</p>
-<p>User will be require to input a password when function <a href="#id25"><span class="problematic" id="id26">`surProvider`_</span></a> is called.</p>
+<p>User will be require to input a password when function <span class="xref std std-ref">surProvider</span> is called.</p>
 </div>
 </div>
 
@@ -243,10 +243,10 @@ function <a href="#id21"><span class="problematic" id="id22">`surProvider`_</spa
 <li><a class="reference internal" href="#decimals">decimals</a></li>
 <li><a class="reference internal" href="#initialsupply">initialSupply</a></li>
 <li><a class="reference internal" href="#totalsupply">totalSupply</a></li>
-<li><a class="reference internal" href="#apid-counter">APID_counter</a></li>
 <li><a class="reference internal" href="#role">role</a></li>
 <li><a class="reference internal" href="#identification">identification</a></li>
 <li><a class="reference internal" href="#apid">APID</a></li>
+<li><a class="reference internal" href="#apid-counter">APID_counter</a></li>
 <li><a class="reference internal" href="#balance">balance</a></li>
 <li><a class="reference internal" href="#providerbehind">providerBehind</a></li>
 <li><a class="reference internal" href="#numberofusers">numberOfUsers</a></li>

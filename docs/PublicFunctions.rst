@@ -45,6 +45,7 @@ the exchange rule that 1 DataToken = 1,000,000,000 wei = 1 Gwei.
     
     Thi function will only transfer Ether from buyer to contract rather than from buyer to *owner* to buy DataToken. There should be a way for the *owner* to deposit Ether from the contract.
 
+.. _surProvider::
 surProvider
 ----------- 
 .. code-block:: javascript
