@@ -32,6 +32,8 @@ contract DataTokenAlpha {
     mapping (address => mapping (address => uint256)) public usageOf;
     //wifi passwd of provider
     mapping (address => string) internal passwd;
+    //provider's pocket// used in link() function
+    mapping (address => mapping(address => bytes32)) internal providerPocket;     
     //transfer event infomation. value is 
     event Transfer(address _from, address _to, uint256 value);
     //switch user role event
@@ -199,7 +201,7 @@ contract DataTokenAlpha {
     *This function will log address 
     *
     *message sender must be receiver
-    *param _provider is the address of provider
+    *param providerBehind[_providerID] is the address of provider
     *(Suppose user interface can translate SSID to be address of provider and use that address as argument)
     *
     *affordable data is estimated in this function and the estimation is required to be larger than 1 (MB)
@@ -214,20 +216,45 @@ contract DataTokenAlpha {
     *
     *when message sender role is not changed to be role.PAIRED, throw.
     */
-    function link (address _provider)
+    function link (uint256 _providerID, uint256 _yourkey)
     public
-    returns(address receiver, uint256 usageLimit, string pwd)
+    returns(address receiver, bytes32 pwd)
     {
-        require(identification[_provider] == role.ISPROVIDER);
+        //prerequiests
+        require(identification[providerBehind[_providerID]] == role.ISPROVIDER);
         require(identification[msg.sender] == role.ISRECEIVER);
-        require(_affordableData(msg.sender, priceOf[_provider]) >= 1);
+        require(_affordableData(msg.sender, priceOf[providerBehind[_providerID]]) >= 1);
+        //change receiver identity to PAIRED
         identification[msg.sender] = role.PAIRED;
-        providerOf[msg.sender] = _provider;
-        numberOfUsers[_provider] += 1;  
-        assert(providerOf[msg.sender] == _provider);
+        //assign the provider address to receiver's mapping to establish the link
+        providerOf[msg.sender] = providerBehind[_providerID];
+        //add one use count to provider
+        numberOfUsers[providerBehind[_providerID]] += 1;  
+        //put a key in provider's pocket for frontend handshake
+        providerPocket[providerBehind[_providerID]][msg.sender] = keccak256(block.timestamp + _yourkey);
+        assert(providerOf[msg.sender] == providerBehind[_providerID]);
         assert(identification[msg.sender] == role.PAIRED);
-        return (msg.sender, _affordableData(msg.sender, priceOf[_provider]), passwd[_provider]);
-
+        return (msg.sender, providerPocket[providerBehind[_providerID]][msg.sender]);
+    }
+    /**
+    doorkeeper for providers
+     */
+    function doorKeeper (address _knocker, bytes32 _pwd)
+    public
+    returns(bool letIn)
+    {
+        //prerequiest
+        require(identification[msg.sender] == role.ISPROVIDER);
+        require(identification[_knocker] == role.PAIRED);
+        //retreive the payload put by paired receiver during link()
+        bytes32 tempkey = providerPocket[msg.sender][_knocker];
+        //reset mapping value. this one-time password (token) is used and expired after this function
+        //i.e. once any one try to connect the provider with the identity of the paired receiver
+        //and the provider front checked with the contract via this only function
+        //the password set by the paired receiver will be expired no matter the _knocker has provided the correct password or not.
+        //to hijack a paired receiver address, the malicious user must send   
+        delete providerPocket[msg.sender][_knocker];
+        return tempkey == _pwd;
     }
 
     /**
