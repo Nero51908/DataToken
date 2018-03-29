@@ -153,7 +153,11 @@ contract DataTokenAlpha {
         //but the key used to generate dynamic PIN by SHA3 together with blocktime as input
         passwd[msg.sender] = _passwd;
         if (APID[msg.sender] == 0) {
+            //assign new provider an APID
             APID[msg.sender] = APID_counter;
+            //with providerBehind[APID] user can find provider address with the APID 
+            providerBehind[APID_counter] = msg.sender;
+            APID_counter += 1;
         }
         assert(priceOf[msg.sender] == _price);
         return (true, msg.sender);
