@@ -30,9 +30,13 @@ contract DataTokenAlpha {
     mapping (address => uint256) public priceOf;
     //data usage recorded by provider and receiver
     mapping (address => mapping (address => uint256)) public usageOf;
-    //wifi passwd of provider
-    mapping (address => string) internal passwd;
     //provider's pocket// used in link() function
+    //receiver has a 'ticket with number' and provider knows the number since a receiver connects to it
+    //when a receiver try to connect the provider
+    //provider with compare the number from receiver and the number corresponding to such receiver
+    //if match, let the receiver in (WLAN)
+    //this is using a white name list
+    //this kind of login is more like nonce rather than token based authentication
     mapping (address => mapping(address => bytes32)) internal providerPocket;     
     //transfer event infomation. value is 
     event Transfer(address _from, address _to, uint256 value);
@@ -48,6 +52,15 @@ contract DataTokenAlpha {
         balance[owner] = totalSupply;
     }
 
+    function contractBalance() 
+    public
+    constant
+    returns(uint256 value)
+    {
+        
+        value = address(this).balance;
+        return value;
+    }
 
     /**
     *internally defined transfer operation
@@ -80,14 +93,19 @@ contract DataTokenAlpha {
     }
 
     /**
-    *tranfer that is called publicly
-    *param {address} _to receiver of _value
-    *param {uint256} _value value of token to transfer
+    *function to tranfer tokens. Can be called publicly
+    *_to receiver of _value
+    *_value value of token to transfer
+    * 
+    *_transfer will check whether the operation succeeded or not
+    * if _transfer succeeded, transfer will return value of token that has been transfered as success message
     */
     function transfer(address _to, uint256 _value)
     public
+    returns(uint256 value)
     {
         _transfer(msg.sender, _to, _value);
+        return _value;
     }
 
     /**
@@ -95,14 +113,18 @@ contract DataTokenAlpha {
     *
     *msg.sender buy token from owner address using Ether by naming value of the transaction when calling this function
     *this function is payable
+    * 
+    *requires input Ethereum value
+    * 
+    * returns amount of tokens bought as a success message
     */
     function buyToken()
     payable
     public
-    returns(bool success)
+    returns(uint256 value)
     {
         _transfer(owner, msg.sender, msg.value / 10 ** 9);
-        return true;
+        return msg.value / 10 ** 9;
     }
 
     /**
@@ -143,15 +165,15 @@ contract DataTokenAlpha {
     *
     * priceOf mapping is not changed by this function throw
     */
-    function surProvider (uint256 _price, string _passwd)
+    function surProvider (uint256 _price)
     public
     returns(bool success, address provider)
     {
+        require(identification[msg.sender] == role.ISRECEIVER);
         _sur(msg.sender,role.ISRECEIVER,role.ISPROVIDER);
         priceOf[msg.sender] = _price;
         //note the password here is not the "password" to connect to Wi-Fi AP
         //but the key used to generate dynamic PIN by SHA3 together with blocktime as input
-        passwd[msg.sender] = _passwd;
         if (APID[msg.sender] == 0) {
             //assign new provider an APID
             APID[msg.sender] = APID_counter;
@@ -201,24 +223,31 @@ contract DataTokenAlpha {
     /**
     *
     *public function that links message sender to the chosen provider
-    *
-    *This function will log address 
+    * _providerID:= input APID of the provider which is available to physical frontend receiver
+    * _yourkey:= input a key that you want to use to make a stamp on the real key you put in provider's pocket
     *
     *message sender must be receiver
-    *param providerBehind[_providerID] is the address of provider
+    *
+    *providerBehind[_providerID] is the address of provider
+    *
     *(Suppose user interface can translate SSID to be address of provider and use that address as argument)
     *
     *affordable data is estimated in this function and the estimation is required to be larger than 1 (MB)
     *
     *role of message sender is changed to be PAIRED which means can call no function but payandleave()
     *
-    *provider address is assigned to msg.sender for use of payment issuing and fetching passwd for wifi connection from mapping
-    *
     *return messagesender address and estimation of it's max possible data usage
     *
     *when provider address is not assigned to message sender successfully, throw.
     *
     *when message sender role is not changed to be role.PAIRED, throw.
+    * 
+    * *************************potential issue*********************************
+    * There is possibility that the receiver drop the physical link between it and the provider
+    * In that case, the receiver has called link() once and pass through doorkeeper() once
+    * role.PAIRER can't call link() and No password to knock doorkeeper() again
+    * In current version, the user must call payAndLeave() to reset it's identification as role.ISRECEIVER
+    * 
     */
     function link (uint256 _providerID, uint256 _yourkey)
     public
@@ -242,6 +271,8 @@ contract DataTokenAlpha {
     }
     /**
     doorkeeper for providers
+    _knocker is whichever address delivered by front end as provider to backend doorkeeper function
+    _pwd is the bytes32 type number input from provider's front end where the physical knocker show this value to the provider's front end
      */
     function doorKeeper (address _knocker, bytes32 _pwd)
     public
@@ -249,16 +280,17 @@ contract DataTokenAlpha {
     {
         //prerequiest
         require(identification[msg.sender] == role.ISPROVIDER);
+        //guarentee the knocker is connected to some address (it has called link function) without knowing whether the provider is msg.sender
         require(identification[_knocker] == role.PAIRED);
-        //retreive the payload put by paired receiver during link()
-        bytes32 tempkey = providerPocket[msg.sender][_knocker];
+        //retreive the nonce like one-time key put link() as a result of the receiver's call
+        letIn = providerPocket[msg.sender][_knocker] == _pwd;
         //reset mapping value. this one-time password (token) is used and expired after this function
         //i.e. once any one try to connect the provider with the identity of the paired receiver
         //and the provider front checked with the contract via this only function
         //the password set by the paired receiver will be expired no matter the _knocker has provided the correct password or not.
         //to hijack a paired receiver address, the malicious user must send   
         delete providerPocket[msg.sender][_knocker];
-        return tempkey == _pwd;
+        return letIn;
     }
 
     /**
@@ -308,14 +340,17 @@ contract DataTokenAlpha {
     */
     function _cashier (address _payer, uint256 _volume)
     internal
-    returns (bool success)
+    returns (uint256 value)
     {
-        //_sur PAIRED back to receiver
+        //transfer fee from receiver to provider, _transfer will throw if error occurs, no need to check transfer result
         _transfer(_payer, providerOf[_payer], _volume * priceOf[providerOf[_payer]]);
+        //_sur PAIRED back to receiver
         _sur(msg.sender, role.PAIRED, role.ISRECEIVER);
         //if the payer has payed successfully, it's role should be receiver again after execution of this function
+        //if user role is not changed as designed, throw.
         assert(identification[_payer] == role.ISRECEIVER);
-        return true;
+        //tell the caller how many tokens transfered, implying transfer succeeded.
+        return (_volume * priceOf[providerOf[_payer]]);
     }
 
     /**
@@ -324,15 +359,19 @@ contract DataTokenAlpha {
     *
     *assume that tolerance of data usage error obtained by comparing both records is always satisfied (otherwise this function will never succeed)
     *
+    * _range is the range of tolerance
+    * _usageLimit could be removed in the next version, it is not necessary to be a input, a mapping can replace it
+    * 
+    * on payment success, this function will return value of token that msg.sender has paid.
     */
     function payAndLeave (uint256 _range, uint256 _usageLimit)
     public
-    returns (bool success)
+    returns (uint256 value)
     {
         //compare both sides' data usage record
         require(_tolerance(_range, _usageLimit));
         //pay the provider according to data usage recorded by the provider if tolerance is succeeded.
-        _cashier (msg.sender, usageOf[providerOf[msg.sender]][msg.sender]);
+        value = _cashier (msg.sender, usageOf[providerOf[msg.sender]][msg.sender]);
         //clear data usage record on both sides
         usageOf[providerOf[msg.sender]][msg.sender] = 0;
         usageOf[msg.sender][providerOf[msg.sender]] = 0;
@@ -340,7 +379,7 @@ contract DataTokenAlpha {
         numberOfUsers[providerOf[msg.sender]] -= 1;
         //check if the clear operation if successful
         assert(usageOf[providerOf[msg.sender]][msg.sender] == usageOf[msg.sender][providerOf[msg.sender]]);
-        //return on function success 
-        return true;
+        //return how many tokens are paid (in wei) implying payment success
+        return value;
     }
 }
