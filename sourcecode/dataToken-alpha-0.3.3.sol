@@ -39,9 +39,17 @@ contract DataTokenAlpha {
     //this kind of login is more like nonce rather than token based authentication
     mapping (address => mapping(address => bytes32)) internal providerPocket;     
     //transfer event infomation. value is 
-    event Transfer(address _from, address _to, uint256 value);
+    event LogTransfer(
+        address _from,
+        address _to,
+        uint256 value
+    );
     //switch user role event
-    event Sur(address _user, role _newrole, bool success);
+    event LogSur(
+        address _user,
+        role _newrole,
+        bool success
+    );
     /**
     *Constructor function
     *@constructor
@@ -52,17 +60,29 @@ contract DataTokenAlpha {
         balance[owner] = totalSupply;
     }
 
+    /**
+    * A getter function.
+    * Show Ether balance of this contract (DataToken) in terms of wei
+    * This balance is a result of buyToken() function
+    * Other addresses buy token will pay Ether to this contract address
+    * And owner address distributs token to the buyer
+    * However, if the owner address call buyToken function
+    * the result is equivalent to depositing an amount of Ether into the contract nothing else will happen
+    */
     function contractBalance() 
     public
     constant
     returns(uint256 value)
     {
-        
         value = address(this).balance;
         return value;
     }
 
     /**
+    * core of transfer()
+    * it manipulates tokenbalance of addresses and it is rebust to errors. 
+    * (on error, revert)
+    *
     *internally defined transfer operation
     *transfer certain amount of token from one address to another address
     *this function is so powerful that it should not be accessable externally.
@@ -93,7 +113,10 @@ contract DataTokenAlpha {
     }
 
     /**
-    *function to tranfer tokens. Can be called publicly
+    *function to tranfer tokens.
+    * Can be called publicly
+    * no requirement on caller's identification mapping value
+    *
     *_to receiver of _value
     *_value value of token to transfer
     * 
@@ -102,10 +125,14 @@ contract DataTokenAlpha {
     */
     function transfer(address _to, uint256 _value)
     public
-    returns(uint256 value)
+    //returns(uint256 value)
     {
         _transfer(msg.sender, _to, _value);
-        return _value;
+        // Whether to keep the return value or not, you need to give it a think
+        // return _value;
+        //
+        // emit the fact of a successful transfer
+        emit LogTransfer(msg.sender, _to, _value);
     }
 
     /**
@@ -121,10 +148,11 @@ contract DataTokenAlpha {
     function buyToken()
     payable
     public
-    returns(uint256 value)
     {
+        // msg.value is in wei, DataToken has 9 decimals, msg.value / 10 ** 9 converts wei value to DataToken value.
         _transfer(owner, msg.sender, msg.value / 10 ** 9);
-        return msg.value / 10 ** 9;
+        // emit the fact of a successful transfer
+        emit LogTransfer(owner, msg.sender, msg.value / 10 ** 9);
     }
 
     /**
@@ -144,12 +172,12 @@ contract DataTokenAlpha {
         if (identification[_user] == _oldrole) {
             identification[_user] = _newrole;
             if (identification[_user] == _newrole) {
-                emit Sur(_user, _newrole, true);
+                emit LogSur(_user, _newrole, true);
             } else {
-                emit Sur(_user, _newrole, false);
+                emit LogSur(_user, _newrole, false);
             }
         } else {
-            emit Sur(_user, _newrole, false);
+            emit LogSur(_user, _newrole, false);
         }
     }
 
