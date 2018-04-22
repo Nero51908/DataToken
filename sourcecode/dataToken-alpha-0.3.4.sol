@@ -53,7 +53,7 @@ contract DataTokenAlpha {
     mapping (address => uint256) public priceOf;
     //data usage recorded by provider and receiver
     mapping (address => mapping (address => uint256[4])) public usageOf;//[latest_usage, last_usage, count,timeStamp]
-    mapping (address => mapping (address => bool)) public agreement;//true => usage records agree, false => fuse burn
+    mapping (address => mapping (address => uint256)) public agreement;//agreed usage that can be used in an invoice
     //provider's pocket// used in link() function
     //receiver has a 'ticket with number' and provider knows the number since a receiver connects to it
     //when a receiver try to connect the provider
@@ -455,19 +455,17 @@ contract DataTokenAlpha {
             // time coherence detection
                 // note: this condition is triggered because provider reports later than user
             if ((_timestamp - usageOf[_user][msg.sender](3))>coherenceTime) {
-                    forcePay(_user)
+                // difference between timestamps of two usageOf of the same count is larger than coherenceTime (contract state variable)
+                forcePay(_user,'user');
+            } else {
+                if ((usageOf[msg.sender][_user](0)-usageOf[_user][msg.sender](0))>usageTolerance || (usageOf[_user][msg.sender](0)-usageOf[msg.sender][_user](0))>usageTolerance) {
+                    //timestamps satisfies coherenceTime, but the two usage values do not agree even with a tolerance usageTolerance (contract state variable)
+                    forcePay(_user,'user');
                 } else {
-                    // data usage report detection
+                    agreement[msg.sender][_user] = (usageOf[_user][msg.sender](0) + usageOf[msg.sender][_user](0)) / 2;
                 }
-            
+            }
         } 
-        // else{
-        //     //do nothing
-        //     // elseif case 1: new count is bigger than user's count, that is "increment of 1", fuse need to wait for report from user
-        //     // elseif case 2: new count is samller than user's count, even after that "increments of 1, such case will never happen.
-        // }
-        // // time difference between time stamps of two reports of the same report count exceeds coherence time (providers fault, pay as user's usage record)
-
     }
     // for paired uses to call
     function fuse (uint256 _usage)
