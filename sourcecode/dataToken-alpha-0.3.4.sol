@@ -424,6 +424,17 @@ contract DataTokenAlpha {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Need rethink
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    /**
+    *core of payment
+    *tell it who is gonna pay
+    *and
+    *pay with respect to which ledger (provider's ledger or user's)
+    */
+    function __forceInvoice(address _user, source of bill)
+    internal
+    {
+
+    }
     /**fuse
     *fuse can be called by provider or receiver
     *log latest data usage 
@@ -442,10 +453,10 @@ contract DataTokenAlpha {
     {
         // fuse called by provider once and by linked user onece is called one "match".
         // require:  caller is provider,                          _user is linked to caller,          usage report never decrease,                count must wait for it's match
-        require(identification(msg.sender == role.ISPROVIDER) && msg.sender == providerOf[_user] && _usage >= usageOf[msg.sender][_user](1) && usageOf[msg.sender][_user](2) <= usageOf[_user][msg.sender](2));
+        require(identification(msg.sender == role.ISPROVIDER) && msg.sender == providerOf[_user] && _usage >= usageOf[msg.sender][_user](0) && usageOf[msg.sender][_user](2) <= usageOf[_user][msg.sender](2));
         // if fuse burns, which is caused by new datausage report from provider
         // new usage log
-        usageOf[msg.sender][_user] = [_usage,usageOf[msg.sender][_user](1),usageOf[msg.sender][_user](2) += 1, _timestamp];
+        usageOf[msg.sender][_user] = [_usage,usageOf[msg.sender][_user](0),usageOf[msg.sender][_user](2) += 1, _timestamp];
         // check with validity:
         // conditions to burn the fuse
         // usage decreases (burn instantly) => issue a forced invoice to let the user pay as the latest valid usage, or
@@ -456,11 +467,11 @@ contract DataTokenAlpha {
                 // note: this condition is triggered because provider reports later than user
             if ((_timestamp - usageOf[_user][msg.sender](3))>coherenceTime) {
                 // difference between timestamps of two usageOf of the same count is larger than coherenceTime (contract state variable)
-                forcePay(_user,'user');
+                _forceInvoice(_user,'user');
             } else {
                 if ((usageOf[msg.sender][_user](0)-usageOf[_user][msg.sender](0))>usageTolerance || (usageOf[_user][msg.sender](0)-usageOf[msg.sender][_user](0))>usageTolerance) {
                     //timestamps satisfies coherenceTime, but the two usage values do not agree even with a tolerance usageTolerance (contract state variable)
-                    forcePay(_user,'user');
+                    _forceInvoice(_user,'user');
                 } else {
                     agreement[msg.sender][_user] = (usageOf[_user][msg.sender](0) + usageOf[msg.sender][_user](0)) / 2;
                 }
@@ -468,147 +479,25 @@ contract DataTokenAlpha {
         } 
     }
     // for paired uses to call
-    function fuse (uint256 _usage)
+    function fuse (uint256 _usage, uint256 _timestamp)
     public
-    {
-        require(identification(msg.sender) == role.PAIRED);
+    {     // requires: caller is paired user (no need to input provider), usage report will never decrease,             wait for a match if this report count is curretly leading
+        require(identification(msg.sender) == role.PAIRED && _usage >= usageOf[msg.sender][providerOf[msg.sender]](0) && usageOf[msg.sender][providerOf[msg.sender]](2) <= usageOf[providerOf[msg.sender]][msg.sender](2));
+        usageOf[msg.sender][providerOf[msg.sender]] = [_usage, usageOf[msg.sender][providerOf[msg.sender]](0), usageOf[msg.sender][providerOf[msg.sender]](2) += 1, _timestamp];
+        if (usageOf[msg.sender][providerOf[msg.sender]](2) == usageOf[providerOf[msg.sender]][msg.sender](2)) {
+            if ((_timestamp - usageOf[providerOf[msg.sender]][msg.sender](3)>coherenceTime)) {
+                _forceInvoice(msg.sender,'provider');
+            } else {
+                if ((usageOf[msg.sender][providerOf[msg.sender]](0)-usageOf[providerOf[msg.sender]][msg.sender](0))>usageTolerance || (usageOf[providerOf[msg.sender]][msg.sender](0)-usageOf[msg.sender][providerOf[msg.sender]](0))>usageTolerance) {
+                    _forceInvoice(msg.sender,'provider');
+                } else {
+                    agreement[msg.sender][_user] = (usageOf[_user][msg.sender](0) + usageOf[msg.sender][_user](0)) / 2;
+                }
+            }       
+        }   
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    function _coherenceChecker (address _sideA, address _sideB)
-    internal
-    returns (bool coherent)
-    {
-        if (usageOf[_sideA][_sideB](0) >= usageOf[_sideB][_sideA](0)) {
-            if (usageOf[_sideA][_sideB](0) - usageOf[_sideB][_sideA](0) < coherenceTime) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (usageOf[_sideB][_sideA](0) - usageOf[_sideA][_sideB](0) < coherenceTime) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    function receiverBreaker (uint256 _time, uint256 _dataUsage)
-    public
-    returns (bool shouldBreak)
-    {
-        //just got a report
-        usageOf[msg.sender][providerOf[msg.sender]] = [now, _dataUsage, usageOf[msg.sender][providerOf[msg.sender]](1), 0];
-        if (usageOf[providerOf[msg.sender]][msg.sender](2) == 0) {//conjugate is also waiting for check
-            check; 
-        } else {//conjugate is waiting for a new report from provider (checked flag tells that the value have been checked by, say, _coherenceChecker() )
-            //let providerBreaker check the usage condition when it receives a new report from provider
-            return false;
-        }
-        // Too fucking complicated! You can never use this kind of fuckin rubish 
-        // //caller must be a paired receiver
-        // require(identification[msg.sender] != role.PAIRED);
-        // //honest and safety check
-        // if (_dataUsage >= usageOf[msg.sender][providerOf[msg.sender]](1)) {
-        //     usageOf[msg.sender][providerOf[msg.sender]] = [now, _dataUsage, usageOf[msg.sender][providerOf[msg.sender]](1), 0];
-        //     if (coherent) {//coherece check
-        //         if (exceeds limit) {
-        //             payAndLeave;
-        //             return true;
-        //         } else {
-        //             return false;
-        //         }
-        //     } else {
-        //         forceInvoice;
-        //     }            
-        // } else {// receiver is malicious or an error occurs. anyway, pay and break.
-        //     forceInvoice;
-        //     return true;
-        // }
-
-        
-    }
-    function providerBreaker (address _receiver, uint256 _time, uint256 _dataUsage)
-    public
-    returns (bool shouldBreak)
-    {
-        //caller must be a provider
-        require(identification[msg.sender] == role.ISPROVIDER);
-    }
-
-    // function _traVolRecord (address _theOtherSide, uint256 _volRecord) 
-    // internal
-    // returns (bool success)
-    // {
-    //     //caller must be provider or paired receiver
-    //     require(identification[msg.sender] == role.PAIRED || identification[msg.sender] == role.ISPROVIDER);
-    //     //record usage track
-    //     usageOf[msg.sender][_theOtherSide] = _volRecord;
-    //     if (identification[msg.sender] == role.PAIRED) {
-    //         if (_volRecord >= _affordableData(msg.sender)) {
-    //             //payAndLeave
-    //             return true;                
-    //         }
-    //         else {
-    //             return true;
-    //         }
-    //     } elseif (msg.sender) {
-            
-    //     }
-    //     // tell the caller "status logged"
-    //     return true;
-    // }
-
-    // function userVolReport (uint256 _volRecord)
-    // public
-    // {
-    //     // caller must be Wi-Fi user in physical layer
-    //     require(identification[msg.sender] == role.PAIRED);
-    //     _traVolRecord(providerOf[msg.sender], _volRecord);
-    // }
-
-    // /**
-    // *internal function
-    // *compare data usage record by both provider and receiver's devices
-    // *difference is smaller than tolerance will return true
-    // *
-    // *A problem is left for front implementation:
-    // *To let two devices send information to the contract about data usage.
-    // */
-    // function _tolerance ()
-    // internal
-    // view
-    // returns (bool agreement, uint256 dataUsage)//MB
-    // {
-    //     uint256 usageProRec = usageOf[providerOf[msg.sender]][msg.sender];
-    //     uint256 usageRecPro = usageOf[msg.sender][providerOf[msg.sender]];
-    //     require(_affordableData(msg.sender) >= usageOf[providerOf[msg.sender]][msg.sender]);
-    //     if (usageRecPro <= usageProRec) {
-    //         return (true, usageRecPro);
-    //     } else {
-    //         return (usageRecPro - usageProRec < usageTolerance);
-    //     }
-    // }
-
-    // /**
-    // *internally defined fee collector
-    // *has high authority
-    // *role.PAIRED will be recovered to be role.ISRECEIVER on succeed.
-    // */
-    // function _cashier (address _payer, uint256 _volume)
-    // internal
-    // returns (uint256 payValue)
-    // {
-    //     //transfer fee from receiver to provider, _transfer will throw if error occurs, no need to check transfer result
-    //     _transfer(_payer, providerOf[_payer], _volume * priceOf[providerOf[_payer]]);
-    //     //_sur PAIRED back to receiver
-    //     _sur(msg.sender, role.PAIRED, role.ISRECEIVER);
-    //     //if the payer has payed successfully, it's role should be receiver again after execution of this function
-    //     //if user role is not changed as designed, throw.
-    //     assert(identification[_payer] == role.ISRECEIVER);
-    //     //tell the caller how many tokens transfered, implying transfer succeeded.
-    //     return (_volume * priceOf[providerOf[_payer]]);
-    // }
 
     /**
     *normal case used data < datalimit
@@ -643,9 +532,9 @@ contract DataTokenAlpha {
         delete usageOf[providerOf[msg.sender]][msg.sender];
         delete usageOf[msg.sender][providerOf[msg.sender]];
     }
-    function forceInvoice (address _payer)
+    function _forceInvoice (address _payer, *oprtion*)
     public
     {
-        require(identification[msg.sender] == role.ISPROVIDER);
+        require(_payer == role.PAIRED);
     }
 }
