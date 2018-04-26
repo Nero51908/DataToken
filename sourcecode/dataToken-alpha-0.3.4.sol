@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.21;
 
 contract DataTokenAlpha {
     /**
@@ -36,6 +36,8 @@ contract DataTokenAlpha {
     uint256 APID_counter = 1;
     //ethereum users can be receiver or provider. By defualt they are all receivers. by a successful call of surProvider, a user can be recognized as a provider.
     enum role {ISRECEIVER, ISPROVIDER, PAIRED}
+    //spsecify payment type;
+    enum forcePayType {FUSEOFPROVIDER, FUSEOFRECEIVER}
     //token balance of each ethereum account. counted in totalSupply
     mapping (address => uint256) public balance;
     //role of an account, by default is role.ISRECEIVER
@@ -52,8 +54,14 @@ contract DataTokenAlpha {
     //pricing: value per MB
     mapping (address => uint256) public priceOf;
     //data usage recorded by provider and receiver
-    mapping (address => mapping (address => uint256[4])) public usageOf;//[latest_usage, last_usage, count,timeStamp]
-    mapping (address => mapping (address => uint256)) public agreement;//agreed usage that can be used in an invoice
+    mapping (address => mapping (address => uint256)) public usageOf;//latest_usage
+    // count is directional. the first address submits the report and the second is the direction of it's connected address
+    mapping (address => mapping (address => uint256)) public reportCount;
+    // timeStamp is directional. the first address submits the report and the second is the direction of it's connected address
+    mapping (address => mapping (address => uint256)) public frontTimestamp;
+    // agreement that determines how many token to pay for function payAndLeave()
+    // agreement has no direction, it is an agreed value of both provider and receiver
+    mapping (address => mapping (address => uint256)) public agreement;//agreed usage that can be used in an invoice, agreement[provideraddress][receiveraddress]
     //provider's pocket// used in link() function
     //receiver has a 'ticket with number' and provider knows the number since a receiver connects to it
     //when a receiver try to connect the provider
@@ -62,7 +70,7 @@ contract DataTokenAlpha {
     //this is using a white name list
     //this kind of login is more like nonce rather than token based authentication
     mapping (address => mapping(address => bytes32)) internal providerPocket;    
-
+    //
     /**
     *Events
     *making log
@@ -92,7 +100,7 @@ contract DataTokenAlpha {
     *assigns contract owner;
     *give all token balance to the owner;
     */
-    function DataTokenAlpha() 
+    constructor() 
     public
     {
         owner = msg.sender;
@@ -111,11 +119,11 @@ contract DataTokenAlpha {
         reportPeriod = _reportPeriod;
         coherenceTime = _coherenceTime;
         tokenPrice = _tokenPrice;
-        usageTollerence = _usageTolerance;
+        usageTolerance = _usageTolerance;
         assert(tokenPrice == _tokenPrice);
         assert(reportPeriod == _reportPeriod);
         assert(coherenceTime == _coherenceTime);
-        assert(usageTollerence == _usageTolerance);
+        assert(usageTolerance == _usageTolerance);
     }
 
     /**
@@ -169,6 +177,8 @@ contract DataTokenAlpha {
         balance[_to] += _value;
         //assert function is used to check bugs during transfer operation. assert(false) will throw such tranfer.
         assert(balance[_from] + balance[_to] == totalBalance);
+        // emit event
+        emit LogTransfer(_from, _to, _value);
         return true;
     }
 
@@ -185,20 +195,8 @@ contract DataTokenAlpha {
     */
     function transfer(address _to, uint256 _value)
     public
-    //returns(uint256 value)
     {
-        //if _transfer() succeeds, emit the event
-        if (_transfer(msg.sender, _to, _value)) {
-            // emit the fact of a successful transfer
-            emit LogTransfer(msg.sender, _to, _value);
-        } else {
-            //if not, emit the event saying nothing is sent.
-            emit LogTransfer(msg.sender, _to, 0);
-        }
-        // Whether to keep the return value or not, you need to give it a think
-        // return _value;
-        //
-
+        _transfer(msg.sender, _to, _value);
     }
 
     /**
@@ -385,8 +383,6 @@ contract DataTokenAlpha {
         } else {
             emit LogSur(msg.sender, role.PAIRED, false);
         }
-        
-
     }
 
     /**
@@ -422,19 +418,41 @@ contract DataTokenAlpha {
     *data usage is in terms of MB
     */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Need rethink
+// To handle forced payment caused by excedding affordable usage (not implemented yet) or 
+// possibly dishonest behavior (implemented, waiting for test) and too much time gap between two reports of the same count (implemented, waiting for test)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
     /**
-    *core of payment
+    *core of a forced payment because the detection of unstable or possibly dishonest link
     *tell it who is gonna pay
     *and
     *pay with respect to which ledger (provider's ledger or user's)
+    *there are two types of forcePayTypes: FUSEOFPROVIDER (use the latest usage record in receiver's ledger), FUSEOFRECEIVER (use provider's ledger) 
+    *_type input of this function can only be ether forcePayType.FUSEOFPRIVIDER or forcePayType.FUSEOFRECEIVER
     */
-    function __forceInvoice(address _user, source of bill)
+    function _cashier (uint256 _usage, uint256 _price)
+    internal
+    pure
+    returns (uint256 bill)
+    {
+        return _usage*_price;
+    }
+
+    function _forceInvoice(address _user, forcePayType _type)
     internal
     {
-
+        require(identification[_user] == role.PAIRED);
+        //
+        //if _transfer() succeeds, emit the event
+        if (_type == forcePayType.FUSEOFPROVIDER) {
+            //pay as receiver's record by calling this NOTE that the _user is always the receiver (PAIRED)
+            _transfer(_user,providerOf[_user], _cashier(usageOf[_user][providerOf[_user]],priceOf[providerOf[_user]]));
+        } else { //_type == forcePayType.FUSEOFRECEIVER
+            //pay as provider's record by calling this NOTE that the _user is always the receiver (PAIRED)
+            _transfer(_user,providerOf[_user], _cashier(usageOf[providerOf[_user]][_user],priceOf[providerOf[_user]]));
+        }
     }
+    
+
     /**fuse
     *fuse can be called by provider or receiver
     *log latest data usage 
@@ -446,34 +464,40 @@ contract DataTokenAlpha {
     *timestamps satisfies coherenceTime, but the two usage values do not agree even with a tolerance usageTolerance (contract state variable)
     *too long waiting for a match (need to detect time..but how....)
     *
-     */
+    */
     // for providers to call 
     function fuse (address _user, uint256 _usage, uint256 _timestamp)
     public
+    returns (bool fuseBurn)
     {
         // fuse called by provider once and by linked user onece is called one "match".
         // require:  caller is provider,                          _user is linked to caller,          usage report never decrease,                count must wait for it's match
-        require(identification(msg.sender == role.ISPROVIDER) && msg.sender == providerOf[_user] && _usage >= usageOf[msg.sender][_user](0) && usageOf[msg.sender][_user](2) <= usageOf[_user][msg.sender](2));
+        require(identification[msg.sender] == role.ISPROVIDER && msg.sender == providerOf[_user] && _usage >= usageOf[msg.sender][_user] && reportCount[msg.sender][_user] <= reportCount[_user][msg.sender]);
         // if fuse burns, which is caused by new datausage report from provider
         // new usage log
-        usageOf[msg.sender][_user] = [_usage,usageOf[msg.sender][_user](0),usageOf[msg.sender][_user](2) += 1, _timestamp];
+        usageOf[msg.sender][_user] = _usage;
+        reportCount[msg.sender][_user] += 1;
+        frontTimestamp[msg.sender][_user] = _timestamp;
         // check with validity:
         // conditions to burn the fuse
         // usage decreases (burn instantly) => issue a forced invoice to let the user pay as the latest valid usage, or
-        if (usageOf[_user][msg.sender](2) == usageOf[msg.sender][_user](2)) {
+        if (reportCount[_user][msg.sender] == reportCount[msg.sender][_user]) {
             // try to make an agreement
             //
             // time coherence detection
                 // note: this condition is triggered because provider reports later than user
-            if ((_timestamp - usageOf[_user][msg.sender](3))>coherenceTime) {
+            if (_timestamp - frontTimestamp[_user][msg.sender]>coherenceTime) {
                 // difference between timestamps of two usageOf of the same count is larger than coherenceTime (contract state variable)
-                _forceInvoice(_user,'user');
+                _forceInvoice(_user,forcePayType.FUSEOFPROVIDER);
+                return true;
             } else {
-                if ((usageOf[msg.sender][_user](0)-usageOf[_user][msg.sender](0))>usageTolerance || (usageOf[_user][msg.sender](0)-usageOf[msg.sender][_user](0))>usageTolerance) {
+                if ((usageOf[msg.sender][_user]-usageOf[_user][msg.sender])>usageTolerance || (usageOf[_user][msg.sender]-usageOf[msg.sender][_user])>usageTolerance) {
                     //timestamps satisfies coherenceTime, but the two usage values do not agree even with a tolerance usageTolerance (contract state variable)
-                    _forceInvoice(_user,'user');
-                } else {
-                    agreement[msg.sender][_user] = (usageOf[_user][msg.sender](0) + usageOf[msg.sender][_user](0)) / 2;
+                    _forceInvoice(_user,forcePayType.FUSEOFPROVIDER);
+                    return true;
+                } else { // consistent reports received assign agreement value by there mean value
+                    agreement[msg.sender][_user] = (usageOf[_user][msg.sender] + usageOf[msg.sender][_user]) / 2;
+                    return false;
                 }
             }
         } 
@@ -481,27 +505,35 @@ contract DataTokenAlpha {
     // for paired uses to call
     function fuse (uint256 _usage, uint256 _timestamp)
     public
-    {     // requires: caller is paired user (no need to input provider), usage report will never decrease,             wait for a match if this report count is curretly leading
-        require(identification(msg.sender) == role.PAIRED && _usage >= usageOf[msg.sender][providerOf[msg.sender]](0) && usageOf[msg.sender][providerOf[msg.sender]](2) <= usageOf[providerOf[msg.sender]][msg.sender](2));
-        usageOf[msg.sender][providerOf[msg.sender]] = [_usage, usageOf[msg.sender][providerOf[msg.sender]](0), usageOf[msg.sender][providerOf[msg.sender]](2) += 1, _timestamp];
-        if (usageOf[msg.sender][providerOf[msg.sender]](2) == usageOf[providerOf[msg.sender]][msg.sender](2)) {
-            if ((_timestamp - usageOf[providerOf[msg.sender]][msg.sender](3)>coherenceTime)) {
-                _forceInvoice(msg.sender,'provider');
+    returns (bool fuseBurn)
+    {     
+        // requires: caller is paired user (no need to input provider), usage report will never decrease,             wait for a match if this report count is curretly leading
+        require(identification[msg.sender] == role.PAIRED && _usage >= usageOf[msg.sender][providerOf[msg.sender]] && reportCount[msg.sender][providerOf[msg.sender]] <= reportCount[providerOf[msg.sender]][msg.sender]);
+        // new usage log
+        usageOf[msg.sender][providerOf[msg.sender]] = _usage;
+        reportCount[msg.sender][providerOf[msg.sender]] += 1;
+        frontTimestamp[msg.sender][providerOf[msg.sender]] =  _timestamp;
+        // trying to make an agreement
+        if (reportCount[msg.sender][providerOf[msg.sender]] == reportCount[providerOf[msg.sender]][msg.sender]) {
+            if ((_timestamp - frontTimestamp[providerOf[msg.sender]][msg.sender])>coherenceTime) {
+                _forceInvoice(msg.sender,forcePayType.FUSEOFRECEIVER);
+                return true;
             } else {
-                if ((usageOf[msg.sender][providerOf[msg.sender]](0)-usageOf[providerOf[msg.sender]][msg.sender](0))>usageTolerance || (usageOf[providerOf[msg.sender]][msg.sender](0)-usageOf[msg.sender][providerOf[msg.sender]](0))>usageTolerance) {
-                    _forceInvoice(msg.sender,'provider');
-                } else {
-                    agreement[msg.sender][_user] = (usageOf[_user][msg.sender](0) + usageOf[msg.sender][_user](0)) / 2;
+                if ((usageOf[msg.sender][providerOf[msg.sender]]-usageOf[providerOf[msg.sender]][msg.sender])>usageTolerance || (usageOf[providerOf[msg.sender]][msg.sender]-usageOf[msg.sender][providerOf[msg.sender]])>usageTolerance) {
+                    _forceInvoice(msg.sender,forcePayType.FUSEOFRECEIVER);
+                    return true;
+                } else { // consistent reports received assign agreement value by there mean value
+                    agreement[providerOf[msg.sender]][msg.sender] = (usageOf[msg.sender][providerOf[msg.sender]] + usageOf[providerOf[msg.sender]][msg.sender]) / 2;
+                    return false;
                 }
             }       
         }   
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     /**
-    *normal case used data < datalimit
-    *pay function. 
+    *normal case used data < datalimit (fuse functions will help to watch the data limit)
+    *payAndLeave function. 
     *
     *assume that tolerance of data usage error obtained by comparing both records is always satisfied (otherwise this function will never succeed)
     *
@@ -510,31 +542,18 @@ contract DataTokenAlpha {
     * 
     * on payment success, this function will return value of token that msg.sender has paid.
     */
-    function payAndLeave (uint256 _range, uint256 _usageLimit)
+    function payAndLeave ()
     public
     {
-        // //compare both sides' data usage record
-        // require(_tolerance());
-        //
-        //check latest usage record
-        if (condition) {
-            
-        } else {
-            
-        }
-        //pay the provider according to data usage recorded by the provider if tolerance is succeeded.
-        emit LogTransfer(msg.sender, providerOf[msg.sender], _cashier (msg.sender, usageOf[providerOf[msg.sender]][msg.sender]));
-        //reasonably decrease number of users of the provider by 1
+        // caller must be a paired user
+        require(identification[msg.sender]==role.PAIRED);
+        transfer(providerOf[msg.sender],agreement[providerOf[msg.sender]][msg.sender]*priceOf[providerOf[msg.sender]]);
+        //reasonably decrease number of users of the provider by 1        
         numberOfUsers[providerOf[msg.sender]] -= 1;
-        //safety check
+        //safety check number of users under a provider is never smaller than 0
         assert(numberOfUsers[providerOf[msg.sender]] >= 0);
-        //clear data usage record on both sides
+        //clear data usage record on both provider's and receiver's sides
         delete usageOf[providerOf[msg.sender]][msg.sender];
         delete usageOf[msg.sender][providerOf[msg.sender]];
-    }
-    function _forceInvoice (address _payer, *oprtion*)
-    public
-    {
-        require(_payer == role.PAIRED);
     }
 }
