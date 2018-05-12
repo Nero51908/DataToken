@@ -50,54 +50,77 @@
             
   <div class="section" id="contract-variables">
 <h1>Contract Variables<a class="headerlink" href="#contract-variables" title="Permalink to this headline">¶</a></h1>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Contracts variables are declared at the beginning of solidity contract body.
+<p>Contracts variables are declared at the beginning of solidity contract body.
 In this section, variable types and availability are indicated by source code definition
 below each mentioned variables.</p>
-</div>
 <div class="section" id="owner">
 <h2>owner<a class="headerlink" href="#owner" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">address</span> <span class="nx">owner</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>The message sender address of the transaction that has initiated this
-DataTokenAlpha contract is stored in this variable.</p>
-<p>All initial supply tokens are assigned to this address.
-That is, all usable tokens are sold buy owner address.</p>
+<p>Owner of the contract. It is the Ethereum address which is
+the message sender of the transaction that has successfully deployed
+DataTokenAlpha contract on Ethereum network.
+Total supply (666,000,000,000 tokens) is assigned to this address initially.
+That is, all usable tokens of this contract in Ethereum network are sold by this owner address.</p>
 </div>
 <div class="section" id="tokenname">
 <h2>tokenName<a class="headerlink" href="#tokenname" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">string</span> <span class="kr">public</span> <span class="nx">tokenName</span> <span class="o">=</span> <span class="s2">&quot;dataToken&quot;</span><span class="p">;</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">string</span> <span class="kr">public</span> <span class="nx">tokenName</span> <span class="o">=</span> <span class="s2">&quot;DataToken&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>The name of token defined by this contract is dataToken.</p>
-</div>
-<div class="section" id="decimals">
-<h2>decimals<a class="headerlink" href="#decimals" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint</span> <span class="kr">public</span> <span class="nx">decimals</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This token will support 9 digits after decimal point.
-The number of 9 actually defines the smallest operable unit of each token.</p>
-</div>
-<div class="section" id="initialsupply">
-<h2>initialSupply<a class="headerlink" href="#initialsupply" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">initialSupply</span> <span class="o">=</span> <span class="mi">666</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>There will be 666 usable tokens in this contract.</p>
+<p>The name of token defined by this contract.
+In current version, the contract is named “DataToken”.</p>
 </div>
 <div class="section" id="totalsupply">
 <h2>totalSupply<a class="headerlink" href="#totalsupply" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">totalSupply</span> <span class="o">=</span> <span class="nx">initialSupply</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="nx">decimals</span><span class="p">;</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="kr">public</span> <span class="nx">totalSupply</span> <span class="o">=</span> <span class="mi">666</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Number of tokens in terms of the smallest unit
-is 666,000,000,000.</p>
+<p>Total number of tokens is 666,000,000,000. Amount of Tokens only have discrete integer values.</p>
+</div>
+<div class="section" id="reportperiod">
+<h2>reportPeriod<a class="headerlink" href="#reportperiod" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="kr">public</span> <span class="nx">reportPeriod</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span> <span class="c1">// sec</span>
+</pre></div>
+</div>
+<p>Data usage information should be reported from frontend software
+less than every 30 sec. This value can be changed by function tuner()</p>
+</div>
+<div class="section" id="coherencetime">
+<h2>coherenceTime<a class="headerlink" href="#coherencetime" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="kr">public</span> <span class="nx">coherenceTime</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// sec</span>
+</pre></div>
+</div>
+<p>Within such time difference, two data usage report are considered as “synchronized”.</p>
+</div>
+<div class="section" id="tokenprice">
+<h2>tokenPrice<a class="headerlink" href="#tokenprice" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="kr">public</span> <span class="nx">tokenPrice</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">;</span><span class="c1">// wei/DAT</span>
+</pre></div>
+</div>
+<p>Price in wei to purchase each DataToken from the owner.</p>
+</div>
+<div class="section" id="usagetolerance">
+<h2>usageTolerance<a class="headerlink" href="#usagetolerance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="kr">public</span> <span class="nx">usageTolerance</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span><span class="c1">// MB</span>
+</pre></div>
+</div>
+<p>Maximum allowed difference between frontend reported data usage
+from the service provider and the receiver.</p>
+</div>
+<div class="section" id="apid-counter">
+<h2>APID_counter<a class="headerlink" href="#apid-counter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="kr">public</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For the first time that an address choose to be a provider,
+this number is assigned to the address as the only ID of this
+address in physical layer where the numerical ID is embedded in
+SSID of the provder’s Wi-Fi AP.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The smallest unit is DataToken. There are 666,000,000,000 DataTokens supplied by this contract.</p>
+<p class="last">The following variables are of enum type.</p>
 </div>
 </div>
 <div class="section" id="role">
@@ -105,13 +128,24 @@ is 666,000,000,000.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">enum</span> <span class="nx">role</span> <span class="p">{</span><span class="nx">ISRECEIVER</span><span class="p">,</span> <span class="nx">ISPROVIDER</span><span class="p">,</span> <span class="nx">PAIRED</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>This variable defines three possible roles of contract users.</p>
-<p>Numerically, identification has values:</p>
+<p>This variable defines three possible roles of contract users.
+Numerically, identification has values:</p>
 <ul class="simple">
 <li>role.ISRECEIVER = 0</li>
 <li>role.ISPROVIDER = 1</li>
 <li>role.PAIRED = 2</li>
 </ul>
+</div>
+<div class="section" id="forcepaytype">
+<h2>forcePayType<a class="headerlink" href="#forcepaytype" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">enum</span> <span class="nx">forcePayType</span> <span class="p">{</span><span class="nx">FUSEOFPROVIDER</span><span class="p">,</span> <span class="nx">FUSEOFRECEIVER</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This variable is a flag to show whether a invoice is triggered by fuse conditions
+or initiated by the receiver’s call of function payAndLeave().</p>
+<p>Numerically, forcePayType has values:
+* forcePayType.FUSEOFPROVIDER = 0
+* forcePayType.FUSEOFRECEIVER = 1</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The following variables are of mapping type.</p>
@@ -146,8 +180,8 @@ of the provider. Then the unique numerical ID can be shown in SSID.</p>
 <li>Ethereum address behind a wireless AP could be protected by this APID. Currently, <a class="reference internal" href="#providerbehind">providerBehind</a> is publicly declared, but it’s high availability is not necessary.</li>
 </ul>
 </div>
-<div class="section" id="apid-counter">
-<h2>APID_counter<a class="headerlink" href="#apid-counter" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>APID_counter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -184,8 +218,8 @@ is the Ethereum address of the AP host.</p>
 <p>For each contract user of provider role, this mapping is important.</p>
 <ul class="simple">
 <li>When a receiver is linked to a provider by <span class="xref std std-ref">link</span> function, mapping value of the provider should be added by 1.</li>
-<li>When the receiver has successfully called function <a href="#id1"><span class="problematic" id="id2">`payAndLeave`_</span></a>, the value of numberOfUsers should be decreased by 1.</li>
-<li>Only when this mapping value is 0 which is the default value, can a provider call function <a href="#id3"><span class="problematic" id="id4">`surReceiver`_</span></a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
+<li>When the receiver has successfully called function <a href="#id2"><span class="problematic" id="id3">`payAndLeave`_</span></a>, the value of numberOfUsers should be decreased by 1.</li>
+<li>Only when this mapping value is 0 which is the default value, can a provider call function <a href="#id4"><span class="problematic" id="id5">`surReceiver`_</span></a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
 </ul>
 </div>
 <div class="section" id="providerof">
@@ -196,7 +230,7 @@ is the Ethereum address of the AP host.</p>
 <p>For each user of <em>role.PAIRED</em> who was of <em>role.ISRECEIVER</em> before a successful call of <span class="xref std std-ref">link</span> function,
 this mapping will be assigned by the Ethereum address of the linked provider.</p>
 <p>Only users being served has nonzero providerOf mapping.
-Value of this mapping will be reset to 0 after a successful call of <a href="#id5"><span class="problematic" id="id6">`payAndLeave`_</span></a>.</p>
+Value of this mapping will be reset to 0 after a successful call of <a href="#id6"><span class="problematic" id="id7">`payAndLeave`_</span></a>.</p>
 </div>
 <div class="section" id="priceof">
 <h2>priceOf<a class="headerlink" href="#priceof" title="Permalink to this headline">¶</a></h2>
@@ -212,7 +246,7 @@ function <span class="xref std std-ref">surProvider</span> will request a input 
 </pre></div>
 </div>
 <p>This is a mapping designed to verify data usage information to prevent cheating on both sides when issuing payment.</p>
-<p>A function <a href="#id7"><span class="problematic" id="id8">`_tolerance`_</span></a> is defined to check whether data usage record can reach a consensus.</p>
+<p>A function <a href="#id8"><span class="problematic" id="id9">`_tolerance`_</span></a> is defined to check whether data usage record can reach a consensus.</p>
 <p>If records from both provider and receiver agree with each other, the receiver will pay for the amount of data usage specified by the provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -240,13 +274,17 @@ function <span class="xref std std-ref">surProvider</span> will request a input 
 <li><a class="reference internal" href="#">Contract Variables</a><ul>
 <li><a class="reference internal" href="#owner">owner</a></li>
 <li><a class="reference internal" href="#tokenname">tokenName</a></li>
-<li><a class="reference internal" href="#decimals">decimals</a></li>
-<li><a class="reference internal" href="#initialsupply">initialSupply</a></li>
 <li><a class="reference internal" href="#totalsupply">totalSupply</a></li>
+<li><a class="reference internal" href="#reportperiod">reportPeriod</a></li>
+<li><a class="reference internal" href="#coherencetime">coherenceTime</a></li>
+<li><a class="reference internal" href="#tokenprice">tokenPrice</a></li>
+<li><a class="reference internal" href="#usagetolerance">usageTolerance</a></li>
+<li><a class="reference internal" href="#apid-counter">APID_counter</a></li>
 <li><a class="reference internal" href="#role">role</a></li>
+<li><a class="reference internal" href="#forcepaytype">forcePayType</a></li>
 <li><a class="reference internal" href="#identification">identification</a></li>
 <li><a class="reference internal" href="#apid">APID</a></li>
-<li><a class="reference internal" href="#apid-counter">APID_counter</a></li>
+<li><a class="reference internal" href="#id1">APID_counter</a></li>
 <li><a class="reference internal" href="#balance">balance</a></li>
 <li><a class="reference internal" href="#providerbehind">providerBehind</a></li>
 <li><a class="reference internal" href="#numberofusers">numberOfUsers</a></li>

@@ -6,7 +6,9 @@
 Welcome to DataTokenAlpha!
 ==========================
 
-This is the documentation of DataTokenAlpha.
+This is the smart contract (API) documentation of DataTokenAlpha (temporary project name). 
+The documentation is written presumably that 
+the reader has fundamental knowledge about Solidity programming.
 
 .. image:: logo.png
     :scale: 50 %
@@ -16,38 +18,40 @@ This is the documentation of DataTokenAlpha.
 Introduction
 ============
 
-This project aims to develop a scheme for peer-to-peer (P2P) cellular data sharing and to 
-construct a prototype Ethereum smart contract with respect to the scheme using Solidity which is 
-a blockchain oriented programming language. Smart contract DataToken-Alpha (latest version 0.3.2) 
-as the scheme implementation has been under development. Hence, DataToken, a token of Ether 
-(Intrinsic Cryptocurrency of Ethereum) is created for data service transfer recording.The uniqueness 
-of such implementation is that all the information held by the contract is protected by Ethereum 
-network based on blockchain technology from computational hacking.
-
-The implementation is started from analyzing behaviors that a ledger system is expected to have. 
-By design, the contract is firstly able to offer and manage token like a bank in real world 
-and secondly, it is capable to work as a cellular data service trade centre where users of such 
-contract are able to transfer Internet access in terms of cellular data usage and token. 
-Solidity code thud is used to implement necessary features with respect to the behaviors mentioned above. 
-Finally, a prototype of DataToken-Alpha for autonomous data trading is ready for further polish 
-in the next semester when this project will focus on upgrading DataToken-Alpha to be a practically 
-deployable smart contract as close as possible.
+This project, which is developed in Solidity language, aims to implement a scheme (backend service, or API) for peer-to-peer (P2P) cellular data sharing.
+Users of this service can use various implementations of frontend (client) softwares to interact with this smart contract on Ethereum.
+The contract, DataTokenAlpha (temporary project name) works as a highly trustable automated ledger rather than a third-party owned
+by someone else who is probably malicious. Users can act as Wi-Fi service provider to share their cellular data or 
+as service receiver to pay for the Wi-Fi services in physical layer; their behaviors, for instance, using data, checking out and invoicing
+can be reported by the frontend software they use. By carefully designing the backend contract, malicious (dishonest) behaviors will
+lead to extremely inconvenient using experience for both provider type and receiver type of users, therefore, frontend need to behave to some extent.
+As a ledger, DataTokenAlpha need a numerical base to record data trading, 
+hence, DataToken (temporary name of certain token), a token offered by smart contract DataTokenAlpha is created.
+Users of the contract can buy DataToken from the owner of the smart contract with Ether. 
+Then, users are able to exchange DataToken with Wi-Fi service or the other way round with other users in real world.
+The uniqueness of such implementation is that all information is held immutable by Ethereum 
+network based on blockchain technology from brutal force (computational) hacking of current generation computers.
+As a result, DataTokenAlpha runs on Ethereum network as a backend is decentralized and more trustable than 
+centralized backend services on centralized third-parties.
 
 Terms and Conventions
 =====================
-In the context of DataTokenAlpha contract, each Ethereum address 
+In the context of DataTokenAlpha contract, each Ethereum address (user) 
 has three possible roles:
 
-* Receiver (Default role)
-* Provider (A receiver can switch user role as provider)
-* Paired (A receiver who is using AP service of a provider)
+* role.isReceiver (Default role assigned to all Ethereum addresses)
+* role.isProvider (A receiver can switch user role as provider)
+* role.Paired (A receiver who has successfully linked to a provider 
+so that the frontend of this receiver should be able to connect the AP provided by certain provider)
 
 .. note::
-    Both "receiver" and "paired" are referred to as "receiver" in the following documentation. User `identification`_ value will distinguish paired receiver from unpaired receiver.
+    Both "receiver" and "paired" are referred to as "receiver" in the following documentation.
+    The term "paired" appears when it is necessary to clarify whether a receiver has linked to the service of a provider in backend.
+    User `identification`_ value will distinguish paired receiver from unpaired receiver.
 
 Camel case names for variable and function names.
 Internal functions all start with an underscore _.
-Input parameter of functions starts with an underscore _.
+Input parameters of functions all start with an underscore _.
 
 .. toctree::
    :maxdepth: 2

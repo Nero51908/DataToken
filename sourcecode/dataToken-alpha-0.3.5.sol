@@ -10,19 +10,15 @@ contract DataTokenAlpha {
     //
     string public tokenSymbol = "DAT";
     //
-    uint public decimals = 9;
-    //
-    uint256 initialSupply = 666;// GDAT
-    //the possible bigest number of coins (including non-integer valued coins)i.e. number of coins express by the smallest unit of this token
-    uint256 public totalSupply = initialSupply * 10 ** decimals;// DAT
+    uint256 public totalSupply = 666 * 10 ** 9;// DAT
 
     /**
     *Tunable values
     *can be changed by owner's call of correponding functions
     */
-    //data usage information should be reported less than every 30 sec. This value can be changed by 
+    //data usage information should be reported less than every 30 sec. This value can be changed. 
     uint256 public reportPeriod = 30; // sec
-    //within such time differnece, two data usage report are considered as "synchronized"
+    //within such time difference, two data usage report are considered as "synchronized"
     uint256 public coherenceTime = 60; // sec
     //DataToken Price
     uint256 public tokenPrice = 10 ** 9;// wei/DAT
@@ -61,7 +57,8 @@ contract DataTokenAlpha {
     mapping (address => mapping (address => uint256)) public frontTimestamp;
     // agreement that determines how many token to pay for function payAndLeave()
     // agreement has no direction, it is an agreed value of both provider and receiver
-    mapping (address => mapping (address => uint256)) public agreement;//agreed usage that can be used in an invoice, agreement[provideraddress][receiveraddress]
+    // agreed usage that can be used in an invoice, agreement[provideraddress][receiveraddress]
+    mapping (address => mapping (address => uint256)) public agreement;
     //provider's pocket// used in link() function
     //receiver has a 'ticket with number' and provider knows the number since a receiver connects to it
     //when a receiver try to connect the provider
@@ -137,7 +134,7 @@ contract DataTokenAlpha {
     */
     function contractBalance() 
     public
-    constant
+    view
     returns(uint256 value)
     {
         value = address(this).balance;
@@ -231,7 +228,6 @@ contract DataTokenAlpha {
     */
     function _sur(address _user, role _oldrole, role _newrole)
     internal
-    returns(bool success)
     {
         // safety concern
         require(identification[_user] == _oldrole);
@@ -314,8 +310,8 @@ contract DataTokenAlpha {
         //estimated max data usage in MB
         uint256 temp_balance = balance[_wallet];
         address temp_address = providerBehind[_APID];
-        uint256 temp_price =  priceOf[temp_address];
-        valid = temp_balance/temp_price> 20;
+        uint256 temp_price = priceOf[temp_address];
+        valid = temp_balance/temp_price > 20;
         return valid;
     }
 
@@ -460,7 +456,9 @@ contract DataTokenAlpha {
     {
         // fuse called by provider once and by linked user onece is called one "match".
         // require:  caller is provider,                          _user is linked to caller,          usage report never decrease,                count must wait for it's match
-        require(identification[msg.sender] == role.ISPROVIDER && msg.sender == providerOf[_user] && _usage >= usageOf[msg.sender][_user] && reportCount[msg.sender][_user] <= reportCount[_user][msg.sender]);
+        require(identification[msg.sender] == role.ISPROVIDER && msg.sender == providerOf[_user]);
+        // && (break into two parts because of limitation of characters in each line of code) 
+        require(_usage >= usageOf[msg.sender][_user] && reportCount[msg.sender][_user] <= reportCount[_user][msg.sender]);
         // if fuse burns, which is caused by new datausage report from provider
         // new usage log
         usageOf[msg.sender][_user] = _usage;
@@ -496,11 +494,13 @@ contract DataTokenAlpha {
     returns (bool fuseBurn)
     {     
         // requires: caller is paired user (no need to input provider), usage report will never decrease,             wait for a match if this report count is curretly leading
-        require(identification[msg.sender] == role.PAIRED && _usage >= usageOf[msg.sender][providerOf[msg.sender]] && reportCount[msg.sender][providerOf[msg.sender]] <= reportCount[providerOf[msg.sender]][msg.sender]);
+        require(identification[msg.sender] == role.PAIRED && _usage >= usageOf[msg.sender][providerOf[msg.sender]]);
+        // && 
+        require(reportCount[msg.sender][providerOf[msg.sender]] <= reportCount[providerOf[msg.sender]][msg.sender]);
         // new usage log
         usageOf[msg.sender][providerOf[msg.sender]] = _usage;
         reportCount[msg.sender][providerOf[msg.sender]] += 1;
-        frontTimestamp[msg.sender][providerOf[msg.sender]] =  _timestamp;
+        frontTimestamp[msg.sender][providerOf[msg.sender]] = _timestamp;
         // trying to make an agreement
         if (reportCount[msg.sender][providerOf[msg.sender]] == reportCount[providerOf[msg.sender]][msg.sender]) {
             if ((_timestamp - frontTimestamp[providerOf[msg.sender]][msg.sender])>coherenceTime) {

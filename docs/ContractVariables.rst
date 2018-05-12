@@ -1,62 +1,85 @@
 Contract Variables
 ==================
-
-.. note::
-
-    Contracts variables are declared at the beginning of solidity contract body.
-    In this section, variable types and availability are indicated by source code definition 
-    below each mentioned variables.
-
+Contracts variables are declared at the beginning of solidity contract body.
+In this section, variable types and availability are indicated by source code definition 
+below each mentioned variables.
 
 owner
 -----
 .. code-block:: javascript
-    
+
     address owner;
 
-The message sender address of the transaction that has initiated this 
-DataTokenAlpha contract is stored in this variable.
-
-All initial supply tokens are assigned to this address.
-That is, all usable tokens are sold buy owner address.
+Owner of the contract. It is the Ethereum address which is 
+the message sender of the transaction that has successfully deployed 
+DataTokenAlpha contract on Ethereum network.
+Total supply (666,000,000,000 tokens) is assigned to this address initially.
+That is, all usable tokens of this contract in Ethereum network are sold by this owner address.
 
 tokenName
 ---------
 .. code-block:: javascript
- 
-    
-    string public tokenName = "dataToken";
 
-The name of token defined by this contract is dataToken.
+    string public tokenName = "DataToken";
 
-decimals
---------
-.. code-block:: javascript
-
-    uint public decimals = 9;
-
-This token will support 9 digits after decimal point.
-The number of 9 actually defines the smallest operable unit of each token.
-
-initialSupply
--------------
-.. code-block:: javascript
-
-    uint256 initialSupply = 666;
-
-There will be 666 usable tokens in this contract.
+The name of token defined by this contract.
+In current version, the contract is named "DataToken".
 
 totalSupply
 -----------
 .. code-block:: javascript
 
-    uint256 totalSupply = initialSupply * 10 ** decimals;
+    uint256 public totalSupply = 666 * 10 ** 9;
 
-Number of tokens in terms of the smallest unit 
-is 666,000,000,000.
+Total number of tokens is 666,000,000,000. Amount of Tokens only have discrete integer values.
+
+reportPeriod
+------------
+.. code-block:: javascript
+
+    uint256 public reportPeriod = 30; // sec
+
+Data usage information should be reported from frontend software 
+less than every 30 sec. This value can be changed by function tuner()
+
+coherenceTime
+-------------
+.. code-block:: javascript
+
+    uint256 public coherenceTime = 60; // sec
+
+Within such time difference, two data usage report are considered as "synchronized".
+
+tokenPrice
+----------
+.. code-block:: javascript
+
+    uint256 public tokenPrice = 10 ** 9;// wei/DAT
+
+Price in wei to purchase each DataToken from the owner.
+
+usageTolerance
+--------------
+.. code-block:: javascript
+
+    uint256 public usageTolerance = 10;// MB 
+
+Maximum allowed difference between frontend reported data usage 
+from the service provider and the receiver.
+
+APID_counter
+------------
+.. code-block:: javascript
+
+    uint256 public APID_counter = 1;
+
+For the first time that an address choose to be a provider, 
+this number is assigned to the address as the only ID of this 
+address in physical layer where the numerical ID is embedded in 
+SSID of the provder's Wi-Fi AP.  
 
 .. note::
-    The smallest unit is DataToken. There are 666,000,000,000 DataTokens supplied by this contract.
+    The following variables are of enum type. 
 
 role
 ----
@@ -65,12 +88,24 @@ role
     enum role {ISRECEIVER, ISPROVIDER, PAIRED}
 
 This variable defines three possible roles of contract users.
-
 Numerically, identification has values:
 
 * role.ISRECEIVER = 0
 * role.ISPROVIDER = 1
 * role.PAIRED = 2
+
+forcePayType
+------------
+.. code-block:: javascript
+
+    enum forcePayType {FUSEOFPROVIDER, FUSEOFRECEIVER}
+
+This variable is a flag to show whether a invoice is triggered by fuse conditions
+or initiated by the receiver's call of function payAndLeave().
+
+Numerically, forcePayType has values:
+* forcePayType.FUSEOFPROVIDER = 0
+* forcePayType.FUSEOFRECEIVER = 1 
 
 .. note::
     The following variables are of mapping type. 
