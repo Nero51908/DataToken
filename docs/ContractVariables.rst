@@ -147,19 +147,6 @@ There are two reasons for this mapping:
 
 * Ethereum address behind a wireless AP could be protected by this APID. Currently, `providerBehind`_ is publicly declared, but it's high availability is not necessary. 
 
-APID_counter
-------------
-.. code-block:: javascript
-
-    uint256 APID_counter = 1;
-
-This number will be assigned to a newly registered provider.
-
-If a successful call of :ref:`surProvider` is initiated by 
-a user without :ref:`APID' value,
-APID_counter will be assigned to the new provider's `APID` mapping,
-and the value of APID_counter will be updated by +1 as :ref:`surProvider` implemented.
-
 balance
 -------
 .. code-block:: javascript
@@ -234,12 +221,34 @@ If records from both provider and receiver agree with each other, the receiver w
 .. warning::
     What will happen if a consensus is not reached has not been defined yet!
 
-passwd
-------
+reportCount
+-----------
 .. code-block:: javascript
 
-    mapping (address => string) internal passwd;
+    mapping (address => mapping (address => uint256)) public reportCount;
 
-This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.
+This count of data usage report is directional.
+The first address submits the report and the second is the direction of 
+it's connected address.
 
-User will be require to input a password when function :ref:`surProvider` is called.
+frontTimestamp
+--------------
+.. code-block:: javascript
+
+    mapping (address => mapping (address => uint256)) public frontTimestamp;
+
+agreement
+---------
+.. code-block:: javascript
+
+    mapping (address => mapping (address => uint256)) public agreement;
+
+providerPocket
+--------------
+.. code-block:: javascript
+
+    mapping (address => mapping(address => bytes32)) internal providerPocket;    
+
+The place to store the key (provided by service receiver) 
+that enables frontend receiver identity verification at provider's front end in order to authenticate 
+Internet access.
