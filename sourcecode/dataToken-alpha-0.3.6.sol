@@ -33,7 +33,8 @@ contract DataTokenAlpha {
     //ethereum users can be receiver or provider. By defualt they are all receivers. by a successful call of surProvider, a user can be recognized as a provider.
     enum role {ISRECEIVER, ISPROVIDER, PAIRED}
     //spsecify payment type;
-    enum forcePayType {FUSEOFPROVIDER, FUSEOFRECEIVER, FUSEOFEXCEEDING}//Exceeding means receiver reports a data usage value that is equivalent to the maximum payble value. 
+    //Exceeding means receiver reports a data usage value that is equivalent to the maximum payble value. 
+    enum forcePayType {FUSEOFPROVIDER, FUSEOFRECEIVER, FUSEOFEXCEEDING}
     //token balance of each ethereum account. counted in totalSupply
     mapping (address => uint256) public balance;
     //role of an account, by default is role.ISRECEIVER
@@ -161,24 +162,28 @@ contract DataTokenAlpha {
     internal
     returns(bool success)
     {
-        //transfer to 0x0 means destroy such amount of token.
+        // transfer to 0x0 means destroy such amount of token.
         require(_to != 0x0);
-        //check if the sender has enough token. 
+        // temperary place holder
+        uint256 temp_value = 0;
+        // check if the sender has enough token. 
         if (balance[_from] <= _value)
         {
-            _value = balance[_from];//not enough token to transfer but still transfer all token balance to address _to
+            temp_value = balance[_from];// not enough token to transfer but still transfer all token balance to address _to
+        } else {
+            temp_value = _value;
         }
-        //check if balance of the recipient overflows (don't want overflow)
-        require(balance[_to] + _value >= balance[_to]);
-        //take a snapshot on total balance of both sides for assert check
+        // check if balance of the recipient overflows (don't want overflow)
+        require(balance[_to] + temp_value >= balance[_to]);
+        // take a snapshot on total balance of both sides for assert check
         uint256 totalBalance = balance[_from] + balance[_to];
         //transfer operation
-        balance[_from] -= _value;
-        balance[_to] += _value;
+        balance[_from] -= temp_value;
+        balance[_to] += temp_value;
         //assert function is used to check bugs during transfer operation. assert(false) will throw such tranfer.
         assert(balance[_from] + balance[_to] == totalBalance);
         // emit event
-        emit LogTransfer(_from, _to, _value);
+        emit LogTransfer(_from, _to, temp_value);
         return true;
     }
 
@@ -434,11 +439,11 @@ contract DataTokenAlpha {
             //pay as receiver's record by calling this NOTE that the _user is always the receiver (PAIRED)
             _transfer(_user,providerOf[_user], _cashier(usageOf[_user][providerOf[_user]],priceOf[providerOf[_user]]));
         } 
-        if (_type == forecePayType.FUSEOFRECEIVER) { //_type == forcePayType.FUSEOFRECEIVER
+        if (_type == forcePayType.FUSEOFRECEIVER) { //_type == forcePayType.FUSEOFRECEIVER
             //pay as provider's record by calling this NOTE that the _user is always the receiver (PAIRED)
             _transfer(_user,providerOf[_user], _cashier(usageOf[providerOf[_user]][_user],priceOf[providerOf[_user]]));
         } else {
-            _transfer(_user,providerOf[_user], _cashier(_affordabledata(_user,providerOf[_user]),priceOf[providerOf[_user]]));
+            _transfer(_user,providerOf[_user], _cashier(_affordableData(_user,APID[providerOf[_user]]),priceOf[providerOf[_user]]));
         }
         
     }
@@ -509,9 +514,9 @@ contract DataTokenAlpha {
         reportCount[msg.sender][providerOf[msg.sender]] += 1;
         frontTimestamp[msg.sender][providerOf[msg.sender]] = _timestamp;
         // if self recorded usage exeeds affordable amount of data
-        if (_usage >= _affordabledata(msg.sender,providerOf[msg.sender])) {
-                _forceInvoice(msg.sender,forcePayType.FUSEOFEXCEEDING);
-                return true;
+        if (_usage >= _affordableData(msg.sender,APID[providerOf[msg.sender]])) {
+            _forceInvoice(msg.sender,forcePayType.FUSEOFEXCEEDING);
+            return true;
         }
         // trying to make an agreement
         if (reportCount[msg.sender][providerOf[msg.sender]] == reportCount[providerOf[msg.sender]][msg.sender]) {
