@@ -1,0 +1,78 @@
+Demonstration Script
+====================
+
+0. Initialization: Contract Deployment and Demonstration of suProvider()
+------------------------------------------------------------------------
+Deploy contract as 0xca35b7d915458ef540ade6068dfe2f44e8fa733c.
+Owner of the contract: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+Token Balance of 0xca35b7d915458ef540ade6068dfe2f44e8fa733c is
+666,000,000,000 
+provider: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1 Price 100 (DAT/MB)
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c APID: 2 Price 200 (DAT/MB)
+provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)
+
+1. Information Query Demonstration:
+-----------------------------------
+Check APID of the three providers
+Check provider address behind APID using just APID input
+Check service pricing of each provider using address input
+
+2. Demonstration of suReceiver()
+--------------------------------
+0xca35b7d915458ef540ade6068dfe2f44e8fa733c call suReceiver() function.
+user state update:
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1
+    All information about 0xca35b7d915458ef540ade6068dfe2f44e8fa733c as a
+    provider is kept intact.
+
+3. Demonstration of link()
+--------------------------
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+call link()
+to try to link provider of APID: 2
+with input password seed( a PIN): 12345
+Show the returned password from link() function
+
+4. Demonstration of doorKeeper()
+--------------------------------
+call doorKeeper() as 
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+Input 
+knocker as receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+Input password as what has been returned from link()
+doorKeeper() should tell
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+that the receiver 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+is valid to connect to frontend AP.
+
+5. Demonstration of fuse() from Receiver's perspective
+------------------------------------------------------
+call fuse() as 
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+to report 511 MB data usage
+
+6. Demonstration of fuse() from Provider's perspective
+------------------------------------------------------
+call fuse() as
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+to report 511 MB data usage from 
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+Check agreement log.
+1st position:
+0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+2nd position:
+0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+The agreement should be 511 MB.
+
+7. Demonstration of payAndLeave()   
+---------------------------------
+Check provider's balance: 
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+has 0 token balance.
+call payAndLeave() function as 
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+51100 DAT should be paid.
+After the payment,
+Check provider's balance: 
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+has 51100 of token balance.

@@ -23,6 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Event" href="Event.html" />
     <link rel="prev" title="Internal Functions" href="InternalFunctions.html" /> 
   </head>
   <body>
@@ -32,6 +33,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Event.html" title="Event"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="InternalFunctions.html" title="Internal Functions"
              accesskey="P">previous</a> |</li>
@@ -101,7 +105,7 @@ the exchange rule that 1 DataToken = 1,000,000,000 wei = 1 Gwei.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">surProvider</span> <span class="p">(</span><span class="nx">uint256</span> <span class="nx">_price</span><span class="p">,</span> <span class="nx">string</span> <span class="nx">_passwd</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This function can only be called by contract users with <a href="#id2"><span class="problematic" id="id3">`identification`_</span></a> role.ISRECEIVER.
+<p>This function can only be called by contract users with <a href="#id1"><span class="problematic" id="id2">`identification`_</span></a> role.ISRECEIVER.
 On success, <em>role.ISPROVIDER</em> will be assigned to identification mapping of the message sender.</p>
 </div>
 <div class="section" id="surreceiver">
@@ -111,7 +115,7 @@ On success, <em>role.ISPROVIDER</em> will be assigned to identification mapping 
 </div>
 <p>When a provider want to switch back to be a receiver, this function will be there for help.
 The provider will be required to have no linked receiver who is using wireless AP under the name of this provider.
-On success, <em>role.ISRECEIVER</em> will be assigned to <a href="#id4"><span class="problematic" id="id5">`identification`_</span></a> mapping of the message sender.</p>
+On success, <em>role.ISRECEIVER</em> will be assigned to <a href="#id3"><span class="problematic" id="id4">`identification`_</span></a> mapping of the message sender.</p>
 </div>
 <div class="section" id="link">
 <h2>link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
@@ -130,7 +134,7 @@ This function will pair the message sender with the designated provider.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">usageRecord</span> <span class="p">(</span><span class="nx">address</span> <span class="nx">_theOtherSide</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">_usage</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This function assigns value of <a href="#id6"><span class="problematic" id="id7">`usageOf`_</span></a> in terms of MB.</p>
+<p>This function assigns value of <a href="#id5"><span class="problematic" id="id6">`usageOf`_</span></a> in terms of MB.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">There should be some timing and data refreshing features to make the mapped data up to date, however, this feature is not implemented within this version of contract.</p>
@@ -142,27 +146,6 @@ This function will pair the message sender with the designated provider.</p>
 </pre></div>
 </div>
 <p>When a receiver wish to leave it’s wireless AP, it can call this function to issue a payment and disconnect from the provider.</p>
-</div>
-</div>
-<div class="section" id="event">
-<h1>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h1>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Event is used as log when important information of the contract is changed, for example, user balance changed as a result of transfer.</p>
-</div>
-<div class="section" id="id1">
-<h2>Transfer<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">_to</span><span class="p">,</span> <span class="nx">uint256</span> <span class="nx">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Adding this event to the end of a function that issues token transfers will trigger a return message about the transfer.</p>
-</div>
-<div class="section" id="sur">
-<h2>sur<a class="headerlink" href="#sur" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">event</span> <span class="nx">Sur</span><span class="p">(</span><span class="nx">address</span> <span class="nx">_user</span><span class="p">,</span> <span class="nx">role</span> <span class="nx">_newrole</span><span class="p">,</span> <span class="nx">bool</span> <span class="nx">success</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>When a user switch user role, this event will return a message indicating the original user role, the intended user role and whether the operation has succeeded.</p>
 </div>
 </div>
 
@@ -185,16 +168,14 @@ This function will pair the message sender with the designated provider.</p>
 <li><a class="reference internal" href="#payandleave">payAndLeave</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#event">Event</a><ul>
-<li><a class="reference internal" href="#id1">Transfer</a></li>
-<li><a class="reference internal" href="#sur">sur</a></li>
-</ul>
-</li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="InternalFunctions.html"
                         title="previous chapter">Internal Functions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Event.html"
+                        title="next chapter">Event</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -222,6 +203,9 @@ This function will pair the message sender with the designated provider.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="Event.html" title="Event"
+             >next</a> |</li>
         <li class="right" >
           <a href="InternalFunctions.html" title="Internal Functions"
              >previous</a> |</li>

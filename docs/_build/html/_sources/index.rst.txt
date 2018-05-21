@@ -60,3 +60,5 @@ Input parameters of functions all start with an underscore _.
    ContractVariables
    InternalFunctions
    PublicFunctions
+   Event
+   DemoScript

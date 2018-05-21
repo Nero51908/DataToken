@@ -180,17 +180,6 @@ of the provider. Then the unique numerical ID can be shown in SSID.</p>
 <li>Ethereum address behind a wireless AP could be protected by this APID. Currently, <a class="reference internal" href="#providerbehind">providerBehind</a> is publicly declared, but it’s high availability is not necessary.</li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>APID_counter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">uint256</span> <span class="nx">APID_counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This number will be assigned to a newly registered provider.</p>
-<p>If a successful call of <span class="xref std std-ref">surProvider</span> is initiated by
-a user without <span class="xref std std-ref">APID’ value,
-APID_counter will be assigned to the new provider’s `APID</span> mapping,
-and the value of APID_counter will be updated by +1 as <span class="xref std std-ref">surProvider</span> implemented.</p>
-</div>
 <div class="section" id="balance">
 <h2>balance<a class="headerlink" href="#balance" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">balance</span><span class="p">;</span>
@@ -218,8 +207,8 @@ is the Ethereum address of the AP host.</p>
 <p>For each contract user of provider role, this mapping is important.</p>
 <ul class="simple">
 <li>When a receiver is linked to a provider by <span class="xref std std-ref">link</span> function, mapping value of the provider should be added by 1.</li>
-<li>When the receiver has successfully called function <a href="#id2"><span class="problematic" id="id3">`payAndLeave`_</span></a>, the value of numberOfUsers should be decreased by 1.</li>
-<li>Only when this mapping value is 0 which is the default value, can a provider call function <a href="#id4"><span class="problematic" id="id5">`surReceiver`_</span></a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
+<li>When the receiver has successfully called function <a href="#id1"><span class="problematic" id="id2">`payAndLeave`_</span></a>, the value of numberOfUsers should be decreased by 1.</li>
+<li>Only when this mapping value is 0 which is the default value, can a provider call function <a href="#id3"><span class="problematic" id="id4">`surReceiver`_</span></a> to switch user role back to <em>role.ISRECEIVER</em>.</li>
 </ul>
 </div>
 <div class="section" id="providerof">
@@ -230,7 +219,7 @@ is the Ethereum address of the AP host.</p>
 <p>For each user of <em>role.PAIRED</em> who was of <em>role.ISRECEIVER</em> before a successful call of <span class="xref std std-ref">link</span> function,
 this mapping will be assigned by the Ethereum address of the linked provider.</p>
 <p>Only users being served has nonzero providerOf mapping.
-Value of this mapping will be reset to 0 after a successful call of <a href="#id6"><span class="problematic" id="id7">`payAndLeave`_</span></a>.</p>
+Value of this mapping will be reset to 0 after a successful call of <a href="#id5"><span class="problematic" id="id6">`payAndLeave`_</span></a>.</p>
 </div>
 <div class="section" id="priceof">
 <h2>priceOf<a class="headerlink" href="#priceof" title="Permalink to this headline">¶</a></h2>
@@ -246,20 +235,42 @@ function <span class="xref std std-ref">surProvider</span> will request a input 
 </pre></div>
 </div>
 <p>This is a mapping designed to verify data usage information to prevent cheating on both sides when issuing payment.</p>
-<p>A function <a href="#id8"><span class="problematic" id="id9">`_tolerance`_</span></a> is defined to check whether data usage record can reach a consensus.</p>
+<p>A function <a href="#id7"><span class="problematic" id="id8">`_tolerance`_</span></a> is defined to check whether data usage record can reach a consensus.</p>
 <p>If records from both provider and receiver agree with each other, the receiver will pay for the amount of data usage specified by the provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">What will happen if a consensus is not reached has not been defined yet!</p>
 </div>
 </div>
-<div class="section" id="passwd">
-<h2>passwd<a class="headerlink" href="#passwd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">string</span><span class="p">)</span> <span class="nx">internal</span> <span class="nx">passwd</span><span class="p">;</span>
+<div class="section" id="reportcount">
+<h2>reportCount<a class="headerlink" href="#reportcount" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">))</span> <span class="kr">public</span> <span class="nx">reportCount</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>This mapping is where provider can store their designated key to generate dynamic PIN for wireless AP authentication.</p>
-<p>User will be require to input a password when function <span class="xref std std-ref">surProvider</span> is called.</p>
+<p>This count of data usage report is directional.
+The first address submits the report and the second is the direction of
+it’s connected address.</p>
+</div>
+<div class="section" id="fronttimestamp">
+<h2>frontTimestamp<a class="headerlink" href="#fronttimestamp" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">))</span> <span class="kr">public</span> <span class="nx">frontTimestamp</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="agreement">
+<h2>agreement<a class="headerlink" href="#agreement" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">uint256</span><span class="p">))</span> <span class="kr">public</span> <span class="nx">agreement</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="providerpocket">
+<h2>providerPocket<a class="headerlink" href="#providerpocket" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span> <span class="p">=&gt;</span> <span class="nx">bytes32</span><span class="p">))</span> <span class="nx">internal</span> <span class="nx">providerPocket</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The place to store the key (provided by service receiver)
+that enables frontend receiver identity verification at provider’s front end in order to authenticate
+Internet access.</p>
 </div>
 </div>
 
@@ -284,14 +295,16 @@ function <span class="xref std std-ref">surProvider</span> will request a input 
 <li><a class="reference internal" href="#forcepaytype">forcePayType</a></li>
 <li><a class="reference internal" href="#identification">identification</a></li>
 <li><a class="reference internal" href="#apid">APID</a></li>
-<li><a class="reference internal" href="#id1">APID_counter</a></li>
 <li><a class="reference internal" href="#balance">balance</a></li>
 <li><a class="reference internal" href="#providerbehind">providerBehind</a></li>
 <li><a class="reference internal" href="#numberofusers">numberOfUsers</a></li>
 <li><a class="reference internal" href="#providerof">providerOf</a></li>
 <li><a class="reference internal" href="#priceof">priceOf</a></li>
 <li><a class="reference internal" href="#usageof">usageOf</a></li>
-<li><a class="reference internal" href="#passwd">passwd</a></li>
+<li><a class="reference internal" href="#reportcount">reportCount</a></li>
+<li><a class="reference internal" href="#fronttimestamp">frontTimestamp</a></li>
+<li><a class="reference internal" href="#agreement">agreement</a></li>
+<li><a class="reference internal" href="#providerpocket">providerPocket</a></li>
 </ul>
 </li>
 </ul>

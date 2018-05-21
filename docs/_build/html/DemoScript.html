@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Demonstration Script &#8212; DataTokenAlpha  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Public Functions" href="PublicFunctions.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="PublicFunctions.html" title="Public Functions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="demonstration-script">
+<h1>Demonstration Script<a class="headerlink" href="#demonstration-script" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="initialization-contract-deployment-and-demonstration-of-suprovider">
+<h2>0. Initialization: Contract Deployment and Demonstration of suProvider()<a class="headerlink" href="#initialization-contract-deployment-and-demonstration-of-suprovider" title="Permalink to this headline">¶</a></h2>
+<p>Deploy contract as 0xca35b7d915458ef540ade6068dfe2f44e8fa733c.
+Owner of the contract: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+Token Balance of 0xca35b7d915458ef540ade6068dfe2f44e8fa733c is
+666,000,000,000
+provider: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1 Price 100 (DAT/MB)
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c APID: 2 Price 200 (DAT/MB)
+provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)</p>
+</div>
+<div class="section" id="information-query-demonstration">
+<h2>1. Information Query Demonstration:<a class="headerlink" href="#information-query-demonstration" title="Permalink to this headline">¶</a></h2>
+<p>Check APID of the three providers
+Check provider address behind APID using just APID input
+Check service pricing of each provider using address input</p>
+</div>
+<div class="section" id="demonstration-of-sureceiver">
+<h2>2. Demonstration of suReceiver()<a class="headerlink" href="#demonstration-of-sureceiver" title="Permalink to this headline">¶</a></h2>
+<p>0xca35b7d915458ef540ade6068dfe2f44e8fa733c call suReceiver() function.
+user state update:
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1</p>
+<blockquote>
+<div>All information about 0xca35b7d915458ef540ade6068dfe2f44e8fa733c as a
+provider is kept intact.</div></blockquote>
+</div>
+<div class="section" id="demonstration-of-link">
+<h2>3. Demonstration of link()<a class="headerlink" href="#demonstration-of-link" title="Permalink to this headline">¶</a></h2>
+<p>receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+call link()
+to try to link provider of APID: 2
+with input password seed( a PIN): 12345
+Show the returned password from link() function</p>
+</div>
+<div class="section" id="demonstration-of-doorkeeper">
+<h2>4. Demonstration of doorKeeper()<a class="headerlink" href="#demonstration-of-doorkeeper" title="Permalink to this headline">¶</a></h2>
+<p>call doorKeeper() as
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+Input
+knocker as receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+Input password as what has been returned from link()
+doorKeeper() should tell
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+that the receiver 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+is valid to connect to frontend AP.</p>
+</div>
+<div class="section" id="demonstration-of-fuse-from-receiver-s-perspective">
+<h2>5. Demonstration of fuse() from Receiver’s perspective<a class="headerlink" href="#demonstration-of-fuse-from-receiver-s-perspective" title="Permalink to this headline">¶</a></h2>
+<p>call fuse() as
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+to report 511 MB data usage</p>
+</div>
+<div class="section" id="demonstration-of-fuse-from-provider-s-perspective">
+<h2>6. Demonstration of fuse() from Provider’s perspective<a class="headerlink" href="#demonstration-of-fuse-from-provider-s-perspective" title="Permalink to this headline">¶</a></h2>
+<p>call fuse() as
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+to report 511 MB data usage from
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+Check agreement log.
+1st position:
+0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+2nd position:
+0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+The agreement should be 511 MB.</p>
+</div>
+<div class="section" id="demonstration-of-payandleave">
+<h2>7. Demonstration of payAndLeave()<a class="headerlink" href="#demonstration-of-payandleave" title="Permalink to this headline">¶</a></h2>
+<p>Check provider’s balance:
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+has 0 token balance.
+call payAndLeave() function as
+receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
+51100 DAT should be paid.
+After the payment,
+Check provider’s balance:
+provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
+has 51100 of token balance.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Demonstration Script</a><ul>
+<li><a class="reference internal" href="#initialization-contract-deployment-and-demonstration-of-suprovider">0. Initialization: Contract Deployment and Demonstration of suProvider()</a></li>
+<li><a class="reference internal" href="#information-query-demonstration">1. Information Query Demonstration:</a></li>
+<li><a class="reference internal" href="#demonstration-of-sureceiver">2. Demonstration of suReceiver()</a></li>
+<li><a class="reference internal" href="#demonstration-of-link">3. Demonstration of link()</a></li>
+<li><a class="reference internal" href="#demonstration-of-doorkeeper">4. Demonstration of doorKeeper()</a></li>
+<li><a class="reference internal" href="#demonstration-of-fuse-from-receiver-s-perspective">5. Demonstration of fuse() from Receiver’s perspective</a></li>
+<li><a class="reference internal" href="#demonstration-of-fuse-from-provider-s-perspective">6. Demonstration of fuse() from Provider’s perspective</a></li>
+<li><a class="reference internal" href="#demonstration-of-payandleave">7. Demonstration of payAndLeave()</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="PublicFunctions.html"
+                        title="previous chapter">Public Functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/DemoScript.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="PublicFunctions.html" title="Public Functions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DataTokenAlpha  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Zhuoqun Liu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
