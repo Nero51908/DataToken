@@ -81,7 +81,7 @@ provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)
 
 5. Demonstration of fuse() from Receiver's perspective
 ------------------------------------------------------
-**Call fuse() as **
+**Call fuse() as**
     receiver::
     
      0xca35b7d915458ef540ade6068dfe2f44e8fa733c
