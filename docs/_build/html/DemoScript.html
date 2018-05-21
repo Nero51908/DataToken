@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Public Functions" href="PublicFunctions.html" /> 
+    <link rel="prev" title="Event" href="Event.html" /> 
   </head>
   <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -33,7 +33,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="PublicFunctions.html" title="Public Functions"
+          <a href="Event.html" title="Event"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">DataTokenAlpha  documentation</a> &#187;</li> 
       </ul>
@@ -48,80 +48,147 @@
 <h1>Demonstration Script<a class="headerlink" href="#demonstration-script" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="initialization-contract-deployment-and-demonstration-of-suprovider">
 <h2>0. Initialization: Contract Deployment and Demonstration of suProvider()<a class="headerlink" href="#initialization-contract-deployment-and-demonstration-of-suprovider" title="Permalink to this headline">¶</a></h2>
-<p>Deploy contract as 0xca35b7d915458ef540ade6068dfe2f44e8fa733c.
-Owner of the contract: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-Token Balance of 0xca35b7d915458ef540ade6068dfe2f44e8fa733c is
-666,000,000,000
-provider: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1 Price 100 (DAT/MB)
-provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c APID: 2 Price 200 (DAT/MB)
-provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)</p>
+<p><strong>Deploy contract as 0xca35b7d915458ef540ade6068dfe2f44e8fa733c</strong></p>
+<p>Owner of the contract: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c</p>
+<p>Token Balance of the owner: 666,000,000,000</p>
+<p>provider: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1 Price 100 (DAT/MB)</p>
+<p>provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c APID: 2 Price 200 (DAT/MB)</p>
+<p>provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)</p>
 </div>
 <div class="section" id="information-query-demonstration">
 <h2>1. Information Query Demonstration:<a class="headerlink" href="#information-query-demonstration" title="Permalink to this headline">¶</a></h2>
-<p>Check APID of the three providers
-Check provider address behind APID using just APID input
-Check service pricing of each provider using address input</p>
+<p><strong>Check APID of the three providers</strong></p>
+<p><strong>Check provider address behind APID using just APID input</strong></p>
+<p><strong>Check service pricing of each provider using address input</strong></p>
 </div>
 <div class="section" id="demonstration-of-sureceiver">
 <h2>2. Demonstration of suReceiver()<a class="headerlink" href="#demonstration-of-sureceiver" title="Permalink to this headline">¶</a></h2>
-<p>0xca35b7d915458ef540ade6068dfe2f44e8fa733c call suReceiver() function.
-user state update:
-receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1</p>
-<blockquote>
-<div>All information about 0xca35b7d915458ef540ade6068dfe2f44e8fa733c as a
-provider is kept intact.</div></blockquote>
+<dl class="docutils">
+<dt><strong>Call suReceiver() function as</strong></dt>
+<dd><p class="first">provider:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>user state update</strong></dt>
+<dd><p class="first">receiver:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span> <span class="n">APID</span><span class="p">:</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p class="last">All information about 0xca35b7d915458ef540ade6068dfe2f44e8fa733c as a
+provider is kept intact.</p>
+</dd>
+</dl>
+<p><strong>Only user role is changed.</strong></p>
 </div>
 <div class="section" id="demonstration-of-link">
 <h2>3. Demonstration of link()<a class="headerlink" href="#demonstration-of-link" title="Permalink to this headline">¶</a></h2>
-<p>receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-call link()
-to try to link provider of APID: 2
-with input password seed( a PIN): 12345
-Show the returned password from link() function</p>
+<blockquote>
+<div><p><strong>Call link() as</strong>
+receiver:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+<p>to try to link provider of APID: 2</p>
+<p><strong>With input password seed( a PIN)</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">12345</span>
+</pre></div>
+</div>
+<p><strong>Show the returned password from link() function</strong></p>
+</div></blockquote>
 </div>
 <div class="section" id="demonstration-of-doorkeeper">
 <h2>4. Demonstration of doorKeeper()<a class="headerlink" href="#demonstration-of-doorkeeper" title="Permalink to this headline">¶</a></h2>
-<p>call doorKeeper() as
-provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
-Input
-knocker as receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-Input password as what has been returned from link()
-doorKeeper() should tell
-provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
-that the receiver 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-is valid to connect to frontend AP.</p>
+<dl class="docutils">
+<dt><strong>Call doorKeeper() as</strong></dt>
+<dd><p class="first">provider:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
+</pre></div>
+</div>
+<p>Input knocker as receiver:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+<p class="last">Input password as what has been returned from link()</p>
+</dd>
+<dt><strong>doorKeeper() should tell</strong></dt>
+<dd><p class="first">provider:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
+</pre></div>
+</div>
+<p>that the receiver:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+<p class="last">is valid to connect to frontend AP.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="demonstration-of-fuse-from-receiver-s-perspective">
 <h2>5. Demonstration of fuse() from Receiver’s perspective<a class="headerlink" href="#demonstration-of-fuse-from-receiver-s-perspective" title="Permalink to this headline">¶</a></h2>
-<p>call fuse() as
-receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-to report 511 MB data usage</p>
+<dl class="docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>Call fuse() as **</dt>
+<dd><p class="first">receiver:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+<p class="last">to report 511 MB data usage</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="demonstration-of-fuse-from-provider-s-perspective">
 <h2>6. Demonstration of fuse() from Provider’s perspective<a class="headerlink" href="#demonstration-of-fuse-from-provider-s-perspective" title="Permalink to this headline">¶</a></h2>
-<p>call fuse() as
-provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
-to report 511 MB data usage from
-receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-Check agreement log.
-1st position:
-0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
-2nd position:
-0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-The agreement should be 511 MB.</p>
+<dl class="docutils">
+<dt><strong>Call fuse() as</strong></dt>
+<dd><p class="first">provider:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
+</pre></div>
+</div>
+<p>to report 511 MB data usage from</p>
+<p>receiver:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>Check agreement log</strong></dt>
+<dd><p class="first">1st position:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
+</pre></div>
+</div>
+<p>2nd position:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+<p class="last">The agreement should be 511 MB.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="demonstration-of-payandleave">
 <h2>7. Demonstration of payAndLeave()<a class="headerlink" href="#demonstration-of-payandleave" title="Permalink to this headline">¶</a></h2>
-<p>Check provider’s balance:
-provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
-has 0 token balance.
-call payAndLeave() function as
-receiver: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-51100 DAT should be paid.
-After the payment,
-Check provider’s balance:
-provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
-has 51100 of token balance.</p>
+<p><strong>Check provider’s balance.</strong></p>
+<blockquote>
+<div><p>provider:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
+</pre></div>
+</div>
+<p>has 0 token balance.</p>
+</div></blockquote>
+<p><strong>Call payAndLeave() function as</strong></p>
+<blockquote>
+<div><p>receiver:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
+</pre></div>
+</div>
+<p>51100 DAT should be paid.</p>
+</div></blockquote>
+<p><strong>After the payment, check provider’s balance</strong></p>
+<blockquote>
+<div><p>provider:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
+</pre></div>
+</div>
+<p>has 51100 of token balance.</p>
+</div></blockquote>
 </div>
 </div>
 
@@ -147,8 +214,8 @@ has 51100 of token balance.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="PublicFunctions.html"
-                        title="previous chapter">Public Functions</a></p>
+  <p class="topless"><a href="Event.html"
+                        title="previous chapter">Event</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -177,7 +244,7 @@ has 51100 of token balance.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="PublicFunctions.html" title="Public Functions"
+          <a href="Event.html" title="Event"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">DataTokenAlpha  documentation</a> &#187;</li> 
       </ul>
