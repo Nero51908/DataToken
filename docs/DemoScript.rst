@@ -68,6 +68,10 @@ provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)
 
     Input password as what has been returned from link()
 
+    Input format for instance::
+
+     0xca35b7d915458ef540ade6068dfe2f44e8fa733c,"0xd8ded4e7bc50d059043a56cb3afdb294615b215663beffa98862bccb10116087"
+
 **doorKeeper() should tell**
     provider:: 
 
@@ -86,7 +90,9 @@ provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)
     
      0xca35b7d915458ef540ade6068dfe2f44e8fa733c
     
-    to report 511 MB data usage
+    to report 511 MB data usage with time stamp 1000::
+
+     511,1000
 
 6. Demonstration of fuse() from Provider's perspective
 ------------------------------------------------------
@@ -101,6 +107,10 @@ provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)
     
      0xca35b7d915458ef540ade6068dfe2f44e8fa733c
 
+    input::
+
+     0xca35b7d915458ef540ade6068dfe2f44e8fa733c,511,1000
+     
 **Check agreement log**
     1st position::
 
@@ -109,7 +119,11 @@ provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)
     2nd position::
 
      0xca35b7d915458ef540ade6068dfe2f44e8fa733c
-    
+
+    Input::
+
+     "0xca35b7d915458ef540ade6068dfe2f44e8fa733c","0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C"
+
     The agreement should be 511 MB.
 
 7. Demonstration of payAndLeave()   
