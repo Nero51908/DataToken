@@ -1,7 +1,7 @@
 Demonstration Script
 ====================
 
-0. Initialization: Contract Deployment and Demonstration of suProvider()
+0. Initialization: Contract Deployment and Demonstration of surProvider()
 ------------------------------------------------------------------------
 **Deploy contract as 0xca35b7d915458ef540ade6068dfe2f44e8fa733c**
 
@@ -25,9 +25,9 @@ Token Balance of the owner: **666,000,000,000**
 
 - Check service **pricing** of each provider using address input
 
-2. Demonstration of suReceiver()
+2. Demonstration of surReceiver()
 --------------------------------
-**Call suReceiver() function as**
+**Call surReceiver() function as**
     provider::
 
      0xca35b7d915458ef540ade6068dfe2f44e8fa733c

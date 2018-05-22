@@ -563,5 +563,8 @@ contract DataTokenAlpha {
         _sur(msg.sender,role.PAIRED,role.ISRECEIVER);
         delete usageOf[providerOf[msg.sender]][msg.sender];
         delete usageOf[msg.sender][providerOf[msg.sender]];
+        delete agreement[providerOf[msg.sender]][msg.sender];
+        delete providerOf[msg.sender];
+
     }
 }
