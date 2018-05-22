@@ -45,17 +45,17 @@ contract DataTokenAlpha {
     //This mapping can be private in release versions.
     mapping (uint256 => address) public providerBehind;
     //number of users under a provider
-    mapping (address => uint) public numberOfUsers;
+    mapping (address => uint) private numberOfUsers;
     //Receiver thus knows which address they should pay token.
     mapping (address => address) public providerOf;
     //pricing: value per MB
     mapping (address => uint256) public priceOf;
     //data usage recorded by provider and receiver
-    mapping (address => mapping (address => uint256)) public usageOf;//latest_usage
+    mapping (address => mapping (address => uint256)) private usageOf;//latest_usage
     // count is directional. the first address submits the report and the second is the direction of it's connected address
     mapping (address => mapping (address => uint256)) private reportCount;
     // timeStamp is directional. the first address submits the report and the second is the direction of it's connected address
-    mapping (address => mapping (address => uint256)) public frontTimestamp;
+    mapping (address => mapping (address => uint256)) private frontTimestamp;
     // agreement that determines how many token to pay for function payAndLeave()
     // agreement has no direction, it is an agreed value of both provider and receiver
     // agreed usage that can be used in an invoice, agreement[provideraddress][receiveraddress]
@@ -352,7 +352,7 @@ contract DataTokenAlpha {
     * In current version, the user must call payAndLeave() to reset it's identification as role.ISRECEIVER
     * 
     */
-    function link (uint256 _providerID, uint256 _yourkey)
+    function link (uint256 _providerID, bytes32 _yourkey)
     public
     returns(bytes32 pwd)
     {
@@ -368,7 +368,7 @@ contract DataTokenAlpha {
         //add one use count to provider
         numberOfUsers[providerBehind[_providerID]] += 1;  
         //put a key in provider's pocket for frontend handshake, _yourkey is to shift block.timestamp, maybe there are some better ways
-        providerPocket[providerBehind[_providerID]][msg.sender] = keccak256(block.timestamp + _yourkey);
+        providerPocket[providerBehind[_providerID]][msg.sender] = _yourkey;
         // safety: caller has been correctly linked to provider address, caller role.PAIRED is guaranteed by _sur()
         assert(providerOf[msg.sender] == providerBehind[_providerID]);
         // pwd is the same as providerPocket[providerBehind[_providerID]][msg.sender] 

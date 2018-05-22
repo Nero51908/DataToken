@@ -49,17 +49,41 @@
 <div class="section" id="initialization-contract-deployment-and-demonstration-of-suprovider">
 <h2>0. Initialization: Contract Deployment and Demonstration of suProvider()<a class="headerlink" href="#initialization-contract-deployment-and-demonstration-of-suprovider" title="Permalink to this headline">¶</a></h2>
 <p><strong>Deploy contract as 0xca35b7d915458ef540ade6068dfe2f44e8fa733c</strong></p>
-<p>Owner of the contract: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c</p>
-<p>Token Balance of the owner: 666,000,000,000</p>
-<p>provider: 0xca35b7d915458ef540ade6068dfe2f44e8fa733c APID: 1 Price 100 (DAT/MB)</p>
-<p>provider: 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c APID: 2 Price 200 (DAT/MB)</p>
-<p>provider: 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db APID: 3 Price 300 (DAT/MB)</p>
+<p>Owner of the contract: <strong>0xca35b7d915458ef540ade6068dfe2f44e8fa733c</strong></p>
+<p>Token Balance of the owner: <strong>666,000,000,000</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="55%" />
+<col width="9%" />
+<col width="24%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>provider:</td>
+<td>0xca35b7d915458ef540ade6068dfe2f44e8fa733c</td>
+<td>APID: 1</td>
+<td>Price 100 (DAT/MB)</td>
+</tr>
+<tr class="row-even"><td>provider:</td>
+<td>0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</td>
+<td>APID: 2</td>
+<td>Price 200 (DAT/MB)</td>
+</tr>
+<tr class="row-odd"><td>provider:</td>
+<td>0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db</td>
+<td>APID: 3</td>
+<td>Price 300 (DAT/MB)</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="information-query-demonstration">
 <h2>1. Information Query Demonstration:<a class="headerlink" href="#information-query-demonstration" title="Permalink to this headline">¶</a></h2>
-<p><strong>Check APID of the three providers</strong></p>
-<p><strong>Check provider address behind APID using just APID input</strong></p>
-<p><strong>Check service pricing of each provider using address input</strong></p>
+<ul class="simple">
+<li>Check <strong>APID</strong> of the three providers</li>
+<li>Check <strong>provider address</strong> behind APID using just APID input</li>
+<li>Check service <strong>pricing</strong> of each provider using address input</li>
+</ul>
 </div>
 <div class="section" id="demonstration-of-sureceiver">
 <h2>2. Demonstration of suReceiver()<a class="headerlink" href="#demonstration-of-sureceiver" title="Permalink to this headline">¶</a></h2>
@@ -72,7 +96,7 @@
 </dd>
 <dt><strong>user state update</strong></dt>
 <dd><p class="first">receiver:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span> <span class="n">APID</span><span class="p">:</span> <span class="mi">1</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
 </pre></div>
 </div>
 <p class="last">All information about 0xca35b7d915458ef540ade6068dfe2f44e8fa733c as a
@@ -80,6 +104,31 @@ provider is kept intact.</p>
 </dd>
 </dl>
 <p><strong>Only user role is changed.</strong></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Table of user role: (meanings of values of variable identification)</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>role.ISRECEIVER</td>
+<td>numerical 0</td>
+<td>All users are receivers by default</td>
+</tr>
+<tr class="row-even"><td>role.PAIRED</td>
+<td>numerical 2</td>
+<td>Such receiver has linked to a provider</td>
+</tr>
+<tr class="row-odd"><td>role.ISPROVIDER</td>
+<td>numerical 1</td>
+<td>This is a user who provides service</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="demonstration-of-link">
 <h2>3. Demonstration of link()<a class="headerlink" href="#demonstration-of-link" title="Permalink to this headline">¶</a></h2>
@@ -90,11 +139,19 @@ receiver:</p>
 </pre></div>
 </div>
 <p>to try to link provider of APID: 2</p>
-<p><strong>With input password seed( a PIN)</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">12345</span>
+<p><strong>input a hexadecimal number as password seed( a PIN)</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.**</span> <span class="n">frontend</span> <span class="nb">input</span> <span class="n">string</span> <span class="s2">&quot;seed&quot;</span> <span class="k">for</span> <span class="n">password</span> <span class="n">generation</span>
+<span class="n">can</span> <span class="n">be</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">hexadecimal</span><span class="p">:</span> <span class="mh">0x73656564</span> <span class="k">as</span> <span class="nb">input</span> <span class="n">of</span> <span class="n">link</span><span class="p">()</span> <span class="n">function</span><span class="o">.</span>
 </pre></div>
 </div>
-<p><strong>Show the returned password from link() function</strong></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>put this into the input box of link() function</strong>:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span><span class="p">,</span><span class="mh">0x73656564</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Show the returned password from link() function in transaction monitor</strong></p>
 </div></blockquote>
 </div>
 <div class="section" id="demonstration-of-doorkeeper">
@@ -110,9 +167,12 @@ receiver:</p>
 </pre></div>
 </div>
 <p>Input password as what has been returned from link()</p>
+<div class="last admonition tip">
+<p class="first admonition-title">Tip</p>
 <p>Input format for instance:</p>
 <div class="last highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span><span class="p">,</span><span class="s2">&quot;0xd8ded4e7bc50d059043a56cb3afdb294615b215663beffa98862bccb10116087&quot;</span>
 </pre></div>
+</div>
 </div>
 </dd>
 <dt><strong>doorKeeper() should tell</strong></dt>
@@ -124,7 +184,10 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
 </pre></div>
 </div>
-<p class="last">is valid to connect to frontend AP.</p>
+<p>is valid to connect to frontend AP by returning:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">letIn</span> <span class="n">true</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </div>
@@ -136,9 +199,13 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
 </pre></div>
 </div>
-<p>to report 511 MB data usage with time stamp 1000:</p>
+<p>reports 511 MB data usage with time stamp 1000</p>
+<div class="last admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>input this to fuse() box for receiver:</p>
 <div class="last highlight-default"><div class="highlight"><pre><span></span><span class="mi">511</span><span class="p">,</span><span class="mi">1000</span>
 </pre></div>
+</div>
 </div>
 </dd>
 </dl>
@@ -151,17 +218,20 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
 </pre></div>
 </div>
-<p>to report 511 MB data usage from</p>
+<p>reports 511 MB data usage from</p>
 <p>receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
 </pre></div>
 </div>
-<p>input:</p>
+<div class="last admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Input this into fuse() for provider:</p>
 <div class="last highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span><span class="p">,</span><span class="mi">511</span><span class="p">,</span><span class="mi">1000</span>
 </pre></div>
 </div>
+</div>
 </dd>
-<dt><strong>Check agreement log</strong></dt>
+<dt><strong>Then, check agreement log</strong></dt>
 <dd><p class="first">1st position:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
 </pre></div>
@@ -170,11 +240,14 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
 </pre></div>
 </div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
 <p>Input:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;0xca35b7d915458ef540ade6068dfe2f44e8fa733c&quot;</span><span class="p">,</span><span class="s2">&quot;0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C&quot;</span>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;0xca35b7d915458ef540ade6068dfe2f44e8fa733c&quot;</span><span class="p">,</span><span class="s2">&quot;0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C&quot;</span>
 </pre></div>
 </div>
-<p class="last">The agreement should be 511 MB.</p>
+</div>
+<p class="last"><strong>The agreement should be 511 MB</strong></p>
 </dd>
 </dl>
 </div>
@@ -186,7 +259,7 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
 </pre></div>
 </div>
-<p>has 0 token balance.</p>
+<p>has <strong>0</strong> token balance.</p>
 </div></blockquote>
 <p><strong>Call payAndLeave() function as</strong></p>
 <blockquote>
@@ -194,7 +267,7 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0xca35b7d915458ef540ade6068dfe2f44e8fa733c</span>
 </pre></div>
 </div>
-<p>51100 DAT should be paid.</p>
+<p><strong>51100</strong> DataToken should be paid.</p>
 </div></blockquote>
 <p><strong>After the payment, check provider’s balance</strong></p>
 <blockquote>
@@ -202,7 +275,7 @@ receiver:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mh">0x14723a09acff6d2a60dcdf7aa4aff308fddc160c</span>
 </pre></div>
 </div>
-<p>has 51100 of token balance.</p>
+<p>has <strong>51100</strong> of token balance.</p>
 </div></blockquote>
 </div>
 </div>

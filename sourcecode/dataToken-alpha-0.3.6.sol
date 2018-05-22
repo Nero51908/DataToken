@@ -352,7 +352,7 @@ contract DataTokenAlpha {
     * In current version, the user must call payAndLeave() to reset it's identification as role.ISRECEIVER
     * 
     */
-    function link (uint256 _providerID, uint256 _yourkey)
+    function link (uint256 _providerID, bytes _yourkey)
     public
     returns(bytes32 pwd)
     {
@@ -368,7 +368,9 @@ contract DataTokenAlpha {
         //add one use count to provider
         numberOfUsers[providerBehind[_providerID]] += 1;  
         //put a key in provider's pocket for frontend handshake, _yourkey is to shift block.timestamp, maybe there are some better ways
-        providerPocket[providerBehind[_providerID]][msg.sender] = keccak256(block.timestamp + _yourkey);
+        //for instance, use _yourkey directly as a disposal password in frontend. There could be some other ways to add randomness to
+        //pssword generation.
+        providerPocket[providerBehind[_providerID]][msg.sender] = keccak256(_yourkey);
         // safety: caller has been correctly linked to provider address, caller role.PAIRED is guaranteed by _sur()
         assert(providerOf[msg.sender] == providerBehind[_providerID]);
         // pwd is the same as providerPocket[providerBehind[_providerID]][msg.sender] 
