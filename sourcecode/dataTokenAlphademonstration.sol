@@ -558,6 +558,7 @@ contract DataTokenAlpha {
         //safety check number of users under a provider is never smaller than 0
         assert(numberOfUsers[providerOf[msg.sender]] >= 0);
         //clear data usage record on both provider's and receiver's sides
+        _sur(msg.sender,role.PAIRED,role.ISRECEIVER);
         delete usageOf[providerOf[msg.sender]][msg.sender];
         delete usageOf[msg.sender][providerOf[msg.sender]];
     }

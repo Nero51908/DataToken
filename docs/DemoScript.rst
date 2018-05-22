@@ -12,7 +12,7 @@ Token Balance of the owner: **666,000,000,000**
 +---------+------------------------------------------+-------+------------------+
 |provider:|0xca35b7d915458ef540ade6068dfe2f44e8fa733c|APID: 1|Price 100 (DAT/MB)|
 +---------+------------------------------------------+-------+------------------+
-|provider:|0x14723a09acff6d2a60dcdf7aa4aff308fddc160c|APID: 2|Price 200 (DAT/MB)|
+|provider:|0x14723a09acff6d2a60dcdf7aa4aff308fddc160c|APID: 2|Price 100 (DAT/MB)|
 +---------+------------------------------------------+-------+------------------+
 |provider:|0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db|APID: 3|Price 300 (DAT/MB)|
 +---------+------------------------------------------+-------+------------------+
@@ -72,7 +72,7 @@ Token Balance of the owner: **666,000,000,000**
 
         **put this into the input box of link() function**::
      
-         0xca35b7d915458ef540ade6068dfe2f44e8fa733c,0x73656564
+         2,0x73656564
 
     
     **Show the returned password from link() function in transaction monitor**
@@ -94,7 +94,7 @@ Token Balance of the owner: **666,000,000,000**
 
         Input format for instance::
 
-         0xca35b7d915458ef540ade6068dfe2f44e8fa733c,"0xd8ded4e7bc50d059043a56cb3afdb294615b215663beffa98862bccb10116087"
+         0xca35b7d915458ef540ade6068dfe2f44e8fa733c,"0x73656564"
 
 **doorKeeper() should tell**
     provider:: 
@@ -156,7 +156,7 @@ Token Balance of the owner: **666,000,000,000**
 
         Input::
 
-         "0xca35b7d915458ef540ade6068dfe2f44e8fa733c","0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C"
+         "0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C","0xca35b7d915458ef540ade6068dfe2f44e8fa733c"
 
     **The agreement should be 511 MB**
 
