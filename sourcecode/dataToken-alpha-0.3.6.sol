@@ -565,6 +565,5 @@ contract DataTokenAlpha {
         delete usageOf[msg.sender][providerOf[msg.sender]];
         delete agreement[providerOf[msg.sender]][msg.sender];
         delete providerOf[msg.sender];
-
     }
 }

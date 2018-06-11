@@ -1,0 +1,371 @@
+commit ef920542fb2c0e1240fdca9ce12aeb4169684811
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Tue May 22 21:33:59 2018 +0800
+
+    minor bug fix
+
+commit fdef36dbcee6387ba1164755b0264c0f2b6ec53e
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Tue May 22 17:30:35 2018 +0800
+
+    dcript update
+
+commit 731693874c998faf4ac745d7671cfdfa72e7d9d7
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Tue May 22 16:33:43 2018 +0800
+
+    demonstration script update
+
+commit 930a7cc33a41d70e6fa1eada91fc22c8b55d9377
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon May 21 23:05:36 2018 +0800
+
+    general update
+
+commit 7a21ac4139fe7fc2a1391f42bb9c8b766de1ed0e
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon May 21 21:49:10 2018 +0800
+
+    Price51908
+
+commit a3680c94a4e7ebc87d35d70bc6cb3c20f91c1545
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon May 21 21:47:16 2018 +0800
+
+    reformatting of demoscript
+
+commit 7a83c7e8a2eed697028205ddd0f1c48e5dcdd3b3
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon May 21 21:16:58 2018 +0800
+
+    Contract Demo script added
+
+commit 626df5bee9ae7785c88ad49546cb3b21eb49bedc
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Thu May 17 21:52:24 2018 +0800
+
+    0.3.6 Error and waning fixed
+
+commit c9aa0786bd7a1d6de48fc3df80d3eafd19e75f4e
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Wed May 16 18:24:51 2018 +0800
+
+    0.3.6 ver fuse() for receiver can check whether exceeding usage limit
+
+commit 710c4d3324249054c8a70bf0608b257f02ab28d4
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Sat May 12 23:28:16 2018 +0800
+
+    refine of 0.3.5 code and start to amend doc
+
+commit bbbd94183d1843491471170b0a210d09240aa6f9
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Tue May 8 23:27:35 2018 +0800
+
+    Polish and debug day 1
+
+commit 31a46f6611135096f80c172a0a838e09bf15c903
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Thu Apr 26 21:48:58 2018 +0800
+
+    upgaded payment scheme, waiting for test
+
+commit b4a35d874076292c10ee0d68d792cb1defd76c19
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon Apr 23 10:49:52 2018 +0800
+
+    fuse() prototype fin. _forcepay=(rnam)>_forceInvoice
+
+commit c8f4218c6e18d6e702ae252fb1b47aac9960dd02
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon Apr 23 00:57:20 2018 +0800
+
+    prototype fuse() function
+
+commit 4c3a0310f1cf274ab2e4fc1e6f52b2acd577d45e
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Mon Apr 23 00:32:49 2018 +0800
+
+     breaker function or fuse function, planning new payment function
+
+commit 81a76e35168b168d5289b687e7139cf955ea96e3
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Sun Apr 15 00:35:44 2018 +0800
+
+    test eth dir removed, use ganache; Considering Safety and code style.
+
+commit a3e4757ed2b6df2ee608c70bb559f01ab770309b
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Wed Apr 4 10:04:34 2018 +0800
+
+    upgrade link() to token auth ready; fix return of public funcs
+
+commit 31428607c149b6ad96cd29a07d866bf95c710d26
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Thu Mar 29 19:59:07 2018 +0800
+
+    folder rename
+
+commit e4316fa0bda1181df5c4357be4a48cda699a8780
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Thu Mar 29 14:03:46 2018 +0800
+
+    remove flowchart
+
+commit 9a4bcd1d47efc1b77216cf432a87a8cd51dfb720
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Tue Mar 27 22:41:23 2018 +0800
+
+    new link func; doorKeeeper added
+
+commit 817dc48f5dab1f2a86341bdd210714e28eb352da
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Tue Mar 27 22:40:50 2018 +0800
+
+    reformat
+
+commit 7775d0425335f1b43f89eb4d2eb67ab5389fc7b5
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Sun Mar 25 18:20:09 2018 +0800
+
+    changing builder to sphinx-build-3
+
+commit 0c4726e207bbbee4aab963b60b7802adb0caf5f0
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Sun Mar 25 17:58:58 2018 +0800
+
+    rearrangement
+
+commit 29201d41ca476909db39183bb5e5b36cd68ad0b5
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Sun Mar 25 17:29:49 2018 +0800
+
+    rearranged index
+
+commit e6bc57d10712a418ad7dc62b2a1944f7c4d08c79
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Sun Mar 25 15:26:46 2018 +0800
+
+    indented; adding "emit" prefix to events as required by solCompiler
+
+commit f4236506baa8d1bbfec337b7b50b5381d99ddfe7
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Fri Mar 23 22:44:14 2018 +0800
+
+    file rearrangement
+
+commit 924811d046080776c772f287754447fbcf2e2ee8
+Author: Price51908 <zhuzibajia@gmail.com>
+Date:   Fri Mar 23 17:58:00 2018 +0800
+
+    rename folder sphinx documentation to doc
+
+commit a313bba7bfb8f8df9df34f7952b1e55168a1d5a1
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Fri Mar 23 11:53:05 2018 +0800
+
+    Rearrange index.rst
+
+commit d4cb98f57547d097b9def5e946c4140b1ce69031
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Wed Mar 14 22:52:42 2018 +0800
+
+    test change 3
+
+commit eaa748a3b8f711a62547cfa50ef4ab5b34d14674
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Wed Mar 14 22:50:40 2018 +0800
+
+    test change 2
+
+commit 9b627bf18e581d0f2cc791b22f9a6f98db3848bc
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Wed Mar 14 22:50:19 2018 +0800
+
+    test change 1
+
+commit 10a1e9fdc1e76a2950de749f2a8cd89e25044edb
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Wed Mar 14 20:27:52 2018 +0800
+
+    documentation html theme is changed to defaul
+
+commit e66a67321af060a07c6a2b1a2194d0982610fd34
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Wed Mar 14 18:53:25 2018 +0800
+
+    documentation html build theme is set to classic
+
+commit cf3175a5b1c10d5fbe87dbe77f1021ba9ee4e2a9
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Wed Mar 14 17:32:33 2018 +0800
+
+    documentation file updated, ready for v0.3.3
+
+commit 6a237a1da598ccc455dcabb848f7880ca2696bb5
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Thu Mar 8 20:19:59 2018 +0800
+
+    0.3.2 version starts. added "numberOfUsers", ssid resolver
+
+commit baac5b3215df70a192962fff3d72607e6180b946
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Tue Mar 6 21:21:43 2018 +0800
+
+    documentation structure created powered by Sphinx
+
+commit e4f08bcbfe3abf86b26c8819d3c74a5be2e1c59f
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Tue Feb 20 23:43:21 2018 +0800
+
+    can now deliver wifi password but cannot deal with _tolerance exceptions
+
+commit 6834d5ab5e9ac2fe5ac2f6d2bc3344a1da447894
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Thu Feb 8 22:32:38 2018 +0800
+
+    JSDoc style comments are under construction
+
+commit c402641eba79e8ee3944e22243e0d9fdc9461b82
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Mon Jan 29 22:52:04 2018 +0800
+
+    a usable 0.3.0
+
+commit 4553f30dd44bf201311a7aa40bf8a684611a783e
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Mon Jan 29 00:21:10 2018 +0800
+
+    need a test
+
+commit 5c9200246e53669e3f1b105d86806eb47829f52d
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sun Jan 28 02:36:39 2018 +0800
+
+    start of 0.3.0
+
+commit 5b2a47228bf87f6b3dd1929cfd123a3c5e98adab
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Thu Jan 25 23:02:07 2018 +0800
+
+    Ready for datatokenalpha 0.3 ver
+
+commit 11f3913771ddda849056dc6048ca4ed1fc48e530
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sun Dec 24 00:34:40 2017 +0800
+
+    file reorganize, no change to code
+
+commit a05f730a2048b877a72048f618d14cf966140407
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sun Dec 3 23:49:06 2017 +0800
+
+    basic functions for new contract variables are implemented
+
+commit 53c123f8a262382458658a2095d960ed30419197
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sun Dec 3 02:02:19 2017 +0800
+
+    Cannot Add new user BUG Fix
+
+commit c2ea31e59561d4e714fef24a69372a37c494d148
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Fri Dec 1 18:35:56 2017 +0800
+
+    start of version 0.2.2: rearrangement of contract variables, modifiers and functions
+
+commit 3b44c437cb7cbcd73d265eff147355fb05618552
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Thu Nov 30 20:17:54 2017 +0800
+
+    Coding style is changed as the demo token given by solidity documentation
+
+commit 74d4e8d6dff6f120277dad692494b692efbbc871
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sun Nov 26 21:36:36 2017 +0800
+
+    Restart of 0.2 version and start to build my poster
+
+commit 5a3caf35fd4c61da8ddf5b90ecd643f11b21ea26
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sat Nov 18 17:08:08 2017 +0800
+
+    20171118 17:08
+
+commit 8593a3ec54c88406644af9be9a80f385f1d6601d
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Sat Nov 18 17:07:30 2017 +0800
+
+    20171118 link() function works
+
+commit 36b12dccb10e230643369a495947e71f9d82607c
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Fri Nov 17 19:07:30 2017 +0800
+
+    Ready to add link() function to match receivers to providers
+
+commit 50430ac23b0ad1bed5da12068202f8544b443fb2
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Tue Nov 14 16:14:10 2017 +0800
+
+    Indices are not removed, the limitation in 20171111 is to some extent solved.
+
+commit d784138723d01938ee96e52fb17b827f5f2a2569
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Tue Nov 14 16:12:46 2017 +0800
+
+    can add and remove user as expected.
+
+commit d40dc871cee7862f371fd4e5672d5a678297a5b1
+Author: Nero Liu <zhuzibajia@gmail.com>
+Date:   Tue Nov 14 15:39:41 2017 +0800
+
+    20171114
+
+commit 9287b4323a15f7039317dfd31806cc31f29a7524
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Sat Nov 11 23:15:58 2017 +0800
+
+    20171111
+
+commit 63686abcf08a642d3ecfeacb13496aa0a237cb22
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Fri Nov 10 22:27:19 2017 +0800
+
+    dataToken alpha 0.2
+
+commit 57dc11e13c79c2eaca803ec1dfcf573a1bc88ba1
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Sun Nov 5 16:52:09 2017 +0800
+
+    renamed as datatoken_devlog
+
+commit 3055d0a2af116a52706a5d608930108acab75e88
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Mon Oct 16 17:56:50 2017 +0800
+
+    20171016 update
+
+commit e24dd11e79496f29d90539e4972a9767db864ae9
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Sun Oct 15 04:27:16 2017 -0400
+
+    content of datatoken_dev_log.tex moved to title page
+
+commit ba42fe49fc48ac0fb129cd2deb67343a6e0b07a9
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Sat Oct 14 11:09:18 2017 -0400
+
+    pdf and tex templet added
+
+commit 76e1c7cc1b07bec9843e3ddbe85b374b392ca2dc
+Author: nero <26497363+Price51908@users.noreply.github.com>
+Date:   Sat Oct 14 08:30:16 2017 -0400
+
+    update devlog content
+
+commit 6af887682ccaeae03346421c9fd60461e2eaea49
+Author: nero <zhuzibajia@gmail.com>
+Date:   Sat Oct 14 07:38:20 2017 -0400
+
+    First commit
